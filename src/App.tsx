@@ -1,11 +1,11 @@
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <div>
-      <p>おはよう</p>
+      <h1>こんにちは</h1>
     </div>
   );
-}
+};
 
 export default App;
