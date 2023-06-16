@@ -3,7 +3,7 @@ on:
   pull_request:
 
 env:
-  project-name: ga-test
+  project-name: gamearchive-test
 
 jobs:
   dev-check:
