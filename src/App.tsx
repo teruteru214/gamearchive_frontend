@@ -1,31 +1,68 @@
 import "./lib/tailwind.css";
 
-import {
-  Button,
-  Col,
-  Container,
-  Grid,
-  MantineProvider,
-  Paper,
-} from "@mantine/core";
-import React from "react";
+import { MantineProvider } from "@mantine/core";
+import FooterLinks from "components/FooterLinks";
+import GameCard from "components/GameCard";
+import HeaderAction from "components/HeaderAction";
+import StatusGameCard from "components/StatusGameCard";
 
-const App: React.FC = () => {
+const data = [
+  {
+    link: "#",
+    label: "プライバシーポリシー",
+  },
+  {
+    link: "#",
+    label: "利用規約",
+  },
+  {
+    link: "#",
+    label: "お問い合わせ",
+  },
+];
+
+const isLogin = true;
+const user = { name: "User", image: "user-image-url" };
+
+const gameItem = {
+  id: 1,
+  name: "The Legend of Zelda: Skyward Sword HD",
+  cover: {
+    id: 123,
+    url: "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p3a.png",
+  },
+  genres: [
+    {
+      id: 1,
+      name: "Adventure",
+    },
+    {
+      id: 2,
+      name: "Role-playing(RPG)",
+    },
+  ],
+  platforms: [
+    {
+      id: 3,
+      name: "NintendoSwitch",
+    },
+    {
+      id: 4,
+      name: "Wii",
+    },
+  ],
+  url: "https://www.igdb.com/games/the-legend-of-zelda-skyward-sword-hd",
+  rating: 76,
+  status: "プレイ中", // Add status here
+};
+
+const App = () => {
   return (
-    <MantineProvider theme={{ colorScheme: "light" }}>
-      <Container size="md" className="h-full px-8 pt-8">
-        <Grid>
-          <Col span={12} style={{ maxWidth: 400 }}>
-            <Paper style={{ padding: "1em" }} shadow="xs">
-              <h1 className="mb-4 text-2xl">
-                Mantine & Tailwind CSS Test View with MantineProvider
-              </h1>
-              <h1 className="text-3xl font-bold underline">Hello world!</h1>
-              <Button>Hello, world!</Button>
-            </Paper>
-          </Col>
-        </Grid>
-      </Container>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <HeaderAction isLogin={isLogin} user={user} />
+      <StatusGameCard game={gameItem} />
+      <GameCard game={gameItem} />
+      <FooterLinks {...{ data }} />
     </MantineProvider>
   );
 };
