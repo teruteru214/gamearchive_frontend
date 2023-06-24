@@ -53,23 +53,7 @@ const useStyles = createStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.colors.yellow[0],
     },
-
-    // [theme.fn.smallerThan("xs")]: {
-
-    //   display: "none",
-
-    // },
   },
-
-  // burger: {
-
-  //   [theme.fn.largerThan("xs")]: {
-
-  //     display: "none",
-
-  //   },
-
-  // },
 
   userActive: {
     backgroundColor:
@@ -84,7 +68,7 @@ interface HeaderActionProps {
 }
 
 const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
 
   const [userMenuOpened, setUserMenuOpened] = useState(false);
 
