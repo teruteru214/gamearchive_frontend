@@ -1,7 +1,7 @@
 import "./lib/tailwind.css";
 
 import { MantineProvider } from "@mantine/core";
-import Top from "components/Top/Top";
+import HeroContents from "components/GameSearch/HeroContents";
 
 // const gameItem = {
 //   id: 1,
@@ -38,7 +38,7 @@ import Top from "components/Top/Top";
 const App = () => {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Top />
+      <HeroContents />
     </MantineProvider>
   );
 };
