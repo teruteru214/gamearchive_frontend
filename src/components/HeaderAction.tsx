@@ -7,7 +7,6 @@ import {
   Group,
   Image,
   Menu,
-  rem,
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -33,8 +32,6 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colors.white,
 
     borderBottom: `1px solid ${theme.colors.gray[2]}`,
-
-    marginBottom: rem(120),
   },
 
   mainSection: {
@@ -76,7 +73,7 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
 
   return (
     <div className={classes.header}>
-      <Container className={classes.mainSection}>
+      <Container className={classes.mainSection} size="lg">
         <Group position="apart">
           <Image src={logo} width={200} fit="contain" />
 
