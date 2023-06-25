@@ -2,9 +2,8 @@ import "./lib/tailwind.css";
 
 import { MantineProvider } from "@mantine/core";
 import FooterLinks from "components/FooterLinks";
-import GameCard from "components/GameCard";
 import HeaderAction from "components/HeaderAction";
-import StatusGameCard from "components/StatusGameCard";
+import HeroContents from "components/Top/HeroContents";
 
 const data = [
   {
@@ -60,8 +59,7 @@ const App = () => {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <HeaderAction isLogin={isLogin} user={user} />
-      <StatusGameCard game={gameItem} />
-      <GameCard game={gameItem} />
+      <HeroContents />
       <FooterLinks {...{ data }} />
     </MantineProvider>
   );
