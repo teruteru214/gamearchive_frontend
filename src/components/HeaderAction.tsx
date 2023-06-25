@@ -26,27 +26,15 @@ import { useState } from "react";
 import logo from "../assets/logo.png";
 
 const useStyles = createStyles((theme) => ({
-  header: {
-    paddingTop: theme.spacing.sm,
-
-    backgroundColor: theme.colors.white,
-
-    borderBottom: `1px solid ${theme.colors.gray[2]}`,
-  },
-
   mainSection: {
     paddingBottom: theme.spacing.sm,
   },
 
   user: {
     color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
-
     padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-
     borderRadius: theme.radius.sm,
-
     transition: "background-color 100ms ease",
-
     "&:hover": {
       backgroundColor: theme.colors.yellow[0],
     },
@@ -72,7 +60,7 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
-    <div className={classes.header}>
+    <div className="sticky top-0 z-10 border-b border-gray-200 bg-white pt-2">
       <Container className={classes.mainSection} size="lg">
         <Group position="apart">
           <Image src={logo} width={200} fit="contain" />
