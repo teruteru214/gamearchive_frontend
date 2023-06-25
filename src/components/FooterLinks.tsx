@@ -22,13 +22,13 @@ const FooterLinks = ({ data }: FooterLinksProps) => {
   ));
 
   return (
-    <footer className="mt-32 border-0 border-t border-solid border-t-m_gray-2 bg-yellow-50 py-12">
+    <footer className="mt-6 border-0 border-t border-solid border-t-m_gray-2 bg-yellow-50 py-12">
       <Container
         className="flex items-center justify-between max-sm:flex-col"
         size="lg"
       >
         <Image src={logo} width={300} fit="contain" />
-        <Group className="space-x-3 max-xs:mt-4">{links}</Group>
+        <Group className="max-xs:mt-4">{links}</Group>
       </Container>
       <Container
         className="mt-6 flex items-center justify-between px-4 py-6 max-sm:flex-col"
