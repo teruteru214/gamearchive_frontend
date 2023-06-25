@@ -3,6 +3,7 @@ import "./lib/tailwind.css";
 import { MantineProvider } from "@mantine/core";
 import FooterLinks from "components/FooterLinks";
 import HeaderAction from "components/HeaderAction";
+import AppDescription from "components/Top/AppDescription";
 import HeroContents from "components/Top/HeroContents";
 
 const data = [
@@ -60,6 +61,7 @@ const App = () => {
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <HeaderAction isLogin={isLogin} user={user} />
       <HeroContents />
+      <AppDescription />
       <FooterLinks {...{ data }} />
     </MantineProvider>
   );
