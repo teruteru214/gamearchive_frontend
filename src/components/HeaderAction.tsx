@@ -21,7 +21,6 @@ import {
   IconUserEdit,
   IconUsersGroup,
 } from "@tabler/icons-react";
-import { useState } from "react";
 
 import logo from "../assets/logo.png";
 
@@ -48,14 +47,11 @@ const useStyles = createStyles((theme) => ({
 
 interface HeaderActionProps {
   isLogin: boolean;
-
   user: { name: string; image: string };
 }
 
 const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
   const { classes } = useStyles();
-
-  const [userMenuOpened, setUserMenuOpened] = useState(false);
 
   const [opened, { toggle }] = useDisclosure(false);
 
@@ -67,13 +63,12 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
 
           {isLogin ? (
             // ログイン済みの時に表示するコンポーネント
-
             <Menu
               width={260}
               position="bottom-end"
               transitionProps={{ transition: "pop-top-right" }}
-              onClose={() => setUserMenuOpened(false)}
-              onOpen={() => setUserMenuOpened(true)}
+              onOpen={toggle}
+              onClose={toggle}
               withinPortal
             >
               <Menu.Target>

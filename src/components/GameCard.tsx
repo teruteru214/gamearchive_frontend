@@ -1,11 +1,4 @@
-import {
-  Card,
-  createStyles,
-  Group,
-  Image,
-  RingProgress,
-  Text,
-} from "@mantine/core";
+import { Button, Card, createStyles, Group, Image, Text } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -39,29 +32,21 @@ interface GameCardProps {
 const GameCard = ({ game }: GameCardProps) => {
   const { classes } = useStyles();
   return (
-    <Card radius="md" className="h-[250px] max-w-md bg-blue-50 py-0" withBorder>
+    <Card radius="md" className="h-[250px] max-w-md bg-blue-50 py-0">
       <Group noWrap spacing={0} className="">
         <div className="pt-4">
           <Image src={game.cover.url} height={210} />
         </div>
         <div className="pl-3 pt-4">
+          <Button size="md" className="w-64 bg-yellow-400 hover:bg-yellow-500">
+            このゲームを取得
+          </Button>
           <Text className={classes.title} mt="xs" mb="md">
             {game.name}
           </Text>
-          <div className="flex items-center">
-            <Text className="font-bold" mt="xs" mb="md">
-              Rating:
-            </Text>
-            <RingProgress
-              sections={[{ value: game.rating, color: "green" }]}
-              label={
-                <Text color="green" weight={700} align="center" size="md">
-                  {game.rating}
-                </Text>
-              }
-              size={80}
-            />
-          </div>
+          <Text className={classes.title} mt="xs" mb="md">
+            {`Rating: ${game.rating}`}
+          </Text>
           <div className="flex space-x-2">
             {game.genres.map((genre) => (
               <Text key={genre.id} color="dimmed" weight={700} size="xs">
