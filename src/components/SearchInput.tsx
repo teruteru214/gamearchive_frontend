@@ -16,6 +16,7 @@ const SearchInput = ({ filterInput, setFilterInput }: SearchInputProps) => {
       placeholder="キーワードを入力..."
       value={filterInput}
       onChange={(e) => setFilterInput(e.target.value)}
+      className="py-8"
     />
   );
 };

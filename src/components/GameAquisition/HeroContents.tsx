@@ -25,7 +25,7 @@ const HeroContents = () => {
   const largerThanSm = useMediaQuery("sm");
   return (
     <div className="bg-yellow-50">
-      <Container>
+      <Container className="bg-yellow-50">
         <div className={classes.inner}>
           <IconDisc size="3rem" stroke={1.5} />
           <Title
