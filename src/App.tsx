@@ -1,7 +1,7 @@
 import "./lib/tailwind.css";
 
 import { MantineProvider } from "@mantine/core";
-import GameManagement from "components/GameManagement/GameManagement";
+import GameManagement from "components/features/management/GameManagement";
 import MainLayout from "components/Layout/MainLayout";
 
 const App = () => {
