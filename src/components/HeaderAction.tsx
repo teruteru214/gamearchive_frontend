@@ -14,9 +14,9 @@ import {
   IconDeviceGamepad2,
   IconDisc,
   IconLogout,
+  IconReplace,
   IconStack3,
   IconStar,
-  IconSwitchHorizontal,
   IconTrophy,
   IconUserEdit,
   IconUsersGroup,
@@ -127,10 +127,8 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
                   プロフィール編集
                 </Menu.Item>
 
-                <Menu.Item
-                  icon={<IconSwitchHorizontal size="0.9rem" stroke={1.5} />}
-                >
-                  ゲーム管理
+                <Menu.Item icon={<IconReplace size="0.9rem" stroke={1.5} />}>
+                  ゲームマネジメント
                 </Menu.Item>
 
                 <Menu.Item icon={<IconLogout size="0.9rem" stroke={1.5} />}>
