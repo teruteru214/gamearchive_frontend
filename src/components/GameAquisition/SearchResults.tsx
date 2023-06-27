@@ -37,7 +37,7 @@ const createGameItem = (id: number) => ({
 // 30個のゲームデータを生成する
 const gameItems = Array.from({ length: 30 }, (_, i) => createGameItem(i + 1));
 
-const SearchResult = () => {
+const SearchResults = () => {
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {gameItems.map((game) => (
@@ -53,4 +53,4 @@ const SearchResult = () => {
   );
 };
 
-export default SearchResult;
+export default SearchResults;

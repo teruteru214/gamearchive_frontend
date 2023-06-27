@@ -26,13 +26,15 @@ interface StatusGameCardProps {
     }[];
     url: string;
     rating: number;
+    status: string;
   };
 }
 
 const StatusGameCard = ({ game }: StatusGameCardProps) => {
   const { classes } = useStyles();
+
   return (
-    <Card radius="md" className="h-[250px] max-w-md bg-blue-50 py-0" withBorder>
+    <Card radius="md" className="h-[250px] max-w-md bg-blue-50 py-0">
       <Group noWrap spacing={0} className="">
         <div className="pt-4">
           <Image src={game.cover.url} height={210} />

@@ -32,6 +32,7 @@ const Profile = ({
       sx={(theme) => ({
         backgroundColor: theme.white,
       })}
+      className="my-8"
     >
       {largerThanSm ? (
         <div className="flex justify-between space-x-5 px-10">
@@ -60,7 +61,7 @@ const Profile = ({
               </div>
             </Stack>
           </div>
-          <Button variant="default">プロフィールを編集する</Button>
+          <Button color="yellow">プロフィールを編集する</Button>
         </div>
       ) : (
         <Stack>
