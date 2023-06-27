@@ -2,7 +2,7 @@ import "./lib/tailwind.css";
 
 import { MantineProvider } from "@mantine/core";
 import FooterLinks from "components/FooterLinks";
-import GameAcquisition from "components/GameAquisition/GameAquisition";
+import GameManagement from "components/GameManagement/GameManagement";
 import HeaderAction from "components/HeaderAction";
 
 const data = [
@@ -27,7 +27,7 @@ const App = () => {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <HeaderAction isLogin={isLogin} user={user} />
-      <GameAcquisition />
+      <GameManagement />
       <FooterLinks {...{ data }} />
     </MantineProvider>
   );

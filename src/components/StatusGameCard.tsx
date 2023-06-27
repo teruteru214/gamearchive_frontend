@@ -1,12 +1,7 @@
-import { Button, Card, createStyles, Group, Image, Text } from "@mantine/core";
+import { Button, Card, Group, Image, Text } from "@mantine/core";
+import { IconReplace } from "@tabler/icons-react";
 
-const useStyles = createStyles((theme) => ({
-  title: {
-    fontWeight: 700,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    lineHeight: 1.2,
-  },
-}));
+import { useMediaQuery } from "../lib/mantine/useMediaQuery"; // useMediaQuery フックのパスを正しく指定してください。
 
 interface StatusGameCardProps {
   game: {
@@ -26,37 +21,60 @@ interface StatusGameCardProps {
     }[];
     url: string;
     rating: number;
+    status: string;
   };
 }
 
 const StatusGameCard = ({ game }: StatusGameCardProps) => {
-  const { classes } = useStyles();
+  const largerThanSm = useMediaQuery("sm");
+
   return (
-    <Card radius="md" className="h-[250px] max-w-md bg-blue-50 py-0" withBorder>
-      <Group noWrap spacing={0} className="">
-        <div className="pt-4">
-          <Image src={game.cover.url} height={210} />
-        </div>
-        <div className="pl-3 pt-4">
-          <Button size="md" className="w-64 bg-yellow-400 hover:bg-yellow-500">
-            Change
+    <Card radius="md" className="max-w-md bg-blue-50 py-0">
+      <Group noWrap spacing={0} className="py-4">
+        <Image src={game.cover.url} width={150} />
+        <div
+          className={`pl-3 ${
+            largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"
+          }`}
+        >
+          <Button size={largerThanSm ? "md" : "xs"} className="" color="yellow">
+            <IconReplace size="0.9rem" stroke={1.5} className="mr-1" />
+            {largerThanSm ? "ゲームステータスを変更" : "ステータスを変更"}
           </Button>
-          <Text className={classes.title} mt="xs" mb="md">
+          <Text
+            className={`line-clamp-2 ${
+              largerThanSm ? "w-60" : "w-full"
+            } font-sans font-bold leading-5`}
+            mt="xs"
+            mb="md"
+          >
             {game.name}
           </Text>
-          <Text className={classes.title} mt="xs" mb="md">
+          <Text className="font-sans font-bold leading-5" mt="xs" mb="md">
             {`Rating: ${game.rating}`}
           </Text>
           <div className="flex space-x-2">
             {game.genres.map((genre) => (
-              <Text key={genre.id} color="dimmed" weight={700} size="xs">
+              <Text
+                key={genre.id}
+                color="dimmed"
+                weight={700}
+                size="xs"
+                className="line-clamp-1"
+              >
                 #{genre.name}
               </Text>
             ))}
           </div>
           <div className="flex space-x-2">
             {game.platforms.map((platform) => (
-              <Text key={platform.id} color="dimmed" weight={700} size="xs">
+              <Text
+                key={platform.id}
+                color="dimmed"
+                weight={700}
+                size="xs"
+                className="line-clamp-1"
+              >
                 #{platform.name}
               </Text>
             ))}
