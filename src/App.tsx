@@ -1,14 +1,14 @@
 import "./lib/tailwind.css";
 
 import { MantineProvider } from "@mantine/core";
-import GameManagement from "components/features/management/GameManagement";
+import ProfileForm from "components/features/user/ProfileForm";
 import MainLayout from "components/Layout/MainLayout";
 
 const App = () => {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <MainLayout>
-        <GameManagement />
+        <ProfileForm />
       </MainLayout>
     </MantineProvider>
   );
