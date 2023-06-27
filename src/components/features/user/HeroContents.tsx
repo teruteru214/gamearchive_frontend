@@ -1,7 +1,7 @@
 import { Container, createStyles, Title } from "@mantine/core";
-import { IconDisc } from "@tabler/icons-react";
+import { IconUserEdit } from "@tabler/icons-react";
 
-import { useMediaQuery } from "../../lib/mantine/useMediaQuery";
+import { useMediaQuery } from "../../../lib/mantine/useMediaQuery";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -27,14 +27,14 @@ const HeroContents = () => {
     <div className="bg-yellow-50">
       <Container className="bg-yellow-50">
         <div className={classes.inner}>
-          <IconDisc size="3rem" stroke={1.5} />
+          <IconUserEdit size="3rem" stroke={1.5} />
           <Title
             className={classes.title}
             style={{
               fontSize: largerThanSm ? "22px" : "20px",
             }}
           >
-            ゲームを取得
+            プロフィール編集
           </Title>
         </div>
       </Container>
