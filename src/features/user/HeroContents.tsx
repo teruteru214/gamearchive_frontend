@@ -1,7 +1,7 @@
 import { Container, createStyles, Title } from "@mantine/core";
 import { IconUserEdit } from "@tabler/icons-react";
 
-import { useMediaQuery } from "../../../lib/mantine/useMediaQuery";
+import { useMediaQuery } from "../../lib/mantine/useMediaQuery";
 
 const useStyles = createStyles((theme) => ({
   inner: {
