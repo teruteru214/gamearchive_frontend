@@ -27,11 +27,7 @@ const schema = z.object({
 type Form = z.infer<typeof schema>;
 
 const ProfileForm = () => {
-  const largerThanXs = useMediaQuery("xs");
   const largerThanSm = useMediaQuery("sm");
-  const largerThanMd = useMediaQuery("md");
-  const largerThanLg = useMediaQuery("lg");
-  const largerThanXl = useMediaQuery("xl");
   const form = useForm<Form>({
     validate: zodResolver(schema),
     initialValues: {
