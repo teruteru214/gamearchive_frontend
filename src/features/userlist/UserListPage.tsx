@@ -1,9 +1,9 @@
 import { Container } from "@mantine/core";
-import SearchInput from "components/SearchInput";
 import { useState } from "react";
 
 import HeroContents from "./HeroContents";
 import PublicUserList from "./PublicUserList";
+import SearchInput from "./SearchInput";
 
 const UserListPage = () => {
   const [filterInput, setFilterInput] = useState("");
