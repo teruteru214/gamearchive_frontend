@@ -1,5 +1,4 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
-import { IconReplace } from "@tabler/icons-react";
 
 import { useMediaQuery } from "../lib/mantine/useMediaQuery"; // useMediaQuery フックのパスを正しく指定してください。
 
@@ -23,13 +22,14 @@ interface StatusGameCardProps {
     rating: number;
     status: string;
   };
+  buttonText: string;
 }
 
-const StatusGameCard = ({ game }: StatusGameCardProps) => {
+const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
   const largerThanSm = useMediaQuery("sm");
 
   return (
-    <Card radius="md" className="max-w-md bg-blue-50 py-0">
+    <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
         <Image src={game.cover.url} width={150} />
         <div
@@ -37,9 +37,12 @@ const StatusGameCard = ({ game }: StatusGameCardProps) => {
             largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"
           }`}
         >
-          <Button size={largerThanSm ? "md" : "xs"} className="" color="yellow">
-            <IconReplace size="0.9rem" stroke={1.5} className="mr-1" />
-            {largerThanSm ? "ゲームステータスを変更" : "ステータスを変更"}
+          <Button
+            size={largerThanSm ? "md" : "xs"}
+            className="w-full"
+            color="yellow"
+          >
+            {buttonText}
           </Button>
           <Text
             className={`line-clamp-2 ${
@@ -93,4 +96,4 @@ const StatusGameCard = ({ game }: StatusGameCardProps) => {
   );
 };
 
-export default StatusGameCard;
+export default ButtonGameCard;

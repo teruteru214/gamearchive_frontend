@@ -1,8 +1,8 @@
 import { Button, Image } from "@mantine/core";
 
-import appDescription from "../../../assets/appDescription.png";
-import appDescription2 from "../../../assets/appDescription2.png";
-import { useMediaQuery } from "../../../lib/mantine/useMediaQuery";
+import appDescription from "../../assets/appDescription.png";
+import appDescription2 from "../../assets/appDescription2.png";
+import { useMediaQuery } from "../../lib/mantine/useMediaQuery";
 
 const AppDescription = () => {
   const largerThanSm = useMediaQuery("sm");

@@ -1,7 +1,7 @@
 import { Container, createStyles, Image, Title } from "@mantine/core";
 
-import hero from "../../../assets/hero.png";
-import { useMediaQuery } from "../../../lib/mantine/useMediaQuery";
+import hero from "../../assets/hero.png";
+import { useMediaQuery } from "../../lib/mantine/useMediaQuery";
 
 const useStyles = createStyles((theme) => ({
   inner: {
