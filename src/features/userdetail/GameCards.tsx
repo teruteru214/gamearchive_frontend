@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import GameCard2 from "components/GameCard2";
+import GameCard from "components/GameCard";
 // 1つのゲームデータを作成する
 const createGameItem = (id: number) => ({
   id,
@@ -40,7 +40,7 @@ const GameCards = () => {
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {gameItems.map((game) => (
-        <GameCard2 key={game.id} game={game} />
+        <GameCard key={game.id} game={game} />
       ))}
       <Button
         className="flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"

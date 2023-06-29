@@ -1,5 +1,4 @@
-import { Button, Card, Group, Image, Text } from "@mantine/core";
-import { IconReplace } from "@tabler/icons-react";
+import { Card, Group, Image, Text } from "@mantine/core";
 
 import { useMediaQuery } from "../lib/mantine/useMediaQuery"; // useMediaQuery フックのパスを正しく指定してください。
 
@@ -25,22 +24,18 @@ interface GameCardProps {
   };
 }
 
-const GameCard = ({ game }: GameCardProps) => {
+const GameCard2 = ({ game }: GameCardProps) => {
   const largerThanSm = useMediaQuery("sm");
 
   return (
-    <Card radius="md" className="max-w-md bg-blue-50 py-0">
+    <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
-        <Image src={game.cover.url} width={150} />
+        <Image src={game.cover.url} width={115} />
         <div
           className={`pl-3 ${
             largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"
           }`}
         >
-          <Button size={largerThanSm ? "md" : "xs"} className="" color="yellow">
-            <IconReplace size="0.9rem" stroke={1.5} className="mr-1" />
-            ゲームデータを取得
-          </Button>
           <Text
             className={`line-clamp-2 ${
               largerThanSm ? "w-60" : "w-full"
@@ -93,4 +88,4 @@ const GameCard = ({ game }: GameCardProps) => {
   );
 };
 
-export default GameCard;
+export default GameCard2;
