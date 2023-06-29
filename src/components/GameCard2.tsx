@@ -28,9 +28,9 @@ const GameCard2 = ({ game }: GameCardProps) => {
   const largerThanSm = useMediaQuery("sm");
 
   return (
-    <Card radius="md" className="max-w-md bg-blue-50 py-0">
+    <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
-        <Image src={game.cover.url} width={150} />
+        <Image src={game.cover.url} width={115} />
         <div
           className={`pl-3 ${
             largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"

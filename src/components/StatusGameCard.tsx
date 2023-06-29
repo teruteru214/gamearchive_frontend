@@ -29,7 +29,7 @@ const StatusGameCard = ({ game }: StatusGameCardProps) => {
   const largerThanSm = useMediaQuery("sm");
 
   return (
-    <Card radius="md" className="max-w-md bg-blue-50 py-0">
+    <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
         <Image src={game.cover.url} width={150} />
         <div
