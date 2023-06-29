@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import GameCard from "components/GameCard";
+import ButtonGameCard from "components/ButtonGameCard";
 
 // 1つのゲームデータを作成する
 const createGameItem = (id: number) => ({
@@ -37,11 +37,15 @@ const createGameItem = (id: number) => ({
 // 30個のゲームデータを生成する
 const gameItems = Array.from({ length: 30 }, (_, i) => createGameItem(i + 1));
 
-const SearchResults = () => {
+const StatusGameCards = () => {
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {gameItems.map((game) => (
-        <GameCard key={game.id} game={game} />
+        <ButtonGameCard
+          key={game.id}
+          game={game}
+          buttonText="ゲームステータスを変更"
+        />
       ))}
       <Button
         className="flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
@@ -53,4 +57,4 @@ const SearchResults = () => {
   );
 };
 
-export default SearchResults;
+export default StatusGameCards;

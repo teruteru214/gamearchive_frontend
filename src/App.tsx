@@ -1,14 +1,19 @@
 import "./lib/tailwind.css";
 
 import { MantineProvider } from "@mantine/core";
-import UserListPage from "components/features/userlist/UserListPage";
 import MainLayout from "components/Layout/MainLayout";
+import UserDetail from "features/userdetail/UserDetail";
 
 const App = () => {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <MainLayout>
-        <UserListPage />
+        {/* <Top /> */}
+        {/* <GameManagement /> */}
+        {/* <GameAcquisition /> */}
+        {/* <ProfileForm /> */}
+        {/* <UserListPage /> */}
+        <UserDetail />
       </MainLayout>
     </MantineProvider>
   );
