@@ -1,4 +1,5 @@
 import { Group, Image, Modal, Stack, Text } from "@mantine/core";
+import GoogleLoginButton from "components/Button/GoogleLoginButton";
 import { FC } from "react";
 
 import logo from "../../assets/logo.png";
@@ -17,7 +18,7 @@ const LoginModal: FC<LoginModalProps> = ({ opened, setOpened }) => {
           GameArchiveは、あなたのゲーム進行状況をシンプルに管理するアプリです。プレイ中、積みゲー、クリア済みといった各ゲームの状態を一元管理し、公開設定を選んだユーザーは他のプレイヤーと情報を共有できます。
         </Text>
         <Group grow mb="md" mt="md">
-          {/* <GoogleButton radius="xl">Google</GoogleButton> */}
+          <GoogleLoginButton radius="xl">Googleログイン</GoogleLoginButton>
         </Group>
         <Text size="sm" color="dimmed" className="px-5 text-center">
           利用規約、プライバシーポリシーに同意したうえでログインしてください。
