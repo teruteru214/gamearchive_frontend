@@ -17,7 +17,7 @@ const data = [
   },
 ];
 
-const isLogin = false;
+const isLogin = true;
 const user = { name: "User", image: "user-image-url" };
 
 type MainLayoutProps = {

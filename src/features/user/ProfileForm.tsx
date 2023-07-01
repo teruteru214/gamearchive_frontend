@@ -52,11 +52,7 @@ const ProfileForm = () => {
                   <Avatar src="/src/assets/avatar.png" size="xl" />
                 )}
                 <FileButton onChange={setFile} accept="image/png,image/jpeg">
-                  {(props) => (
-                    <Button {...props} color="yellow">
-                      画像をアップロード
-                    </Button>
-                  )}
+                  {(props) => <Button {...props}>画像をアップロード</Button>}
                 </FileButton>
               </Group>
               <TextInput
@@ -86,7 +82,7 @@ const ProfileForm = () => {
               />
             </Stack>
             <Group position="center" className="mt-10">
-              <Button type="submit" radius="xl" size="md" color="yellow">
+              <Button type="submit" radius="xl" size="md">
                 更新する
               </Button>
             </Group>

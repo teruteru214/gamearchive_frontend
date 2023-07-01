@@ -9,7 +9,7 @@ const SearchInputButton = () => {
         radius="xl"
         size="md"
         rightSection={
-          <ActionIcon size={32} radius="xl" color="yellow" variant="filled">
+          <ActionIcon size={32} radius="xl" variant="filled" color="yellow">
             <IconClick size="1.1rem" stroke={1.5} />
           </ActionIcon>
         }

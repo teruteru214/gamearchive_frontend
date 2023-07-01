@@ -36,7 +36,6 @@ const PublicUserList: React.FC = () => {
       <div className="flex justify-center">
         <Pagination
           total={Math.ceil(users.length / ITEMS_PER_PAGE)}
-          color="yellow"
           size="md"
           radius="xs"
           value={activePage}
