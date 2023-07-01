@@ -21,6 +21,8 @@ import {
   IconUserEdit,
   IconUsersGroup,
 } from "@tabler/icons-react";
+import LoginModal from "features/auth/LoginModal";
+import { useState } from "react";
 
 import logo from "../assets/logo.png";
 
@@ -53,6 +55,7 @@ interface HeaderActionProps {
 const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
   const { classes } = useStyles();
 
+  const [loginModalOpened, setLoginModalOpened] = useState(false);
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
@@ -61,7 +64,16 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
         <Group position="apart">
           <Image src={logo} width={200} fit="contain" />
 
-          {isLogin ? (
+          {!isLogin ? (
+            <Button
+              radius="xl"
+              className="h-8"
+              onClick={() => setLoginModalOpened(true)}
+              color="yellow"
+            >
+              ログイン
+            </Button>
+          ) : (
             // ログイン済みの時に表示するコンポーネント
             <Menu
               width={260}
@@ -136,13 +148,10 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>
-          ) : (
-            <Button size="xs" color="yellow">
-              ログイン
-            </Button>
           )}
         </Group>
       </Container>
+      <LoginModal opened={loginModalOpened} setOpened={setLoginModalOpened} />
     </div>
   );
 };

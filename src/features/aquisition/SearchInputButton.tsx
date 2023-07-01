@@ -17,7 +17,7 @@ const SearchInputButton = () => {
         rightSectionWidth={42}
       />
       <p className="text-xs text-gray-400">
-        *日本語でも検索できますが、英語の方が見つかりやすいです
+        *目的のゲームが出てこない時、英語でも検索してみてください
       </p>
     </div>
   );
