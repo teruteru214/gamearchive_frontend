@@ -1,4 +1,4 @@
-import { Button, Image } from "@mantine/core";
+import { Image } from "@mantine/core";
 
 import appDescription from "../../assets/appDescription.png";
 import appDescription2 from "../../assets/appDescription2.png";
@@ -29,9 +29,6 @@ const AppDescription = () => {
         <br />
         あなたのゲーム体験をスムーズに最適化しましょう
       </p>
-      <Button className="mt-10 bg-yellow-400 text-xl hover:bg-yellow-500">
-        ログインして使用する
-      </Button>
     </div>
   );
 };
