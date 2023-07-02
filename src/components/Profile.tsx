@@ -13,14 +13,14 @@ import { useMediaQuery } from "lib/mantine/useMediaQuery";
 interface UserInfoActionProps {
   name: string;
   avatar: string;
-  description: string;
+  introduction: string;
   twitterUsername: string;
 }
 
 const Profile = ({
   avatar,
   name,
-  description,
+  introduction,
   twitterUsername,
 }: UserInfoActionProps) => {
   const largerThanSm = useMediaQuery("sm");
@@ -43,7 +43,7 @@ const Profile = ({
                 {name}
               </Title>
               <Text size="sm" className="break-all">
-                {description}
+                {introduction}
               </Text>
               <div className="flex w-1/12 items-center justify-start">
                 {twitterUsername && (
@@ -76,7 +76,7 @@ const Profile = ({
               size="sm"
               className="w-1/2 break-words"
             >
-              {description}
+              {introduction}
             </Text>
           </div>
           <div className="mx-auto flex w-1/2 items-center justify-center">

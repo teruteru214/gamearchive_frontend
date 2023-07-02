@@ -1,44 +1,38 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import StatusModal from "features/status/StatusModal";
-import StatusUpdateModal from "features/status/StatusUpdateModal";
 
 import { useMediaQuery } from "../lib/mantine/useMediaQuery"; // useMediaQuery フックのパスを正しく指定してください。
 
-interface StatusGameCardProps {
+interface GameCardAcquisitionProps {
   game: {
     id: number;
     name: string;
-    cover: {
+    cover?: {
       id: number;
       url: string;
     };
-    genres: {
+    genres?: {
       id: number;
       name: string;
     }[];
-    platforms: {
+    platforms?: {
       id: number;
       name: string;
     }[];
     url: string;
-    rating: number;
-    status: string;
+    rating?: number;
   };
-  buttonText: string;
 }
 
-const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
+const GameCardAcquisition = ({ game }: GameCardAcquisitionProps) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
-
-  const isGetGame = buttonText === "ゲームを取得する";
-  const isUpdateStatus = buttonText === "ゲームステータスを変更";
 
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
-        <Image src={game.cover.url} width={150} />
+        <Image src={game.cover?.url} width={150} />
         <div
           className={`pl-3 ${
             largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"
@@ -49,7 +43,7 @@ const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
             className="w-full"
             onClick={open}
           >
-            {buttonText}
+            ゲームを取得する
           </Button>
           <Text
             className={`line-clamp-2 ${
@@ -64,7 +58,7 @@ const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
             {`Rating: ${game.rating}`}
           </Text>
           <div className="flex space-x-2">
-            {game.genres.map((genre) => (
+            {game.genres?.map((genre) => (
               <Text
                 key={genre.id}
                 color="dimmed"
@@ -77,7 +71,7 @@ const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
             ))}
           </div>
           <div className="flex space-x-2">
-            {game.platforms.map((platform) => (
+            {game.platforms?.map((platform) => (
               <Text
                 key={platform.id}
                 color="dimmed"
@@ -98,13 +92,10 @@ const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
             ゲームの詳細を見る
           </a>
         </div>
-        {isGetGame && <StatusModal opened={opened} onClose={close} />}
-        {isUpdateStatus && (
-          <StatusUpdateModal opened={opened} onClose={close} />
-        )}
+        <StatusModal opened={opened} onClose={close} />
       </Group>
     </Card>
   );
 };
 
-export default ButtonGameCard;
+export default GameCardAcquisition;
