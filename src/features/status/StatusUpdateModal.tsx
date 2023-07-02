@@ -19,9 +19,7 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({ opened, onClose }) => (
         ]}
       />
       <div className="flex">
-        <Button className="mr-20" color="yellow">
-          更新
-        </Button>
+        <Button className="mr-20">更新</Button>
         <Button color="red">削除</Button>
       </div>
     </Stack>

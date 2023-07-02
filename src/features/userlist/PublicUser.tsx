@@ -9,13 +9,7 @@ type PublicUserProps = {
 const PublicUser: React.FC<PublicUserProps> = ({ avatar, username }) => {
   return (
     <div className="m-2 flex flex-col items-center border-2 border-gray-200 p-2">
-      <Avatar
-        variant="filled"
-        radius="xl"
-        size="xl"
-        color="yellow"
-        src={avatar}
-      />
+      <Avatar variant="filled" radius="xl" size="xl" src={avatar} />
       <p>{username}</p>
     </div>
   );

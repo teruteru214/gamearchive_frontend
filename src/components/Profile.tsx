@@ -61,7 +61,7 @@ const Profile = ({
               </div>
             </Stack>
           </div>
-          <Button color="yellow">プロフィールを編集する</Button>
+          <Button>プロフィールを編集する</Button>
         </div>
       ) : (
         <Stack>

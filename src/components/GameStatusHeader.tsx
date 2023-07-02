@@ -2,7 +2,7 @@ import { Tabs } from "@mantine/core";
 
 const GameStatusHeader = () => {
   return (
-    <Tabs color="yellow" defaultValue="unplaying" className="my-4">
+    <Tabs defaultValue="unplaying" className="my-4">
       <Tabs.List>
         <Tabs.Tab value="clear" className="text-xs font-semibold sm:text-base">
           クリア

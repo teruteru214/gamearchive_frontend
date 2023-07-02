@@ -69,7 +69,6 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
               radius="xl"
               className="h-8"
               onClick={() => setLoginModalOpened(true)}
-              color="yellow"
             >
               ログイン
             </Button>
