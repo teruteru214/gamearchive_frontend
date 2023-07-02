@@ -8,20 +8,20 @@ interface GameCardAcquisitionProps {
   game: {
     id: number;
     name: string;
-    cover: {
+    cover?: {
       id: number;
       url: string;
     };
-    genres: {
+    genres?: {
       id: number;
       name: string;
     }[];
-    platforms: {
+    platforms?: {
       id: number;
       name: string;
     }[];
     url: string;
-    rating: number;
+    rating?: number;
   };
 }
 
@@ -32,7 +32,7 @@ const GameCardAcquisition = ({ game }: GameCardAcquisitionProps) => {
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
-        <Image src={game.cover.url} width={150} />
+        <Image src={game.cover?.url} width={150} />
         <div
           className={`pl-3 ${
             largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"
@@ -58,7 +58,7 @@ const GameCardAcquisition = ({ game }: GameCardAcquisitionProps) => {
             {`Rating: ${game.rating}`}
           </Text>
           <div className="flex space-x-2">
-            {game.genres.map((genre) => (
+            {game.genres?.map((genre) => (
               <Text
                 key={genre.id}
                 color="dimmed"
@@ -71,7 +71,7 @@ const GameCardAcquisition = ({ game }: GameCardAcquisitionProps) => {
             ))}
           </div>
           <div className="flex space-x-2">
-            {game.platforms.map((platform) => (
+            {game.platforms?.map((platform) => (
               <Text
                 key={platform.id}
                 color="dimmed"

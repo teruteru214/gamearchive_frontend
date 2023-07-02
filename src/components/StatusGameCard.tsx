@@ -8,11 +8,11 @@ interface StatusGameCardProps {
   game: {
     id: number;
     name: string;
-    cover: string;
-    genres: string;
-    platforms: string;
+    cover?: string;
+    genres?: string;
+    platforms?: string;
     url: string;
-    rating: number;
+    rating?: number;
     status: number;
   };
 }
