@@ -1,37 +1,16 @@
 import { Button } from "@mantine/core";
-import ButtonGameCard from "components/ButtonGameCard";
+import StatusGameCard from "components/StatusGameCard";
 
 // 1つのゲームデータを作成する
 const createGameItem = (id: number) => ({
   id,
   name: `The Legend of Zelda: Skyward Sword HD ${id}`,
-  cover: {
-    id: 123,
-    url: "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p3a.png",
-  },
-  genres: [
-    {
-      id: 1,
-      name: "Adventure",
-    },
-    {
-      id: 2,
-      name: "Role-playing(RPG)",
-    },
-  ],
-  platforms: [
-    {
-      id: 3,
-      name: "NintendoSwitch",
-    },
-    {
-      id: 4,
-      name: "Wii",
-    },
-  ],
+  cover: "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p3a.png",
+  genres: "#Adventure #Role-playing(RPG)",
+  platforms: "#NintendoSwitch #Wii",
   url: "https://www.igdb.com/games/the-legend-of-zelda-skyward-sword-hd",
   rating: 76,
-  status: "プレイ中", // Add status here
+  status: 3, // Add status here
 });
 
 // 30個のゲームデータを生成する
@@ -41,11 +20,7 @@ const StatusGameCards = () => {
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {gameItems.map((game) => (
-        <ButtonGameCard
-          key={game.id}
-          game={game}
-          buttonText="ゲームステータスを変更"
-        />
+        <StatusGameCard key={game.id} game={game} />
       ))}
       <Button
         className="flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
