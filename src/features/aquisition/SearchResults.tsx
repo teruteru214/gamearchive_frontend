@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import ButtonGameCard from "components/ButtonGameCard";
+import GameCardAcquisition from "components/GameCardAcquisition";
 
 // 1つのゲームデータを作成する
 const createGameItem = (id: number) => ({
@@ -31,7 +31,6 @@ const createGameItem = (id: number) => ({
   ],
   url: "https://www.igdb.com/games/the-legend-of-zelda-skyward-sword-hd",
   rating: 76,
-  status: "プレイ中", // Add status here
 });
 
 // 30個のゲームデータを生成する
@@ -41,11 +40,7 @@ const SearchResults = () => {
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {gameItems.map((game) => (
-        <ButtonGameCard
-          key={game.id}
-          game={game}
-          buttonText={"ゲームを取得する"}
-        />
+        <GameCardAcquisition key={game.id} game={game} />
       ))}
       <Button
         className="flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"

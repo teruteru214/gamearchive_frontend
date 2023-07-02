@@ -1,6 +1,5 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import StatusModal from "features/status/StatusModal";
 import StatusUpdateModal from "features/status/StatusUpdateModal";
 
 import { useMediaQuery } from "../lib/mantine/useMediaQuery"; // useMediaQuery フックのパスを正しく指定してください。
@@ -25,15 +24,11 @@ interface StatusGameCardProps {
     rating: number;
     status: string;
   };
-  buttonText: string;
 }
 
-const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
+const StatusGameCard = ({ game }: StatusGameCardProps) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
-
-  const isGetGame = buttonText === "ゲームを取得する";
-  const isUpdateStatus = buttonText === "ゲームステータスを変更";
 
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
@@ -49,7 +44,7 @@ const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
             className="w-full"
             onClick={open}
           >
-            {buttonText}
+            ゲームステータスを変更
           </Button>
           <Text
             className={`line-clamp-2 ${
@@ -98,13 +93,10 @@ const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
             ゲームの詳細を見る
           </a>
         </div>
-        {isGetGame && <StatusModal opened={opened} onClose={close} />}
-        {isUpdateStatus && (
-          <StatusUpdateModal opened={opened} onClose={close} />
-        )}
+        <StatusUpdateModal opened={opened} onClose={close} />
       </Group>
     </Card>
   );
 };
 
-export default ButtonGameCard;
+export default StatusGameCard;

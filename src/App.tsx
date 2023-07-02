@@ -2,7 +2,7 @@ import "./lib/tailwind.css";
 
 import { MantineProvider } from "@mantine/core";
 import MainLayout from "components/Layout/MainLayout";
-import Top from "features/top/Top";
+import GameAcquisition from "features/aquisition/GameAquisition";
 
 const App = () => {
   return (
@@ -14,9 +14,9 @@ const App = () => {
       }}
     >
       <MainLayout>
-        <Top />
+        {/* <Top /> */}
         {/* <GameManagement /> */}
-        {/* <GameAcquisition /> */}
+        <GameAcquisition />
         {/* <ProfileForm /> */}
         {/* <UserListPage /> */}
         {/* <UserDetail /> */}
