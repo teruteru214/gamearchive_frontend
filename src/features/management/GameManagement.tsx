@@ -19,7 +19,7 @@ const GameManagement = () => {
       <Container>
         <Profile {...userProfileData} />
         <div className="flex justify-center">
-          <Button color="yellow">
+          <Button>
             <IconDisc size="0.9rem" stroke={1.5} className="mr-1" />
             ゲームを追加する
           </Button>

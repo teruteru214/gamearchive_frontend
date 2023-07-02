@@ -47,7 +47,6 @@ const ButtonGameCard = ({ game, buttonText }: StatusGameCardProps) => {
           <Button
             size={largerThanSm ? "md" : "xs"}
             className="w-full"
-            color="yellow"
             onClick={open}
           >
             {buttonText}

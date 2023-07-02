@@ -19,7 +19,7 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose }) => {
             { value: "3", label: "積みゲー" },
           ]}
         />
-        <Button color="yellow">ゲームを取得する</Button>
+        <Button>ゲームを取得する</Button>
       </Stack>
     </Modal>
   );
