@@ -8,9 +8,13 @@ const AppDescription = () => {
   const largerThanSm = useMediaQuery("sm");
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
-      <h1 className="pt-6 text-center text-2xl font-medium sm:text-3xl">
+      <h1 className="mb-0 pt-6 text-center text-2xl font-medium sm:text-3xl">
         本アプリの使い方
       </h1>
+      <p className="text-xs text-gray-400">
+        (本アプリはGoogleログインしたUserのみ使用できます)
+      </p>
+
       <Image
         src={appDescription2}
         style={{ width: largerThanSm ? "600px" : "300px", height: "auto" }}
