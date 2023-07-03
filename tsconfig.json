@@ -19,7 +19,6 @@
       "node",
       "jest",
       "@testing-library/jest-dom",
-      "vite-plugin-svgr/client",
       "vitest/globals"
     ],
     "baseUrl": "./src",
