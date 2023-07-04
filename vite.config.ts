@@ -9,7 +9,17 @@ export default defineConfig({
   server: {
     open: true,
   },
-  plugins: [react(), tsconfigPaths()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          "jotai/babel/plugin-debug-label",
+          "jotai/babel/plugin-react-refresh",
+        ],
+      },
+    }),
+    tsconfigPaths(),
+  ],
   test: {
     // テスト環境を指定
     environment: "happy-dom",
