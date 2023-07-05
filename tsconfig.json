@@ -15,13 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": [
-      "node",
-      "jest",
-      "@testing-library/jest-dom",
-      "vite-plugin-svgr/client",
-      "vitest/globals"
-    ],
+    "jsxImportSource": "react",
+    "types": ["node", "jest", "@testing-library/jest-dom", "vitest/globals"],
     "baseUrl": "./src",
     "noUnusedLocals": true,
     "noUnusedParameters": true,

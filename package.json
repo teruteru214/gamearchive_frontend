@@ -27,11 +27,10 @@
     "@mantine/prism": "^6.0.13",
     "@mantine/styles": "^6.0.14",
     "@mantine/tiptap": "^6.0.13",
-    "@reduxjs/toolkit": "^1.9.5",
     "@tabler/icons-react": "^2.22.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.9",
-    "@tanstack/react-query": "^4.29.12",
+    "@tanstack/query-core": "^4.29.19",
     "@testing-library/react": "^14.0.0",
     "@tiptap/extension-link": "^2.0.3",
     "@tiptap/react": "^2.0.3",
@@ -42,6 +41,11 @@
     "embla-carousel-react": "^8.0.0-rc07",
     "happy-dom": "^9.20.3",
     "jest-extended": "^4.0.0",
+    "jotai": "^2.2.1",
+    "jotai-cache": "^0.3.0",
+    "jotai-location": "^0.5.1",
+    "jotai-molecules": "^1.1.1",
+    "jotai-tanstack-query": "^0.7.1",
     "lint-staged": "^13.2.2",
     "msw": "^1.2.2",
     "react": "^18.2.0",
@@ -79,7 +83,6 @@
     "tailwindcss": "^3.3.2",
     "typescript": "4.6.4",
     "vite": "^4.3.9",
-    "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0"
   }
 }
