@@ -1,7 +1,20 @@
+// SearchInputButton.tsx
 import { ActionIcon, TextInput } from "@mantine/core";
 import { IconClick, IconSearch } from "@tabler/icons-react";
+import { searchQueryState } from "atoms/game/searchQueryState";
+import { useAtom } from "jotai";
+
+import fetchFromIGDB from "./api/fetchFromIGDB";
 
 const SearchInputButton = () => {
+  const [searchQuery, setSearchQuery] = useAtom(searchQueryState);
+
+  const handleSearch = async () => {
+    // 検索クエリを使ってAPIからデータを取得
+    const results = await fetchFromIGDB(searchQuery);
+    // 取得したデータを状態に反映 (ここで適切な状態を設定します)
+  };
+
   return (
     <div className="py-4">
       <TextInput
@@ -9,7 +22,13 @@ const SearchInputButton = () => {
         radius="xl"
         size="md"
         rightSection={
-          <ActionIcon size={32} radius="xl" variant="filled" color="yellow">
+          <ActionIcon
+            size={32}
+            radius="xl"
+            variant="filled"
+            color="yellow"
+            onClick={handleSearch} // クリックイベントに検索を結びつけます
+          >
             <IconClick size="1.1rem" stroke={1.5} />
           </ActionIcon>
         }

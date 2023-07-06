@@ -1,13 +1,13 @@
 import { Container } from "@mantine/core";
 
 import SearchInputButton from "./SearchInputButton";
-import SearchResult from "./SearchResults";
+import SearchResults from "./SearchResults";
 
 const GameSearch = () => {
   return (
     <Container>
       <SearchInputButton />
-      <SearchResult />
+      <SearchResults />
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import { ActionIcon, Button } from "@mantine/core";
 import { ReactNode } from "react";
 
-import { ReactComponent as GoogleIcon } from "../../assets/google.svg";
+import GoogleIcon from "../../assets/google.svg";
 
 interface GoogleLoginButtonProps {
   children: ReactNode;

@@ -1,45 +1,16 @@
 import { Button } from "@mantine/core";
+import { gameResultsFamily } from "atoms/api/IGDB";
+import { searchQueryState } from "atoms/game/searchQueryState";
 import GameCardAcquisition from "components/GameCardAcquisition";
-
-// 1つのゲームデータを作成する
-const createGameItem = (id: number) => ({
-  id,
-  name: `The Legend of Zelda: Skyward Sword HD ${id}`,
-  cover: {
-    id: 123,
-    url: "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p3a.png",
-  },
-  genres: [
-    {
-      id: 1,
-      name: "Adventure",
-    },
-    {
-      id: 2,
-      name: "Role-playing(RPG)",
-    },
-  ],
-  platforms: [
-    {
-      id: 3,
-      name: "NintendoSwitch",
-    },
-    {
-      id: 4,
-      name: "Wii",
-    },
-  ],
-  url: "https://www.igdb.com/games/the-legend-of-zelda-skyward-sword-hd",
-  rating: 76,
-});
-
-// 30個のゲームデータを生成する
-const gameItems = Array.from({ length: 30 }, (_, i) => createGameItem(i + 1));
+import { useAtom } from "jotai";
 
 const SearchResults = () => {
+  const [searchQuery] = useAtom(searchQueryState);
+  const [gameResults] = useAtom(gameResultsFamily(searchQuery));
+
   return (
     <div className="flex flex-wrap justify-between gap-4">
-      {gameItems.map((game) => (
+      {gameResults.map((game) => (
         <GameCardAcquisition key={game.id} game={game} />
       ))}
       <Button

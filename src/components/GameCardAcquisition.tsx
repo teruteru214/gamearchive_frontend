@@ -1,31 +1,15 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import StatusModal from "features/status/StatusModal";
+import { game } from "types/game/game";
 
-import { useMediaQuery } from "../lib/mantine/useMediaQuery"; // useMediaQuery フックのパスを正しく指定してください。
+import { useMediaQuery } from "../lib/mantine/useMediaQuery";
 
-interface GameCardAcquisitionProps {
-  game: {
-    id: number;
-    name: string;
-    cover?: {
-      id: number;
-      url: string;
-    };
-    genres?: {
-      id: number;
-      name: string;
-    }[];
-    platforms?: {
-      id: number;
-      name: string;
-    }[];
-    url: string;
-    rating?: number;
-  };
-}
+type GameCardAcquisitionProps = {
+  game: game;
+};
 
-const GameCardAcquisition = ({ game }: GameCardAcquisitionProps) => {
+const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({ game }) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
 
