@@ -1,9 +1,8 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { GameAcquisition } from "features/aquisition/types";
+import { GameAcquisition } from "features/acquisition/types";
 import StatusModal from "features/status/components/StatusModal";
-
-import { useMediaQuery } from "../lib/mantine/useMediaQuery";
+import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 type GameCardAcquisitionProps = {
   game: GameAcquisition;
@@ -76,7 +75,7 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({ game }) => {
             ゲームの詳細を見る
           </a>
         </div>
-        <StatusModal opened={opened} onClose={close} />
+        <StatusModal opened={opened} onClose={close} game={game} />
       </Group>
     </Card>
   );

@@ -1,4 +1,4 @@
-import fetchFromIGDB from "features/aquisition/api/fetchFromIGDB";
+import fetchFromIGDB from "features/acquisition/api/fetchFromIGDB";
 import { atom } from "jotai";
 import { atomFamily } from "jotai/utils";
 
