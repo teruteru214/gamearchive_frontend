@@ -21,7 +21,7 @@ import {
   IconUserEdit,
   IconUsersGroup,
 } from "@tabler/icons-react";
-import LoginModal from "features/auth/LoginModal";
+import LoginModal from "features/auth/components/LoginModal";
 import { useState } from "react";
 
 import logo from "../assets/logo.png";

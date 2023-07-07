@@ -1,8 +1,6 @@
-// あなたの型定義ファイルからGameをインポートします
+import { GameAcquisition } from "../types";
 
-import { game } from "types/game/game";
-
-const createGameItem = (id: number): game => ({
+const createGameItem = (id: number): GameAcquisition => ({
   id,
   name: `The Legend of Zelda: Skyward Sword HD ${id}`,
   cover: {
@@ -33,7 +31,7 @@ const createGameItem = (id: number): game => ({
   rating: 76,
 });
 
-const fetchFromIGDB = (query: string): Promise<game[]> => {
+const fetchFromIGDB = (query: string): Promise<GameAcquisition[]> => {
   const gameResults = Array.from({ length: 150 }, (_, i) =>
     createGameItem(i + 1)
   );

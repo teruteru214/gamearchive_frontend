@@ -2,7 +2,7 @@ import { Group, Image, Modal, Stack, Text } from "@mantine/core";
 import GoogleLoginButton from "components/Button/GoogleLoginButton";
 import { FC } from "react";
 
-import logo from "../../assets/logo.png";
+import logo from "../../../assets/logo.png";
 
 type LoginModalProps = {
   opened: boolean;

@@ -1,4 +1,4 @@
-import GameStatusHeader from "../../components/GameStatusHeader";
+import GameStatusHeader from "../../../components/GameStatusHeader";
 import StatusGameCards from "./StatusGameCards";
 
 const GameManagementField = () => {

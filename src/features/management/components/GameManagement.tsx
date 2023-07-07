@@ -1,7 +1,7 @@
 import { Button, Container } from "@mantine/core";
 import { IconDisc } from "@tabler/icons-react";
 
-import Profile from "../../components/Profile";
+import Profile from "../../../components/Profile";
 import GameManagementField from "./GameManagementField";
 import HeroContents from "./HeroContents";
 

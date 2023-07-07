@@ -1,7 +1,7 @@
 import { Button } from "@mantine/core";
-import { gameResultsFamily } from "atoms/api/IGDB";
-import { searchQueryState } from "atoms/game/searchQueryState";
 import GameCardAcquisition from "components/GameCardAcquisition";
+import { gameResultsFamily } from "features/aquisition/atoms/api/IGDB";
+import { searchQueryState } from "features/aquisition/atoms/game/searchQueryState";
 import { useAtom } from "jotai";
 
 const SearchResults = () => {

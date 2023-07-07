@@ -1,12 +1,12 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import StatusModal from "features/status/StatusModal";
-import { game } from "types/game/game";
+import { GameAcquisition } from "features/aquisition/types";
+import StatusModal from "features/status/components/StatusModal";
 
 import { useMediaQuery } from "../lib/mantine/useMediaQuery";
 
 type GameCardAcquisitionProps = {
-  game: game;
+  game: GameAcquisition;
 };
 
 const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({ game }) => {

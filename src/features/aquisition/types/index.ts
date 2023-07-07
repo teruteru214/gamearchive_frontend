@@ -1,4 +1,4 @@
-export type game = {
+export type GameAcquisition = {
   id: number;
   name: string;
   cover?: {
