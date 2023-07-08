@@ -1,17 +1,15 @@
 import { Button } from "@mantine/core";
-import { gameResultsFamily } from "features/acquisition/atoms/api/IGDB";
-import { searchQueryState } from "features/acquisition/atoms/game/searchQueryState";
+import { gameItemsAtom2 } from "atoms/dummy";
 import { useAtom } from "jotai";
 
 import GameCardAcquisition from "./GameCardAcquisition";
 
 const SearchResults = () => {
-  const [searchQuery] = useAtom(searchQueryState);
-  const [gameResults] = useAtom(gameResultsFamily(searchQuery));
+  const [games] = useAtom(gameItemsAtom2);
 
   return (
     <div className="flex flex-wrap justify-between gap-4">
-      {gameResults.map((game) => (
+      {games.map((game) => (
         <GameCardAcquisition key={game.id} game={game} />
       ))}
       <Button
