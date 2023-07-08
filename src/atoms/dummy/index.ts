@@ -15,7 +15,16 @@ export const gameItemsAtom = atom(
   Array.from({ length: 30 }, (_, i) => createGameItem(i + 1))
 );
 
-export const loginUserAtom = atom({
+type LoginUserData = {
+  username: string;
+  avatar: string;
+  uid: string;
+  introduction: string;
+  twitterUsername: string;
+  visibility: 0 | 1 | 2;
+};
+
+export const loginUserAtom = atom<LoginUserData>({
   username: "ダニエル",
   avatar: "https://unsplash.com/ja/%E5%86%99%E7%9C%9F/ZHvM3XIOHoE",
   uid: "123",
