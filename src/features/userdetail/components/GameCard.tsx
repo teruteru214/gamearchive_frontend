@@ -1,6 +1,5 @@
 import { Card, Group, Image, Text } from "@mantine/core";
-
-import { useMediaQuery } from "../lib/mantine/useMediaQuery"; // useMediaQuery フックのパスを正しく指定してください。
+import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 interface GameCardProps {
   game: {

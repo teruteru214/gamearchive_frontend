@@ -1,24 +1,15 @@
 import { Button } from "@mantine/core";
-import GameCard from "components/GameCard";
-// 1つのゲームデータを作成する
-const createGameItem = (id: number) => ({
-  id,
-  name: `The Legend of Zelda: Skyward Sword HD ${id}`,
-  cover: "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p3a.png",
-  genres: "#Adventure #Role-playing(RPG)",
-  platforms: "#NintendoSwitch #Wii",
-  url: "https://www.igdb.com/games/the-legend-of-zelda-skyward-sword-hd",
-  rating: 76,
-  status: 1, // Add status here
-});
+import { gameItemsAtom } from "atoms/dummy";
+import { useAtom } from "jotai";
 
-// 30個のゲームデータを生成する
-const gameItems = Array.from({ length: 30 }, (_, i) => createGameItem(i + 1));
+import GameCard from "./GameCard";
 
 const GameCards = () => {
+  const [games] = useAtom(gameItemsAtom);
+
   return (
     <div className="flex flex-wrap justify-between gap-4">
-      {gameItems.map((game) => (
+      {games.map((game) => (
         <GameCard key={game.id} game={game} />
       ))}
       <Button

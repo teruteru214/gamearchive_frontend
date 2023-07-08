@@ -4,5 +4,5 @@ export type User = {
   uid: string;
   introduction: string;
   twitterUsername: string;
-  visibility: 0 | 1 | 2;
+  visibility: 0 | 1;
 };
