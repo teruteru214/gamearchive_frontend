@@ -8,21 +8,21 @@ import {
   Title,
 } from "@mantine/core";
 import { IconBrandTwitter } from "@tabler/icons-react";
+import { loginUserAtom } from "atoms/dummy";
+import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
-interface UserInfoActionProps {
-  name: string;
-  avatar: string;
-  introduction: string;
-  twitterUsername: string;
-}
+// interface UserInfoActionProps {
+//   name: string;
+//   avatar: string;
+//   introduction: string;
+//   twitterUsername: string;
+// }
 
-const Profile = ({
-  avatar,
-  name,
-  introduction,
-  twitterUsername,
-}: UserInfoActionProps) => {
+const Profile = () => {
+  const [userProfileData] = useAtom(loginUserAtom);
+
+  const { username, avatar, introduction, twitterUsername } = userProfileData;
   const largerThanSm = useMediaQuery("sm");
   return (
     <Paper
@@ -40,7 +40,7 @@ const Profile = ({
             <Avatar src={avatar} size={120} radius={120} />
             <Stack>
               <Title order={3} weight={500}>
-                {name}
+                {username}
               </Title>
               <Text size="sm" className="break-all">
                 {introduction}
@@ -67,7 +67,7 @@ const Profile = ({
         <Stack>
           <Avatar src={avatar} size={120} radius={120} mx="auto" />
           <Text align="center" size="lg" weight={500} mt="md">
-            {name}
+            {username}
           </Text>
           <div className="flex justify-center">
             <Text
