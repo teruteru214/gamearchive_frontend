@@ -1,8 +1,7 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import StatusUpdateModal from "features/status/components/StatusUpdateModal";
-
-import { useMediaQuery } from "../lib/mantine/useMediaQuery"; // useMediaQuery フックのパスを正しく指定してください。
+import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 interface StatusGameCardProps {
   game: {

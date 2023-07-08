@@ -14,3 +14,12 @@ const createGameItem = (id: number) => ({
 export const gameItemsAtom = atom(
   Array.from({ length: 30 }, (_, i) => createGameItem(i + 1))
 );
+
+export const loginUserAtom = atom({
+  username: "ダニエル",
+  avatar: "https://unsplash.com/ja/%E5%86%99%E7%9C%9F/ZHvM3XIOHoE",
+  uid: "123",
+  introduction: "Hello! I'm a game enthusiast.",
+  twitterUsername: "UserTwitter",
+  visibility: 0,
+});
