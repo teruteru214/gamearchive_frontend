@@ -1,30 +1,20 @@
+import { FooterAtom } from "atoms/ui";
+import { isLoginAtom } from "atoms/user";
+import { loginUserAtom } from "atoms/user/userInfoAtom";
 import FooterLinks from "components/FooterLinks";
 import HeaderAction from "components/HeaderAction";
+import { useAtom } from "jotai";
 import { FC, ReactElement } from "react";
-
-const data = [
-  {
-    link: "#",
-    label: "プライバシーポリシー",
-  },
-  {
-    link: "#",
-    label: "利用規約",
-  },
-  {
-    link: "#",
-    label: "お問い合わせ",
-  },
-];
-
-const isLogin = false;
-const user = { name: "User", image: "user-image-url" };
 
 type MainLayoutProps = {
   children: ReactElement;
 };
 
 const MainLayout: FC<MainLayoutProps> = ({ children }) => {
+  const [data] = useAtom(FooterAtom);
+  const [isLogin] = useAtom(isLoginAtom);
+  const [user] = useAtom(loginUserAtom);
+
   return (
     <>
       <HeaderAction {...{ user, isLogin }} />

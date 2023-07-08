@@ -10,3 +10,5 @@ export type User = {
 };
 
 export const loginUserAtom = atom<User | null>(null);
+
+export const isLoginAtom = atom(true);
