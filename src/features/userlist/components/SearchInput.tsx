@@ -1,13 +1,13 @@
+// src/features/components/SearchInput.tsx
 import { TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
-import { Dispatch, SetStateAction } from "react";
+import { useAtom } from "jotai";
 
-type SearchInputProps = {
-  filterInput: string;
-  setFilterInput: Dispatch<SetStateAction<string>>;
-};
+import { filterInputAtom } from "../atoms/user";
 
-const SearchInput = ({ filterInput, setFilterInput }: SearchInputProps) => {
+const SearchInput = () => {
+  const [filterInput, setFilterInput] = useAtom(filterInputAtom);
+
   return (
     <TextInput
       icon={<IconSearch size={18} stroke={1.5} />}
