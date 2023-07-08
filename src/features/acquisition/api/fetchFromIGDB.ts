@@ -31,7 +31,7 @@ const createGameItem = (id: number): GameAcquisition => ({
   rating: 76,
 });
 
-const fetchFromIGDB = (query: string): Promise<GameAcquisition[]> => {
+const fetchFromIGDB = (): Promise<GameAcquisition[]> => {
   const gameResults = Array.from({ length: 150 }, (_, i) =>
     createGameItem(i + 1)
   );

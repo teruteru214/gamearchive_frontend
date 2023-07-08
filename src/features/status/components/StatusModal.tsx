@@ -8,7 +8,7 @@ type StatusModalProps = {
   game: GameAcquisition;
 };
 
-const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
+const StatusModal: FC<StatusModalProps> = ({ opened, onClose }) => {
   return (
     <Modal opened={opened} onClose={onClose} centered size="sm">
       <Stack className="flex items-center justify-center space-y-4 pb-16">

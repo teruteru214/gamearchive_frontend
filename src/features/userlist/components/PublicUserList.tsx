@@ -14,10 +14,10 @@ const PublicUserList: React.FC = () => {
   const [activePage, setPage] = useAtom(activePageAtom);
 
   const startIndex = (activePage - 1) * ITEMS_PER_PAGE;
-  const selectedUsers = filteredUsers.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
+  // const selectedUsers = filteredUsers.slice(
+  //   startIndex,
+  //   startIndex + ITEMS_PER_PAGE
+  // );
 
   return (
     <div>
