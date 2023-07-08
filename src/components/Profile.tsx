@@ -8,7 +8,7 @@ import {
   Title,
 } from "@mantine/core";
 import { IconBrandTwitter } from "@tabler/icons-react";
-import { loginUserAtom } from "atoms/dummy";
+import { loginUserAtom } from "atoms/user/userInfoAtom";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 

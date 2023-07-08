@@ -1,9 +1,8 @@
 // src/features/components/SearchInput.tsx
 import { TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
+import { filterInputAtom } from "atoms/user/userInfoAtom";
 import { useAtom } from "jotai";
-
-import { filterInputAtom } from "../atoms/user";
 
 const SearchInput = () => {
   const [filterInput, setFilterInput] = useAtom(filterInputAtom);

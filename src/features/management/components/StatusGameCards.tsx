@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import { gameItemsAtom } from "atoms/dummy";
+import { gameItemsAtom } from "atoms/games/gamesListAtom";
 import { useAtom } from "jotai";
 
 import StatusGameCard from "./StatusGameCard";
