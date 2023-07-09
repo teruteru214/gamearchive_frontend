@@ -23,6 +23,7 @@ import {
 } from "@tabler/icons-react";
 import LoginModal from "features/auth/components/LoginModal";
 import { useState } from "react";
+import { User } from "types/user";
 
 import logo from "../assets/logo.png";
 
@@ -49,7 +50,7 @@ const useStyles = createStyles((theme) => ({
 
 interface HeaderActionProps {
   isLogin: boolean;
-  user: { name: string; image: string };
+  user: User;
 }
 
 const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
@@ -89,14 +90,14 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
                   aria-label={opened ? "Close navigation" : "Open navigation"}
                 >
                   <Avatar
-                    src={user.image}
-                    alt={user.name}
+                    src={user.avatar}
+                    alt={user.username}
                     radius="xl"
                     size={20}
                   />
 
                   <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                    {user.name}
+                    {user.username}
                   </Text>
 
                   <Burger opened={opened} />

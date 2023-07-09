@@ -1,23 +1,17 @@
 // src/features/components/PublicUserList.tsx
 import { Pagination } from "@mantine/core";
-import { useAtom } from "jotai";
-
 import {
   activePageAtom,
   filteredUsersAtom,
   ITEMS_PER_PAGE,
-} from "../atoms/user";
+} from "atoms/user/userInfoAtom";
+import { useAtom } from "jotai";
+
 import PublicUser from "./PublicUser";
 
 const PublicUserList: React.FC = () => {
   const [filteredUsers] = useAtom(filteredUsersAtom);
   const [activePage, setPage] = useAtom(activePageAtom);
-
-  const startIndex = (activePage - 1) * ITEMS_PER_PAGE;
-  const selectedUsers = filteredUsers.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
 
   return (
     <div>

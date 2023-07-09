@@ -11,7 +11,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { loginUserAtom } from "atoms/dummy";
+import { loginUserAtom } from "atoms/user/userInfoAtom";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useState } from "react";
