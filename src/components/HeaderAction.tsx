@@ -23,6 +23,7 @@ import {
 } from "@tabler/icons-react";
 import LoginModal from "features/auth/components/LoginModal";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { User } from "types/user";
 
 import logo from "../assets/logo.png";
@@ -58,12 +59,20 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
 
   const [loginModalOpened, setLoginModalOpened] = useState(false);
   const [opened, { toggle }] = useDisclosure(false);
+  const navigate = useNavigate();
 
   return (
     <div className="sticky top-0 z-10 border-b border-gray-200 bg-white pt-2">
       <Container className={classes.mainSection} size="lg">
         <Group position="apart">
-          <Image src={logo} width={200} fit="contain" />
+          <Link to="/">
+            <Image
+              src={logo}
+              width={200}
+              fit="contain"
+              onClick={() => navigate("/")}
+            />
+          </Link>
 
           {!isLogin ? (
             <Button
@@ -105,29 +114,45 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
               </Menu.Target>
 
               <Menu.Dropdown>
-                <Menu.Item icon={<IconDisc size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  icon={<IconDisc size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("/acquisition")}
+                >
                   ゲーム登録
                 </Menu.Item>
 
-                <Menu.Item icon={<IconTrophy size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  icon={<IconTrophy size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("#")}
+                >
                   クリアしたゲーム
                 </Menu.Item>
 
                 <Menu.Item
                   icon={<IconDeviceGamepad2 size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("#")}
                 >
                   プレイ中のゲーム
                 </Menu.Item>
 
-                <Menu.Item icon={<IconStack3 size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  icon={<IconStack3 size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("#")}
+                >
                   積みゲー
                 </Menu.Item>
 
-                <Menu.Item icon={<IconStar size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  icon={<IconStar size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("#")}
+                >
                   お気に入りのゲーム
                 </Menu.Item>
 
-                <Menu.Item icon={<IconUsersGroup size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  icon={<IconUsersGroup size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("/users")}
+                >
                   ユーザー一覧
                 </Menu.Item>
 
@@ -135,15 +160,24 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
 
                 <Menu.Label>Settings</Menu.Label>
 
-                <Menu.Item icon={<IconUserEdit size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  icon={<IconUserEdit size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("/profile")}
+                >
                   プロフィール編集
                 </Menu.Item>
 
-                <Menu.Item icon={<IconReplace size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  icon={<IconReplace size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("/management")}
+                >
                   ゲームマネジメント
                 </Menu.Item>
 
-                <Menu.Item icon={<IconLogout size="0.9rem" stroke={1.5} />}>
+                <Menu.Item
+                  icon={<IconLogout size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("#")}
+                >
                   ログアウト
                 </Menu.Item>
               </Menu.Dropdown>
