@@ -4,10 +4,10 @@ import { loginUserAtom } from "atoms/user/userInfoAtom";
 import FooterLinks from "components/FooterLinks";
 import HeaderAction from "components/HeaderAction";
 import { useAtom } from "jotai";
-import { FC, ReactElement } from "react";
+import { FC, ReactNode } from "react";
 
 type MainLayoutProps = {
-  children: ReactElement;
+  children: ReactNode;
 };
 
 const MainLayout: FC<MainLayoutProps> = ({ children }) => {

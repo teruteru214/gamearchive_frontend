@@ -18,9 +18,9 @@ const AppProvider = ({ children }: AppProviderProps) => {
           primaryColor: "yellow",
         }}
       >
-        <MainLayout>
-          <Router>{children}</Router>
-        </MainLayout>
+        <Router>
+          <MainLayout>{children}</MainLayout>
+        </Router>
       </MantineProvider>
     </HelmetProvider>
   );
