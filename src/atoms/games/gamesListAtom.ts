@@ -13,7 +13,7 @@ const createGameItem = (id: number) => ({
 });
 
 export const gameItemsAtom = atom(
-  Array.from({ length: 30 }, (_, i) => createGameItem(i + 1))
+  Array.from({ length: 149 }, (_, i) => createGameItem(i + 1))
 );
 
 export const createGameAcquisitionItem = (id: number): GameAcquisition => ({
@@ -48,5 +48,5 @@ export const createGameAcquisitionItem = (id: number): GameAcquisition => ({
 });
 
 export const gameItemsAtom2 = atom(
-  Array.from({ length: 30 }, (_, i) => createGameAcquisitionItem(i + 1))
+  Array.from({ length: 150 }, (_, i) => createGameAcquisitionItem(i + 1))
 );
