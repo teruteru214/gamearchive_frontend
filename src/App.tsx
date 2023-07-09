@@ -1,27 +1,11 @@
-import "./lib/tailwind.css";
-
-import { MantineProvider } from "@mantine/core";
-import MainLayout from "components/Layout/MainLayout";
-import GameManagement from "features/management/components/GameManagement";
+import AppProvider from "providers/app";
+import AppRoutes from "routes";
 
 const App = () => {
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        primaryColor: "yellow",
-      }}
-    >
-      <MainLayout>
-        {/* <Top /> */}
-        <GameManagement />
-        {/* <GameAcquisition /> */}
-        {/* <ProfileForm /> */}
-        {/* <UserListPage /> */}
-        {/* <UserDetail /> */}
-      </MainLayout>
-    </MantineProvider>
+    <AppProvider>
+      <AppRoutes />
+    </AppProvider>
   );
 };
 
