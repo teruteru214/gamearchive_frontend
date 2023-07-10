@@ -11,13 +11,13 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import { IconUserEdit } from "@tabler/icons-react";
 import { loginUserAtom } from "atoms/user/userInfoAtom";
+import HeroContents from "components/HeroContents";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useState } from "react";
 import { z } from "zod";
-
-import HeroContents from "./HeroContents";
 
 const schema = z.object({
   username: z.string().trim().min(1, { message: "ニックネームは必須です" }),
@@ -43,7 +43,10 @@ const ProfileForm = () => {
   const [file, setFile] = useState<File | null>(null);
   return (
     <>
-      <HeroContents />
+      <HeroContents
+        IconComponent={<IconUserEdit size="3rem" stroke={1.5} />}
+        title="プロフィール編集"
+      />
       <Container className="mt-4">
         <Box sx={{ maxWidth: 500 }} mx="auto">
           <form onSubmit={form.onSubmit((values) => console.log(values, file))}>

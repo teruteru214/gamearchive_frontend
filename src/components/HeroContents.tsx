@@ -1,7 +1,7 @@
 import { Container, createStyles, Title } from "@mantine/core";
-import { IconDisc } from "@tabler/icons-react";
+import { ReactElement } from "react";
 
-import { useMediaQuery } from "../../../lib/mantine/useMediaQuery";
+import { useMediaQuery } from "../lib/mantine/useMediaQuery";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -20,21 +20,26 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const HeroContents = () => {
+interface HeroContentsProps {
+  IconComponent: ReactElement;
+  title: string;
+}
+
+const HeroContents = ({ IconComponent, title }: HeroContentsProps) => {
   const { classes } = useStyles();
   const largerThanSm = useMediaQuery("sm");
   return (
     <div className="bg-yellow-50">
       <Container className="bg-yellow-50">
         <div className={classes.inner}>
-          <IconDisc size="3rem" stroke={1.5} />
+          {IconComponent}
           <Title
             className={classes.title}
             style={{
               fontSize: largerThanSm ? "22px" : "20px",
             }}
           >
-            ゲームを取得
+            {title}
           </Title>
         </div>
       </Container>
