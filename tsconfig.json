@@ -17,6 +17,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "types": ["node", "jest", "@testing-library/jest-dom", "vitest/globals"],
+    "typeRoots": ["./node_modules/@types", "./types"],
     "baseUrl": "./src",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
