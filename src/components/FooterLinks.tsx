@@ -1,4 +1,5 @@
 import { Anchor, Container, Group, Image, Text } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../assets/logo.png";
 
@@ -7,7 +8,7 @@ interface FooterLinksProps {
 }
 
 const FooterLinks = ({ data }: FooterLinksProps) => {
-  // const { classes } = useStyles();
+  const navigate = useNavigate();
 
   const links = data.map((link) => (
     <Anchor<"a">
@@ -27,7 +28,12 @@ const FooterLinks = ({ data }: FooterLinksProps) => {
         className="flex items-center justify-between max-sm:flex-col"
         size="lg"
       >
-        <Image src={logo} width={300} fit="contain" />
+        <Image
+          src={logo}
+          width={300}
+          fit="contain"
+          onClick={() => navigate("/")}
+        />
         <Group className="max-xs:mt-4">{links}</Group>
       </Container>
       <Container
