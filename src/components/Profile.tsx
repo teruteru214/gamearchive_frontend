@@ -12,13 +12,6 @@ import { loginUserAtom } from "atoms/user/userInfoAtom";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
-// interface UserInfoActionProps {
-//   name: string;
-//   avatar: string;
-//   introduction: string;
-//   twitterUsername: string;
-// }
-
 const Profile = () => {
   const [userProfileData] = useAtom(loginUserAtom);
 
