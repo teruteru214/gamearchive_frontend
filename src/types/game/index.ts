@@ -1,10 +1,22 @@
 export type GameCard = {
-  id: number;
-  name: string;
-  cover: string;
-  genres: string;
-  platforms: string;
-  url: string;
-  rating: number;
-  status: number;
+  game: {
+    id: number; // このゲームのid (gamesテーブルのid)
+    title: string;
+    cover?: string;
+    rating?: number;
+    url: string;
+  };
+  genres?: {
+    id: number; // このジャンルのid (genresテーブルのid)
+    name: string;
+  }[];
+  platforms?: {
+    id: number; // このプラットフォームのid (platformsテーブルのid)
+    name: string;
+  }[];
+  gameStatus: {
+    id: number; // このゲームステータスのid (gameStatusテーブルのid)
+    user_id: number; // このゲームステータスが紐づくユーザーのid (usersテーブルのid)
+    status: number;
+  };
 };
