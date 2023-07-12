@@ -427,7 +427,7 @@ const initialData = [
   },
 ];
 
-const acquisitionGameAPI = {
+export const acquisitionGameAPI = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getALLAcquisitionGames() {
     return initialData;

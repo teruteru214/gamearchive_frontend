@@ -1,12 +1,12 @@
 import { Button } from "@mantine/core";
 import { itemsToShowAtom } from "atoms/games";
-import { gameItemsAtom2 } from "atoms/games/gamesListAtom";
+import { gameResultsAtom } from "atoms/games/gameAcquisition";
 import { useAtom } from "jotai";
 
 import GameCardAcquisition from "./GameCardAcquisition";
 
 const SearchResults = () => {
-  const [games] = useAtom(gameItemsAtom2);
+  const [games] = useAtom(gameResultsAtom);
   const [itemsToShow, setItemsToShow] = useAtom(itemsToShowAtom);
 
   return (

@@ -1,13 +1,16 @@
 import { ActionIcon, TextInput } from "@mantine/core";
 import { IconClick, IconSearch } from "@tabler/icons-react";
+import { gameResultsAtom } from "atoms/games/gameAcquisition";
+import { useAtom } from "jotai";
+import { acquisitionGameAPI } from "test/handlers/acquisitionGames";
 
 const SearchInputButton = () => {
-  // const [searchQuery, setSearchQuery] = useAtom(searchQueryState);
+  // const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+  const [, setGameResults] = useAtom(gameResultsAtom);
 
   const handleSearch = async () => {
-    // 検索クエリを使ってAPIからデータを取得
-    // const results = await fetchFromIGDB(searchQuery);
-    // 取得したデータを状態に反映 (ここで適切な状態を設定します)
+    const results = await acquisitionGameAPI.getALLAcquisitionGames();
+    setGameResults(results);
   };
 
   return (
