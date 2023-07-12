@@ -1,4 +1,3 @@
-// SearchInputButton.tsx
 import { ActionIcon, TextInput } from "@mantine/core";
 import { IconClick, IconSearch } from "@tabler/icons-react";
 
