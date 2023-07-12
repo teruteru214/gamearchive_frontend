@@ -1,8 +1,13 @@
 import { Button, Modal, Select, Stack, Text } from "@mantine/core";
-import { convertedGameAtom, statusAtom } from "atoms/games/gameAcquisition";
+import {
+  convertedGameAtom,
+  errorAtom,
+  statusAtom,
+} from "atoms/games/gameAcquisition";
 import { GameAcquisition } from "features/acquisition/types";
 import { useAtom } from "jotai";
 import { FC, useEffect } from "react";
+import { z } from "zod";
 
 type StatusModalProps = {
   opened: boolean;
@@ -13,6 +18,11 @@ type StatusModalProps = {
 const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
   const [status, setStatus] = useAtom(statusAtom);
   const [convertedGame, setConvertedGame] = useAtom(convertedGameAtom);
+  const [error, setError] = useAtom(errorAtom);
+
+  const StatusSchema = z
+    .string()
+    .nonempty({ message: "ゲームステータスを選択してください" });
 
   useEffect(() => {
     if (status) {
@@ -36,8 +46,17 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
   }, [status, game]);
 
   const handleClick = () => {
-    if (convertedGame) {
-      console.log(convertedGame);
+    if (convertedGame && status) {
+      // バリデーション
+      const result = StatusSchema.safeParse(status);
+      if (result.success) {
+        console.log(convertedGame);
+        setError(null); // エラーをリセット
+      } else {
+        setError(result.error.message);
+      }
+    } else {
+      setError("※ゲームステータスを選択してください");
     }
   };
 
@@ -45,6 +64,11 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
     <Modal opened={opened} onClose={onClose} centered size="sm">
       <Stack className="flex items-center justify-center space-y-4 pb-16">
         <Text size="lg">ゲームステータスを入力</Text>
+        {error && (
+          <Text color="red" size="xs">
+            {error}
+          </Text>
+        )}
         <Select
           placeholder="ゲームステータスを選択"
           data={["積みゲー", "プレイ中", "クリア"]}

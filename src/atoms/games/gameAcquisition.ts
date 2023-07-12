@@ -9,3 +9,5 @@ export const gameResultsAtom = atom<GameAcquisition[]>([]);
 export const statusAtom = atom<string | null>(null);
 // 変換されたゲームのアトム（ステート）
 export const convertedGameAtom = atom<any | null>(null);
+// errorメッセージ用のatomを定義
+export const errorAtom = atom<string | null>(null);
