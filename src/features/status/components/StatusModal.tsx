@@ -1,6 +1,8 @@
 import { Button, Modal, Select, Stack, Text } from "@mantine/core";
+import { convertedGameAtom, statusAtom } from "atoms/games/gameAcquisition";
 import { GameAcquisition } from "features/acquisition/types";
-import { FC } from "react";
+import { useAtom } from "jotai";
+import { FC, useEffect } from "react";
 
 type StatusModalProps = {
   opened: boolean;
@@ -8,20 +10,47 @@ type StatusModalProps = {
   game: GameAcquisition;
 };
 
-const StatusModal: FC<StatusModalProps> = ({ opened, onClose }) => {
+const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
+  const [status, setStatus] = useAtom(statusAtom);
+  const [convertedGame, setConvertedGame] = useAtom(convertedGameAtom);
+
+  useEffect(() => {
+    if (status) {
+      setConvertedGame({
+        game: {
+          id: game.id,
+          title: game.name,
+          cover: game.cover?.url,
+          rating: game.rating,
+          url: game.url,
+        },
+        genres: game.genres,
+        platforms: game.platforms,
+        gameStatus: {
+          id: 1, // ここは適切な値に置き換えてください
+          user_id: 1, // ここは適切な値に置き換えてください
+          status: status,
+        },
+      });
+    }
+  }, [status, game]);
+
+  const handleClick = () => {
+    if (convertedGame) {
+      console.log(convertedGame);
+    }
+  };
+
   return (
     <Modal opened={opened} onClose={onClose} centered size="sm">
       <Stack className="flex items-center justify-center space-y-4 pb-16">
         <Text size="lg">ゲームステータスを入力</Text>
         <Select
           placeholder="ゲームステータスを選択"
-          data={[
-            { value: "1", label: "クリア" },
-            { value: "2", label: "プレイ中" },
-            { value: "3", label: "積みゲー" },
-          ]}
+          data={["積みゲー", "プレイ中", "クリア"]}
+          onChange={(value) => setStatus(value)}
         />
-        <Button>ゲームを取得する</Button>
+        <Button onClick={handleClick}>ゲームを取得する</Button>
       </Stack>
     </Modal>
   );
