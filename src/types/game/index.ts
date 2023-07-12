@@ -1,22 +1,24 @@
+export type GameStatus = "積みゲー" | "プレイ中" | "クリア";
+
 export type GameCard = {
   game: {
-    id: number; // このゲームのid (gamesテーブルのid)
+    id: number;
     title: string;
     cover?: string;
     rating?: number;
     url: string;
   };
   genres?: {
-    id: number; // このジャンルのid (genresテーブルのid)
+    id: number;
     name: string;
   }[];
   platforms?: {
-    id: number; // このプラットフォームのid (platformsテーブルのid)
+    id: number;
     name: string;
   }[];
   gameStatus: {
-    id: number; // このゲームステータスのid (gameStatusテーブルのid)
-    user_id: number; // このゲームステータスが紐づくユーザーのid (usersテーブルのid)
-    status: number;
+    id: number;
+    user_id: number;
+    status: GameStatus;
   };
 };

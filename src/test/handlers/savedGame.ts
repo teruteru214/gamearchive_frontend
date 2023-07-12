@@ -37,7 +37,7 @@ const initialData = [
     gameStatus: {
       id: 1,
       user_id: 1,
-      status: 0,
+      status: "積みゲー",
     },
   },
   {
@@ -75,7 +75,7 @@ const initialData = [
     gameStatus: {
       id: 2,
       user_id: 1,
-      status: 0,
+      status: "プレイ中",
     },
   },
   {
@@ -113,7 +113,7 @@ const initialData = [
     gameStatus: {
       id: 3,
       user_id: 1,
-      status: 1,
+      status: "クリア",
     },
   },
   {
@@ -175,28 +175,28 @@ const initialData = [
     gameStatus: {
       id: 4,
       user_id: 1,
-      status: 2,
+      status: "積みゲー",
     },
   },
 ];
 
 const savedGameAPI = {
-  getGamesByStatus(status: number) {
+  getGamesByStatus(status: "積みゲー" | "プレイ中" | "クリア") {
     return initialData.filter((game) => game.gameStatus.status === status);
   },
 };
 
 export const savedGamesHandlers = [
   rest.get(`${endpoint}/management/status/unplayed`, (req, res, ctx) => {
-    const unplayedGames = savedGameAPI.getGamesByStatus(0);
+    const unplayedGames = savedGameAPI.getGamesByStatus("積みゲー");
     return res(ctx.status(200), ctx.json(unplayedGames));
   }),
   rest.get(`${endpoint}/management/status/playing`, (req, res, ctx) => {
-    const playingGames = savedGameAPI.getGamesByStatus(1);
+    const playingGames = savedGameAPI.getGamesByStatus("プレイ中");
     return res(ctx.status(200), ctx.json(playingGames));
   }),
   rest.get(`${endpoint}/management/status/clear`, (req, res, ctx) => {
-    const clearedGames = savedGameAPI.getGamesByStatus(2);
+    const clearedGames = savedGameAPI.getGamesByStatus("クリア");
     return res(ctx.status(200), ctx.json(clearedGames));
   }),
 ];
