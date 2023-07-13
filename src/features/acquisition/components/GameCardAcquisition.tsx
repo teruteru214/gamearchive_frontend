@@ -15,23 +15,19 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({ game }) => {
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
-        <Image src={game.cover?.url} width={150} />
-        <div
-          className={`pl-3 ${
-            largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"
-          }`}
-        >
+        <Image src={game.cover?.url} width={140} height={180} fit="contain" />
+        <div className="pl-3">
           <Button
             size={largerThanSm ? "md" : "xs"}
-            className="w-full"
+            className={`${largerThanSm ? "w-64" : "w-40"}`}
             onClick={open}
           >
             ゲームを取得する
           </Button>
           <Text
-            className={`line-clamp-2 ${
-              largerThanSm ? "w-60" : "w-full"
-            } font-sans font-bold leading-5`}
+            className={`line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap ${
+              largerThanSm ? "w-64" : "w-40"
+            } font-sans font-bold `}
             mt="xs"
             mb="md"
           >
@@ -40,37 +36,29 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({ game }) => {
           <Text className="font-sans font-bold leading-5" mt="xs" mb="md">
             {`Rating: ${game.rating}`}
           </Text>
-          <div className="flex space-x-2">
-            {game.genres?.map((genre) => (
-              <Text
-                key={genre.id}
-                color="dimmed"
-                weight={700}
-                size="xs"
-                className="line-clamp-1"
-              >
-                #{genre.name}
-              </Text>
-            ))}
+          <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
+            <Text
+              color="dimmed"
+              size="xs"
+              className="overflow-hidden text-ellipsis whitespace-nowrap font-bold"
+            >
+              {game.genres?.map((genre) => `#${genre.name}`).join("  ")}
+            </Text>
           </div>
-          <div className="flex space-x-2">
-            {game.platforms?.map((platform) => (
-              <Text
-                key={platform.id}
-                color="dimmed"
-                weight={700}
-                size="xs"
-                className="line-clamp-1"
-              >
-                #{platform.name}
-              </Text>
-            ))}
+          <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
+            <Text
+              color="dimmed"
+              size="xs"
+              className="overflow-hidden text-ellipsis whitespace-nowrap font-bold"
+            >
+              {game.platforms?.map((platform) => `#${platform.name}`).join(" ")}
+            </Text>
           </div>
           <a
             href={game.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-bold text-gray-400 no-underline"
+            className="text-xs font-bold text-blue-400 no-underline hover:underline"
           >
             ゲームの詳細を見る
           </a>
