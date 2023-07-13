@@ -1,5 +1,5 @@
 import { ActionIcon, TextInput } from "@mantine/core";
-import { IconClick, IconSearch } from "@tabler/icons-react";
+import { IconPointerSearch, IconSearch } from "@tabler/icons-react";
 import { gameResultsAtom } from "atoms/games/gameAcquisition";
 import { useAtom } from "jotai";
 import { acquisitionGameAPI } from "test/handlers/acquisitionGames";
@@ -27,7 +27,7 @@ const SearchInputButton = () => {
             color="yellow"
             onClick={handleSearch} // クリックイベントに検索を結びつけます
           >
-            <IconClick size="1.1rem" stroke={1.5} />
+            <IconPointerSearch size="1.1rem" stroke={1.5} />
           </ActionIcon>
         }
         placeholder="ゲームの名前を入力してください"
