@@ -1,5 +1,4 @@
 import { MantineProvider } from "@mantine/core";
-import MainLayout from "components/Layout/MainLayout";
 import { ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -18,9 +17,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
           primaryColor: "yellow",
         }}
       >
-        <Router>
-          <MainLayout>{children}</MainLayout>
-        </Router>
+        <Router>{children}</Router>
       </MantineProvider>
     </HelmetProvider>
   );
