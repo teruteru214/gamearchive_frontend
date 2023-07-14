@@ -1,4 +1,4 @@
-export type GameStatus = "積みゲー" | "プレイ中" | "クリア";
+export type GameStatus = "unplaying" | "playing" | "clear";
 
 export type GameCard = {
   game: {
