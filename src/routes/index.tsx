@@ -4,10 +4,8 @@ import GameManagement from "features/management/components/GameManagement";
 // Import your StatusGameCards component
 import ProfileForm from "features/profile/components/ProfileForm";
 import Top from "features/top/components/Top";
-import UserDetail from "features/userdetail/components/UserDetail";
-import UserListPage from "features/userlist/components/UserListPage";
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import { NotFoundTitle } from "./NotFoundTitle";
 
@@ -27,18 +25,19 @@ const AppRoutes = () => {
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
       <Route path="management" element={<MainLayout />}>
-        <Route index element={<GameManagement />} />
+        <Route index element={<Navigate to="/" replace />} />
+        <Route path=":status" element={<GameManagement />} />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
       <Route path="profile" element={<MainLayout />}>
         <Route index element={<ProfileForm />} />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
-      <Route path="users" element={<MainLayout />}>
+      {/* <Route path="users" element={<MainLayout />}>
         <Route index element={<UserListPage />} />
         <Route path=":userId" element={<UserDetail />} />
         <Route path="*" element={<NotFoundTitle />} />
-      </Route>
+      </Route> */}
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Top />} />
         <Route path="*" element={<NotFoundTitle />} />
