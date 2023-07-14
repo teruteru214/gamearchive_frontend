@@ -123,28 +123,28 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
 
                 <Menu.Item
                   icon={<IconTrophy size="0.9rem" stroke={1.5} />}
-                  onClick={() => navigate("#")}
+                  onClick={() => navigate("/management/clear")}
                 >
                   クリアしたゲーム
                 </Menu.Item>
 
                 <Menu.Item
                   icon={<IconDeviceGamepad2 size="0.9rem" stroke={1.5} />}
-                  onClick={() => navigate("#")}
+                  onClick={() => navigate("/management/playing")}
                 >
                   プレイ中のゲーム
                 </Menu.Item>
 
                 <Menu.Item
                   icon={<IconStack3 size="0.9rem" stroke={1.5} />}
-                  onClick={() => navigate("#")}
+                  onClick={() => navigate("/management/unplaying")}
                 >
                   積みゲー
                 </Menu.Item>
 
                 <Menu.Item
                   icon={<IconStar size="0.9rem" stroke={1.5} />}
-                  onClick={() => navigate("#")}
+                  onClick={() => navigate("/management/favorites")}
                 >
                   お気に入りのゲーム
                 </Menu.Item>
@@ -169,7 +169,7 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
 
                 <Menu.Item
                   icon={<IconReplace size="0.9rem" stroke={1.5} />}
-                  onClick={() => navigate("/management")}
+                  onClick={() => navigate("/management/unplaying")}
                 >
                   ゲームマネジメント
                 </Menu.Item>
