@@ -2,28 +2,16 @@ import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import StatusUpdateModal from "features/status/components/StatusUpdateModal";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
+import { GameCard } from "types/game";
 
-interface StatusGameCardProps {
-  game: {
-    id: number;
-    name: string;
-    cover?: string;
-    genres?: string;
-    platforms?: string;
-    url: string;
-    rating?: number;
-    status: number;
-  };
-}
-
-const StatusGameCard = ({ game }: StatusGameCardProps) => {
+const StatusGameCard = ({ game }: { game: GameCard }) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
-        <Image src={game.cover} width={150} />
+        <Image src={game.game.cover} width={150} />
         <div
           className={`pl-3 ${
             largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"
@@ -43,10 +31,10 @@ const StatusGameCard = ({ game }: StatusGameCardProps) => {
             mt="xs"
             mb="md"
           >
-            {game.name}
+            {game.game.title}
           </Text>
           <Text className="font-sans font-bold leading-5" mt="xs" mb="md">
-            {`Rating: ${game.rating}`}
+            {`Rating: ${game.game.rating}`}
           </Text>
           <div className="flex space-x-2">
             <Text
@@ -55,7 +43,7 @@ const StatusGameCard = ({ game }: StatusGameCardProps) => {
               size="xs"
               className="line-clamp-1"
             >
-              {game.genres}
+              {game.genres?.map((genre) => `#${genre.name}`).join(" ")}
             </Text>
           </div>
           <div className="flex space-x-2">
@@ -65,11 +53,11 @@ const StatusGameCard = ({ game }: StatusGameCardProps) => {
               size="xs"
               className="line-clamp-1"
             >
-              {game.platforms}
+              {game.platforms?.map((platform) => `#${platform.name}`).join(" ")}
             </Text>
           </div>
           <a
-            href={game.url}
+            href={game.game.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-bold text-gray-400 no-underline"
