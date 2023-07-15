@@ -15,7 +15,12 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({ game }) => {
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
-        <Image src={game.cover?.url} width={140} height={180} fit="contain" />
+        <Image
+          src={game.cover?.url}
+          width={140}
+          height={largerThanSm ? 190 : 175}
+          fit="contain"
+        />
         <div className="pl-3">
           <Button
             size={largerThanSm ? "md" : "xs"}
