@@ -36,8 +36,11 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
           ]}
         />
         <div className="flex">
-          <Button className="mr-20" onClick={handleUpdate}>
+          <Button className="mr-4" onClick={handleUpdate}>
             更新
+          </Button>
+          <Button className="mr-4" onClick={handleUpdate}>
+            お気に入り登録
           </Button>
           <Button color="red">削除</Button>
         </div>
