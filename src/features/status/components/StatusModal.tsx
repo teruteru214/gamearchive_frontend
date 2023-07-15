@@ -94,7 +94,11 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
         <Text size="lg">ゲームステータスを入力</Text>
         <Select
           placeholder="ゲームステータスを選択"
-          data={["積みゲー", "プレイ中", "クリア"]}
+          data={[
+            { value: "unplaying", label: "積みゲー" },
+            { value: "playing", label: "プレイ中" },
+            { value: "clear", label: "クリア" },
+          ]}
           onChange={handleStatusChange} // ステータスが選択された際のハンドラー
           error={error ? "※ゲームステータスを選択してください" : null} // エラーメッセージ
         />

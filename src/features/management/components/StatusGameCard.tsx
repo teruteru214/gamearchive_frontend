@@ -4,7 +4,7 @@ import StatusUpdateModal from "features/status/components/StatusUpdateModal";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { GameCard } from "types/game";
 
-const StatusGameCard = ({ game }: { game: GameCard }) => {
+const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -12,7 +12,7 @@ const StatusGameCard = ({ game }: { game: GameCard }) => {
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
         <Image
-          src={game.game.cover}
+          src={gameData.game.cover}
           width={140}
           height={largerThanSm ? 190 : 175}
           fit="contain"
@@ -32,10 +32,10 @@ const StatusGameCard = ({ game }: { game: GameCard }) => {
             mt="xs"
             mb="md"
           >
-            {game.game.title}
+            {gameData.game.title}
           </Text>
           <Text className="font-sans font-bold leading-5" mt="xs" mb="md">
-            {`Rating: ${game.game?.rating}`}
+            {`Rating: ${gameData.game?.rating}`}
           </Text>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
             <Text
@@ -43,7 +43,7 @@ const StatusGameCard = ({ game }: { game: GameCard }) => {
               size="xs"
               className="overflow-hidden text-ellipsis whitespace-nowrap font-bold"
             >
-              {game.genres?.map((genre) => `#${genre.name}`).join("  ")}
+              {gameData.genres?.map((genre) => `#${genre.name}`).join("  ")}
             </Text>
           </div>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
@@ -52,11 +52,13 @@ const StatusGameCard = ({ game }: { game: GameCard }) => {
               size="xs"
               className="overflow-hidden text-ellipsis whitespace-nowrap font-bold"
             >
-              {game.platforms?.map((platform) => `#${platform.name}`).join(" ")}
+              {gameData.platforms
+                ?.map((platform) => `#${platform.name}`)
+                .join(" ")}
             </Text>
           </div>
           <a
-            href={game.game.url}
+            href={gameData.game.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-bold text-blue-400 no-underline hover:underline"
@@ -64,7 +66,11 @@ const StatusGameCard = ({ game }: { game: GameCard }) => {
             ゲームの詳細を見る
           </a>
         </div>
-        <StatusUpdateModal opened={opened} onClose={close} />
+        <StatusUpdateModal
+          opened={opened}
+          onClose={close}
+          gameData={gameData}
+        />
       </Group>
     </Card>
   );

@@ -13,7 +13,7 @@ const StatusGameCards = () => {
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {games.slice(0, itemsToShow).map((game) => (
-        <StatusGameCard key={game.game.id} game={game} />
+        <StatusGameCard key={game.game.id} gameData={game} />
       ))}
       <Button
         onClick={() => setItemsToShow(itemsToShow + 30)}
