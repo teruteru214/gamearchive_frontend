@@ -1,22 +1,8 @@
 import { Tabs } from "@mantine/core";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 
 const GameStatusHeader = () => {
-  const navigate = useNavigate();
-  const { status } = useParams();
-  const [currentTab, setCurrentTab] = useState(status || "unplaying");
-
-  useEffect(() => {
-    setCurrentTab(status || "unplaying");
-  }, [status]);
-
-  const changeTab = (tabValue: string) => {
-    navigate(`/management/${tabValue}`);
-  };
-
   return (
-    <Tabs value={currentTab} className="my-4" onTabChange={changeTab}>
+    <Tabs defaultValue="unplaying" className="my-4">
       <Tabs.List>
         <Tabs.Tab value="clear" className="text-xs font-semibold sm:text-base">
           クリア
