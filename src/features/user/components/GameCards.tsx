@@ -3,7 +3,7 @@ import { itemsToShowAtom } from "atoms/games";
 import { sabGamesAtom } from "atoms/games/gamesListAtom";
 import { useAtom } from "jotai";
 
-import UserGameCard from "./GameCard";
+import UserGameCard from "./UserGameCard";
 
 const GameCards = () => {
   const [games] = useAtom(sabGamesAtom);

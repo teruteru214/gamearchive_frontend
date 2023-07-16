@@ -13,8 +13,8 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
       <Group noWrap spacing={0} className="py-4">
         <Image
           src={gameData.game.cover}
-          width={140}
-          height={largerThanSm ? 190 : 175}
+          width={145}
+          height={largerThanSm ? 210 : 180}
           fit="contain"
         />
         <div className="pl-3">
@@ -26,15 +26,15 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
             ゲームを取得する
           </Button>
           <Text
-            className={`line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap ${
+            className={`line-clamp-1 text-ellipsis ${
               largerThanSm ? "w-64" : "w-40"
-            } font-sans font-bold `}
+            } font-bold `}
             mt="xs"
             mb="md"
           >
             {gameData.game.title}
           </Text>
-          <Text className="font-sans font-bold leading-5" mt="xs" mb="md">
+          <Text className="font-sans font-bold" mt="xs" mb="md">
             {`Rating: ${gameData.game?.rating}`}
           </Text>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
