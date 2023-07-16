@@ -1,68 +1,57 @@
 import { Card, Group, Image, Text } from "@mantine/core";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
+import { GameCard } from "types/game";
 
-interface GameCardProps {
-  game: {
-    id: number;
-    name: string;
-    cover?: string;
-    genres?: string;
-    platforms?: string;
-    url: string;
-    rating?: number;
-    status: number;
-  };
-}
-
-const GameCard = ({ game }: GameCardProps) => {
+const UserGameCard = ({ gameData }: { gameData: GameCard }) => {
   const largerThanSm = useMediaQuery("sm");
 
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
-        <Image src={game.cover} width={115} />
-        <div
-          className={`pl-3 ${
-            largerThanSm ? "" : "sm:max-w-xs sm:overflow-auto"
-          }`}
-        >
+        <Image
+          src={gameData.game.cover}
+          width={140}
+          height={155}
+          fit="contain"
+        />
+        <div className="pl-3">
           <Text
-            className={`line-clamp-2 ${
-              largerThanSm ? "w-60" : "w-full"
-            } font-sans font-bold leading-5`}
+            className={`line-clamp-2 text-ellipsis ${
+              largerThanSm ? "w-64" : "w-40"
+            } font-bold `}
             mt="xs"
             mb="md"
           >
-            {game.name}
+            {gameData.game.title}
           </Text>
-          <Text className="font-sans font-bold leading-5" mt="xs" mb="md">
-            {`Rating: ${game.rating}`}
+          <Text className="my-3 font-sans font-bold" mt="xs" mb="md">
+            {`Rating: ${gameData.game?.rating}`}
           </Text>
-          <div className="flex space-x-2">
+          <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
             <Text
               color="dimmed"
-              weight={700}
               size="xs"
-              className="line-clamp-1"
+              className="line-clamp-1 text-ellipsis font-bold"
             >
-              {game.genres}
+              {gameData.genres?.map((genre) => `#${genre.name}`).join("  ")}
             </Text>
           </div>
-          <div className="flex space-x-2">
+          <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
             <Text
               color="dimmed"
-              weight={700}
               size="xs"
-              className="line-clamp-1"
+              className="line-clamp-1 text-ellipsis font-bold"
             >
-              {game.platforms}
+              {gameData.platforms
+                ?.map((platform) => `#${platform.name}`)
+                .join(" ")}
             </Text>
           </div>
           <a
-            href={game.url}
+            href={gameData.game.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-bold text-gray-400 no-underline"
+            className="text-xs font-bold text-blue-400 no-underline hover:underline"
           >
             ゲームの詳細を見る
           </a>
@@ -72,4 +61,4 @@ const GameCard = ({ game }: GameCardProps) => {
   );
 };
 
-export default GameCard;
+export default UserGameCard;
