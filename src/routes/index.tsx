@@ -1,9 +1,11 @@
 import MainLayout from "components/Layout/MainLayout";
 import GameAcquisition from "features/acquisition/components/GameAcquisition";
 import GameManagement from "features/management/components/GameManagement";
-// Import your StatusGameCards component
-import ProfileForm from "features/profile/components/ProfileForm";
+// Import your StatusGameCards compone
 import Top from "features/top/components/Top";
+import ProfileForm from "features/user/components/ProfileForm";
+import UserDetail from "features/user/components/UserDetail";
+import UserListPage from "features/users/components/UserListPage";
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
@@ -33,11 +35,11 @@ const AppRoutes = () => {
         <Route index element={<ProfileForm />} />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
-      {/* <Route path="users" element={<MainLayout />}>
+      <Route path="users" element={<MainLayout />}>
         <Route index element={<UserListPage />} />
         <Route path=":userId" element={<UserDetail />} />
         <Route path="*" element={<NotFoundTitle />} />
-      </Route> */}
+      </Route>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Top />} />
         <Route path="*" element={<NotFoundTitle />} />
