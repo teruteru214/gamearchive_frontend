@@ -1,18 +1,18 @@
 import { Button } from "@mantine/core";
 import { itemsToShowAtom } from "atoms/games";
-import { gameItemsAtom } from "atoms/games/gamesListAtom";
+import { sabGamesAtom } from "atoms/games/gamesListAtom";
 import { useAtom } from "jotai";
 
-import GameCard from "./GameCard";
+import UserGameCard from "./UserGameCard";
 
 const GameCards = () => {
-  const [games] = useAtom(gameItemsAtom);
+  const [games] = useAtom(sabGamesAtom);
   const [itemsToShow, setItemsToShow] = useAtom(itemsToShowAtom);
 
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {games.slice(0, itemsToShow).map((game) => (
-        <GameCard key={game.id} game={game} />
+        <UserGameCard key={game.game.id} gameData={game} />
       ))}
       <Button
         onClick={() => setItemsToShow(itemsToShow + 30)}

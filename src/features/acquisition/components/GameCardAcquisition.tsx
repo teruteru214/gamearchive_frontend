@@ -17,8 +17,8 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({ game }) => {
       <Group noWrap spacing={0} className="py-4">
         <Image
           src={game.cover?.url}
-          width={140}
-          height={largerThanSm ? 190 : 175}
+          width={145}
+          height={largerThanSm ? 210 : 180}
           fit="contain"
         />
         <div className="pl-3">
