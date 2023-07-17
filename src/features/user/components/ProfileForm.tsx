@@ -19,7 +19,7 @@ import { z } from "zod";
 const schema = z.object({
   username: z.string().trim().min(1, { message: "ニックネームは必須です" }),
   introduction: z.string(),
-  twitterUsername: z.string(),
+  twitter_name: z.string(),
   visibility: z.enum(["public", "private"]),
 });
 

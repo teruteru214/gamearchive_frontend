@@ -1,10 +1,10 @@
-import { userState } from "atoms/auth/userState";
+import { loginUserAtom } from "atoms/auth/userState";
 import { createStore } from "jotai";
 
 // Create a store
 export const authStore = createStore();
 // Setting initial state of userState atom in store
-authStore.set(userState, {
+authStore.set(loginUserAtom, {
   authChecked: false,
   avatar: "",
   introduction: "",

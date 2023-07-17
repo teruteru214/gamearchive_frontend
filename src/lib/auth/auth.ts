@@ -1,4 +1,4 @@
-import { userState } from "atoms/auth/userState";
+import { loginUserAtom } from "atoms/auth/userState";
 import { auth, provider } from "firebase";
 import {
   getAdditionalUserInfo,
@@ -12,8 +12,8 @@ import { useNavigate } from "react-router-dom";
 
 export const useFirebaseAuth = () => {
   const navigate = useNavigate();
-  const currentUser = useAtomValue(userState);
-  const setUserState = useSetAtom(userState);
+  const currentUser = useAtomValue(loginUserAtom);
+  const setUserState = useSetAtom(loginUserAtom);
 
   const nextOrObserver = async (authUser: User | null) => {
     if (authUser) {

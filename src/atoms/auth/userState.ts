@@ -10,7 +10,7 @@ export interface UserState {
   visibility: "private" | "public";
 }
 
-export const userState = atom<UserState>({
+export const loginUserAtom = atom<UserState>({
   authChecked: false,
   avatar: "",
   introduction: "",
