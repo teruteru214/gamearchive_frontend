@@ -11,10 +11,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { IconUserEdit } from "@tabler/icons-react";
-import { loginUserAtom } from "atoms/user/userInfoAtom";
-import HeroContents from "components/HeroContents";
-import { useAtom } from "jotai";
+import { useFirebaseAuth } from "lib/auth/auth";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useState } from "react";
 import { z } from "zod";
@@ -29,33 +26,23 @@ const schema = z.object({
 type Form = z.infer<typeof schema>;
 
 const ProfileForm = () => {
-  const [userProfile] = useAtom(loginUserAtom);
+  const { currentUser } = useFirebaseAuth();
   const largerThanSm = useMediaQuery("sm");
   const form = useForm<Form>({
     validate: zodResolver(schema),
-    initialValues: {
-      username: userProfile.username,
-      introduction: userProfile.introduction,
-      twitterUsername: userProfile.twitterUsername,
-      visibility: userProfile.visibility === 0 ? "public" : "private",
-    },
   });
   const [file, setFile] = useState<File | null>(null);
   return (
     <>
-      <HeroContents
-        IconComponent={<IconUserEdit size="3rem" stroke={1.5} />}
-        title="プロフィール編集"
-      />
       <Container className="mt-4">
         <Box sx={{ maxWidth: 500 }} mx="auto">
           <form onSubmit={form.onSubmit((values) => console.log(values, file))}>
             <Stack spacing="lg">
               <Group position="left">
                 {largerThanSm ? (
-                  <Avatar src={userProfile.avatar} size={120} />
+                  <Avatar src={currentUser.avatar} size={120} />
                 ) : (
-                  <Avatar src={userProfile.avatar} size="xl" />
+                  <Avatar src={currentUser.avatar} size="xl" />
                 )}
                 <FileButton onChange={setFile} accept="image/png,image/jpeg">
                   {(props) => <Button {...props}>画像をアップロード</Button>}
@@ -81,8 +68,8 @@ const ProfileForm = () => {
                 label="ユーザー公開/非公開"
                 placeholder="Pick one"
                 data={[
-                  { value: "public", label: "公開" },
                   { value: "private", label: "非公開" },
+                  { value: "public", label: "公開" },
                 ]}
                 {...form.getInputProps("visibility")} // Added visibility input props
               />

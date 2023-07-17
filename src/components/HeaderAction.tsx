@@ -22,9 +22,9 @@ import {
   IconUsersGroup,
 } from "@tabler/icons-react";
 import LoginModal from "features/auth/components/LoginModal";
+import { useFirebaseAuth } from "lib/auth/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User } from "types/user";
 
 import logo from "../assets/logo.png";
 
@@ -51,15 +51,15 @@ const useStyles = createStyles((theme) => ({
 
 interface HeaderActionProps {
   isLogin: boolean;
-  user: User;
 }
 
-const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
+const HeaderAction = ({ isLogin }: HeaderActionProps) => {
   const { classes } = useStyles();
 
   const [loginModalOpened, setLoginModalOpened] = useState(false);
   const [opened, { toggle }] = useDisclosure(false);
   const navigate = useNavigate();
+  const { currentUser, signOut } = useFirebaseAuth();
 
   return (
     <div className="sticky top-0 z-10 border-b border-gray-200 bg-white pt-2">
@@ -99,14 +99,14 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
                   aria-label={opened ? "Close navigation" : "Open navigation"}
                 >
                   <Avatar
-                    src={user.avatar}
-                    alt={user.username}
+                    src={currentUser.avatar}
+                    alt={currentUser.nickname}
                     radius="xl"
                     size={20}
                   />
 
                   <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                    {user.username}
+                    {currentUser.nickname}
                   </Text>
 
                   <Burger opened={opened} />
@@ -175,8 +175,9 @@ const HeaderAction = ({ isLogin, user }: HeaderActionProps) => {
                 </Menu.Item>
 
                 <Menu.Item
+                  color="red"
                   icon={<IconLogout size="0.9rem" stroke={1.5} />}
-                  onClick={() => navigate("#")}
+                  onClick={signOut}
                 >
                   ログアウト
                 </Menu.Item>

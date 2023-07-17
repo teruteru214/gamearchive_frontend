@@ -3,8 +3,8 @@ import GameAcquisition from "features/acquisition/components/GameAcquisition";
 import GameManagement from "features/management/components/GameManagement";
 // Import your StatusGameCards compone
 import Top from "features/top/components/Top";
-import ProfileForm from "features/user/components/ProfileForm";
 import UserDetail from "features/user/components/UserDetail";
+import ProfileEdit from "features/user/container/ProfileEdit";
 import UserListPage from "features/users/components/UserListPage";
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
@@ -32,7 +32,7 @@ const AppRoutes = () => {
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
       <Route path="profile" element={<MainLayout />}>
-        <Route index element={<ProfileForm />} />
+        <Route index element={<ProfileEdit />} />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
       <Route path="users" element={<MainLayout />}>
