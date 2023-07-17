@@ -22,6 +22,8 @@ export const useFirebaseAuth = () => {
         avatar: authUser.photoURL || "",
         uid: authUser.uid,
         introduction: "",
+        twitter_name: "", // 新しいプロパティを初期化
+        visibility: "private", // 新しいプロパティを初期化
         authChecked: true,
       });
     } else {
@@ -30,6 +32,8 @@ export const useFirebaseAuth = () => {
         nickname: "",
         uid: "",
         introduction: "",
+        twitter_name: "", // 新しいプロパティを初期化
+        visibility: "private", // 新しいプロパティを初期化
         authChecked: false,
       });
     }
@@ -72,6 +76,8 @@ export const useFirebaseAuth = () => {
       nickname: "",
       uid: "",
       introduction: "",
+      twitter_name: "", // 新しいプロパティを初期化
+      visibility: "private", // 新しいプロパティを初期化
       authChecked: false,
     });
   };

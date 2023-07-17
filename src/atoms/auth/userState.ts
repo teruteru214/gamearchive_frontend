@@ -6,13 +6,16 @@ export interface UserState {
   introduction: string;
   nickname: string;
   uid: string;
+  twitter_name: string;
+  visibility: "private" | "public";
 }
 
-// Userの初期状態を定義します
 export const userState = atom<UserState>({
   authChecked: false,
   avatar: "",
   introduction: "",
   nickname: "",
   uid: "",
+  twitter_name: "",
+  visibility: "private",
 });

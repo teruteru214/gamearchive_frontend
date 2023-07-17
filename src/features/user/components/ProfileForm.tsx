@@ -62,7 +62,7 @@ const ProfileForm = () => {
               <TextInput
                 label="Twitterユーザー名"
                 placeholder="@なしで入力"
-                {...form.getInputProps("twitterUsername")}
+                {...form.getInputProps("twitter_name")}
               />
               <Select
                 label="ユーザー公開/非公開"

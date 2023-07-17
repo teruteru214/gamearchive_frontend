@@ -10,4 +10,6 @@ authStore.set(userState, {
   introduction: "",
   nickname: "",
   uid: "",
+  twitter_name: "", // 新しいプロパティを初期化
+  visibility: "private",
 });

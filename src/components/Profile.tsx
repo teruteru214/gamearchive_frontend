@@ -1,11 +1,20 @@
-import { Avatar, Button, Paper, Stack, Text, Title } from "@mantine/core";
+import {
+  ActionIcon,
+  Avatar,
+  Button,
+  Paper,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
+import { IconBrandTwitter } from "@tabler/icons-react";
 import { useFirebaseAuth } from "lib/auth/auth";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 const Profile = () => {
   const { currentUser } = useFirebaseAuth();
   const largerThanSm = useMediaQuery("sm");
-  const { avatar, nickname, introduction } = currentUser || {};
+  const { avatar, nickname, introduction, twitter_name } = currentUser || {};
   return (
     <Paper
       radius="md"
@@ -28,18 +37,18 @@ const Profile = () => {
                 {introduction}
               </Text>
               <div className="flex w-1/12 items-center justify-start">
-                {/* {twitterUsername && (
+                {twitter_name && (
                   <>
                     <ActionIcon
                       component="a"
-                      href={`https://twitter.com/${twitterUsername}`}
+                      href={`https://twitter.com/${twitter_name}`}
                       target="_blank"
                     >
                       <IconBrandTwitter size={18} />
                     </ActionIcon>
-                    <Text size="sm">@{twitterUsername}</Text>
+                    <Text size="sm">@{twitter_name}</Text>
                   </>
-                )} */}
+                )}
               </div>
             </Stack>
           </div>
