@@ -1,7 +1,8 @@
 import { loginUserAtom } from "atoms/auth/userState";
-import { auth, provider } from "firebase";
 import {
   getAdditionalUserInfo,
+  getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
   User,
@@ -41,6 +42,7 @@ export const useFirebaseAuth = () => {
   };
 
   useEffect(() => {
+    const auth = getAuth();
     const unSub = onAuthStateChanged(auth, nextOrObserver);
     return () => {
       unSub();
@@ -49,6 +51,8 @@ export const useFirebaseAuth = () => {
   }, []);
 
   const signInWithGoogle = (setOpened: (flag: boolean) => void) => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         setOpened(false);
@@ -71,6 +75,7 @@ export const useFirebaseAuth = () => {
   };
 
   const signOut = async () => {
+    const auth = getAuth();
     auth.signOut();
     setUserState({
       avatar: "",
