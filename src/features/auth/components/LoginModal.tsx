@@ -1,7 +1,11 @@
 import { Group, Image, Modal, Stack, Text } from "@mantine/core";
 import GoogleButton from "components/Button/GoogleButton";
-import { auth, provider } from "firebase";
-import { getAdditionalUserInfo, signInWithPopup } from "firebase/auth";
+import {
+  getAdditionalUserInfo,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +19,8 @@ type LoginModalProps = {
 const LoginModal: FC<LoginModalProps> = ({ opened, setOpened }) => {
   const navigate = useNavigate();
   const signInwithGoogle = () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         setOpened(false);
