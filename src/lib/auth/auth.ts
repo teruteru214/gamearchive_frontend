@@ -14,6 +14,7 @@ export const useFirebaseAuth = () => {
   const navigate = useNavigate();
   const currentUser = useAtomValue(loginUserAtom);
   const setUserState = useSetAtom(loginUserAtom);
+  const { authChecked } = useAtomValue(loginUserAtom);
 
   const nextOrObserver = async (authUser: User | null) => {
     if (authUser) {
@@ -86,5 +87,6 @@ export const useFirebaseAuth = () => {
     currentUser,
     signInWithGoogle,
     signOut,
+    authChecked,
   };
 };
