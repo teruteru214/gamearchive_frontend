@@ -7,7 +7,6 @@ import {
   Group,
   Image,
   Menu,
-  Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -102,18 +101,15 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                     src={currentUser.avatar}
                     alt={currentUser.nickname}
                     radius="xl"
-                    size={20}
+                    size="sm"
                   />
-
-                  <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                    {currentUser.nickname}
-                  </Text>
 
                   <Burger opened={opened} />
                 </Group>
               </Menu.Target>
 
               <Menu.Dropdown>
+                <Menu.Label>Application</Menu.Label>
                 <Menu.Item
                   icon={<IconDisc size="0.9rem" stroke={1.5} />}
                   onClick={() => navigate("/acquisition")}
