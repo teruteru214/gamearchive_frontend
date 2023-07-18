@@ -21,6 +21,7 @@ const schema = z.object({
   introduction: z.string(),
   twitter_name: z.string(),
   visibility: z.enum(["public", "private"]),
+  avatar: z.string(), // 新たに追加
 });
 
 type Form = z.infer<typeof schema>;
@@ -32,6 +33,7 @@ const ProfileForm = () => {
     validate: zodResolver(schema),
   });
   const [file, setFile] = useState<File | null>(null);
+  const [imageURL, setImageURL] = useState("");
   return (
     <>
       <Container className="mt-4">
@@ -39,12 +41,20 @@ const ProfileForm = () => {
           <form onSubmit={form.onSubmit((values) => console.log(values, file))}>
             <Stack spacing="lg">
               <Group position="left">
-                {largerThanSm ? (
-                  <Avatar src={currentUser.avatar} size={120} />
-                ) : (
-                  <Avatar src={currentUser.avatar} size="xl" />
-                )}
-                <FileButton onChange={setFile} accept="image/png,image/jpeg">
+                <Avatar
+                  src={imageURL || currentUser.avatar}
+                  size="xl"
+                  radius="xl"
+                />
+                <FileButton
+                  onChange={(file: File | null) => {
+                    if (file) {
+                      setFile(file);
+                      setImageURL(URL.createObjectURL(file));
+                    }
+                  }}
+                  accept="image/png,image/jpeg"
+                >
                   {(props) => <Button {...props}>画像をアップロード</Button>}
                 </FileButton>
               </Group>
