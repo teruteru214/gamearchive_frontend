@@ -1,13 +1,13 @@
 import { ActionIcon, Button } from "@mantine/core";
-import { ReactNode } from "react";
 
 import { ReactComponent as GoogleIcon } from "../../assets/google.svg";
 
-interface GoogleLoginButtonProps {
-  children: ReactNode;
+interface GoogleButtonProps {
+  title: string;
+  onClick: () => void;
 }
 
-const GoogleLoginButton = ({ children, ...props }: GoogleLoginButtonProps) => {
+const GoogleButton = ({ onClick, title }: GoogleButtonProps) => {
   return (
     <Button
       leftIcon={
@@ -17,11 +17,11 @@ const GoogleLoginButton = ({ children, ...props }: GoogleLoginButtonProps) => {
       }
       variant="default"
       color="gray"
-      {...props}
+      onClick={onClick}
     >
-      {children}
+      {title}
     </Button>
   );
 };
 
-export default GoogleLoginButton;
+export default GoogleButton;

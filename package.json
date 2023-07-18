@@ -40,7 +40,7 @@
     "@vitest/coverage-c8": "^0.32.0",
     "axios": "^1.4.0",
     "embla-carousel-react": "^8.0.0-rc07",
-    "happy-dom": "^9.20.3",
+    "firebase": "^10.0.0",
     "jest-extended": "^4.0.0",
     "jotai": "^2.2.1",
     "jotai-cache": "^0.3.0",
