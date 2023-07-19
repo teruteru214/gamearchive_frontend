@@ -21,7 +21,8 @@ import {
   IconUsersGroup,
 } from "@tabler/icons-react";
 import LoginModal from "features/auth/components/LoginModal";
-import { useFirebaseAuth } from "lib/auth/auth";
+import { getAuth } from "firebase/auth";
+import { useFirebaseAuth } from "lib/auth/firebaseAuth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -173,7 +174,10 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                 <Menu.Item
                   color="red"
                   icon={<IconLogout size="0.9rem" stroke={1.5} />}
-                  onClick={signOut}
+                  onClick={() => {
+                    const auth = getAuth();
+                    auth.signOut();
+                  }}
                 >
                   ログアウト
                 </Menu.Item>

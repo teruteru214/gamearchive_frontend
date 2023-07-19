@@ -11,8 +11,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { useFirebaseAuth } from "lib/auth/auth";
-import { useMediaQuery } from "lib/mantine/useMediaQuery";
+import { useFirebaseAuth } from "lib/auth/firebaseAuth";
 import { useState } from "react";
 import { z } from "zod";
 
@@ -28,7 +27,6 @@ type Form = z.infer<typeof schema>;
 
 const ProfileForm = () => {
   const { currentUser } = useFirebaseAuth();
-  const largerThanSm = useMediaQuery("sm");
   const form = useForm<Form>({
     validate: zodResolver(schema),
   });
