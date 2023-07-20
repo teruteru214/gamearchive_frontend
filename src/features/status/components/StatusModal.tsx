@@ -33,12 +33,12 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
         game: {
           id: game.id,
           title: game.name,
-          cover: game.cover?.url,
-          rating: game.rating,
+          cover: game.cover?.url ?? null,
+          rating: game.rating ?? 0,
           url: game.url,
         },
-        genres: game.genres,
-        platforms: game.platforms,
+        genres: game.genres?.map((genre) => genre.name) ?? [],
+        platforms: game.platforms?.map((platform) => platform.name) ?? [],
         gameStatus: {
           id: 1, // ここは適切な値に置き換えてください
           user_id: 1, // ここは適切な値に置き換えてください

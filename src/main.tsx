@@ -17,8 +17,9 @@ const prepare = async () => {
   }
 };
 console.log(firebaseConfig);
+// eslint-disable-next-line no-unused-vars
 const app = initializeApp(firebaseConfig);
-// prepareが完了した後にアプリケーションをマウントする
+
 prepare().then(() => {
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
