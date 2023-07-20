@@ -20,9 +20,10 @@ import {
   IconUserEdit,
   IconUsersGroup,
 } from "@tabler/icons-react";
+import { loginUserAtom } from "atoms/auth/loginUser";
 import LoginModal from "features/auth/components/LoginModal";
 import { getAuth } from "firebase/auth";
-import { useFirebaseAuth } from "lib/auth/firebaseAuth";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -59,7 +60,7 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
   const [loginModalOpened, setLoginModalOpened] = useState(false);
   const [opened, { toggle }] = useDisclosure(false);
   const navigate = useNavigate();
-  const { currentUser, signOut } = useFirebaseAuth();
+  const [currentUser] = useAtom(loginUserAtom);
 
   return (
     <div className="sticky top-0 z-10 border-b border-gray-200 bg-white pt-2">

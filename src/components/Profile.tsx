@@ -8,11 +8,12 @@ import {
   Title,
 } from "@mantine/core";
 import { IconBrandTwitter } from "@tabler/icons-react";
-import { useFirebaseAuth } from "lib/auth/firebaseAuth";
+import { loginUserAtom } from "atoms/auth/loginUser";
+import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 const Profile = () => {
-  const { currentUser } = useFirebaseAuth();
+  const [currentUser] = useAtom(loginUserAtom);
   const largerThanSm = useMediaQuery("sm");
   const { avatar, nickname, introduction, twitter_name } = currentUser || {};
   return (

@@ -11,25 +11,27 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { useFirebaseAuth } from "lib/auth/firebaseAuth";
+import { loginUserAtom } from "atoms/auth/loginUser";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { z } from "zod";
 
 const schema = z.object({
+  avatar: z.string(),
   username: z.string().trim().min(1, { message: "ニックネームは必須です" }),
   introduction: z.string(),
   twitter_name: z.string(),
-  visibility: z.enum(["public", "private"]),
-  avatar: z.string(), // 新たに追加
+  visibility: z.enum(["private", "public"]),
 });
 
 type Form = z.infer<typeof schema>;
 
 const ProfileForm = () => {
-  const { currentUser } = useFirebaseAuth();
+  const [currentUser] = useAtom(loginUserAtom);
   const form = useForm<Form>({
     validate: zodResolver(schema),
   });
+
   const [file, setFile] = useState<File | null>(null);
   const [imageURL, setImageURL] = useState("");
   return (
@@ -60,17 +62,17 @@ const ProfileForm = () => {
                 withAsterisk
                 label="ニックネーム"
                 placeholder="表示名を入力"
-                {...form.getInputProps("username")}
+                defaultValue={currentUser.nickname}
               />
               <Textarea
                 label="自己紹介"
                 placeholder="自己紹介を入力"
-                {...form.getInputProps("introduction")}
+                defaultValue={currentUser?.introduction}
               />
               <TextInput
                 label="Twitterユーザー名"
                 placeholder="@なしで入力"
-                {...form.getInputProps("twitter_name")}
+                defaultValue={currentUser?.twitter_name}
               />
               <Select
                 label="ユーザー公開/非公開"
@@ -79,7 +81,7 @@ const ProfileForm = () => {
                   { value: "private", label: "非公開" },
                   { value: "public", label: "公開" },
                 ]}
-                {...form.getInputProps("visibility")} // Added visibility input props
+                defaultValue={currentUser.visibility}
               />
             </Stack>
             <Group position="center" className="mt-10">

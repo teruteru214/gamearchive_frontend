@@ -9,7 +9,6 @@ import { useAtom } from "jotai";
 import { FC, useEffect } from "react";
 import { z } from "zod";
 
-// カスタムフックから取得するPropsを定義
 type StatusModalProps = {
   opened: boolean;
   onClose: () => void;

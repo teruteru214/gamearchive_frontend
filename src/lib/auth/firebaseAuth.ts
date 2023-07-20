@@ -1,4 +1,4 @@
-import { loginUserAtom } from "atoms/auth/userState";
+import { loginUserAtom } from "atoms/auth/loginUser";
 import {
   getAdditionalUserInfo,
   getAuth,
