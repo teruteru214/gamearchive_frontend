@@ -2,7 +2,7 @@ import { FooterAtom } from "atoms/ui";
 import FooterLinks from "components/FooterLinks";
 import HeaderAction from "components/HeaderAction";
 import { useAtom } from "jotai";
-import { useFirebaseAuth } from "lib/auth/auth";
+import { useFirebaseAuth } from "lib/auth/firebaseAuth";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {

@@ -175,7 +175,7 @@ export const acquisitionGameAPI = {
 export const acquisitionGamesHandlers = [
   rest.get<DefaultBodyType, PathParams, GameAcquisition[]>(
     `${endpoint}/acquisition`,
-    (req, res, ctx) => {
+    (_req, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.json(acquisitionGameAPI.getALLAcquisitionGames())

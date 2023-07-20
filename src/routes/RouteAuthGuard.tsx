@@ -1,5 +1,5 @@
 import { Center, Loader } from "@mantine/core";
-import { useFirebaseAuth } from "lib/auth/auth";
+import { useFirebaseAuth } from "lib/auth/firebaseAuth";
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
@@ -8,20 +8,19 @@ type RouteAuthGuardProps = {
   redirect: string;
 };
 
-export const RouteAuthGuard = (props: RouteAuthGuardProps) => {
+export const RouteAuthGuard = ({
+  component,
+  redirect,
+}: RouteAuthGuardProps) => {
   const location = useLocation();
   const { currentUser, authChecked } = useFirebaseAuth();
 
   if (authChecked) {
     if (currentUser.uid) {
-      return <>{props.component}</>;
+      return <>{component}</>;
     } else {
       return (
-        <Navigate
-          to={props.redirect}
-          state={{ from: location }}
-          replace={false}
-        />
+        <Navigate to={redirect} state={{ from: location }} replace={false} />
       );
     }
   } else {

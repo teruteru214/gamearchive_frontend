@@ -8,7 +8,9 @@ type GameCardAcquisitionProps = {
   game: GameAcquisition;
 };
 
-const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({ game }) => {
+const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({
+  game,
+}: GameCardAcquisitionProps) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
 

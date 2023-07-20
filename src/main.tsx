@@ -18,7 +18,8 @@ const prepare = async () => {
 };
 console.log(firebaseConfig);
 const app = initializeApp(firebaseConfig);
-// prepareが完了した後にアプリケーションをマウントする
+console.log(app);
+
 prepare().then(() => {
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>

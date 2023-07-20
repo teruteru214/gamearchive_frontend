@@ -20,8 +20,10 @@ import {
   IconUserEdit,
   IconUsersGroup,
 } from "@tabler/icons-react";
+import { loginUserAtom } from "atoms/auth/loginUser";
 import LoginModal from "features/auth/components/LoginModal";
-import { useFirebaseAuth } from "lib/auth/auth";
+import { getAuth } from "firebase/auth";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -58,7 +60,7 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
   const [loginModalOpened, setLoginModalOpened] = useState(false);
   const [opened, { toggle }] = useDisclosure(false);
   const navigate = useNavigate();
-  const { currentUser, signOut } = useFirebaseAuth();
+  const [currentUser] = useAtom(loginUserAtom);
 
   return (
     <div className="sticky top-0 z-10 border-b border-gray-200 bg-white pt-2">
@@ -173,7 +175,10 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                 <Menu.Item
                   color="red"
                   icon={<IconLogout size="0.9rem" stroke={1.5} />}
-                  onClick={signOut}
+                  onClick={() => {
+                    const auth = getAuth();
+                    auth.signOut();
+                  }}
                 >
                   ログアウト
                 </Menu.Item>

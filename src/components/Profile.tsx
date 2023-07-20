@@ -8,11 +8,12 @@ import {
   Title,
 } from "@mantine/core";
 import { IconBrandTwitter } from "@tabler/icons-react";
-import { useFirebaseAuth } from "lib/auth/auth";
+import { loginUserAtom } from "atoms/auth/loginUser";
+import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 const Profile = () => {
-  const { currentUser } = useFirebaseAuth();
+  const [currentUser] = useAtom(loginUserAtom);
   const largerThanSm = useMediaQuery("sm");
   const { avatar, nickname, introduction, twitter_name } = currentUser || {};
   return (
@@ -71,18 +72,18 @@ const Profile = () => {
             </Text>
           </div>
           <div className="mx-auto flex w-1/2 items-center justify-center">
-            {/* {twitterUsername && (
+            {twitter_name && (
               <>
                 <ActionIcon
                   component="a"
-                  href={`https://twitter.com/${twitterUsername}`}
+                  href={`https://twitter.com/${twitter_name}`}
                   target="_blank"
                 >
                   <IconBrandTwitter size={18} />
                 </ActionIcon>
-                <Text size="sm">@{twitterUsername}</Text>
+                <Text size="sm">@{twitter_name}</Text>
               </>
-            )} */}
+            )}
           </div>
 
           <Button variant="default" fullWidth mt="md">
