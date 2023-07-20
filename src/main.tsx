@@ -17,8 +17,8 @@ const prepare = async () => {
   }
 };
 console.log(firebaseConfig);
-// eslint-disable-next-line no-unused-vars
 const app = initializeApp(firebaseConfig);
+console.log(app);
 
 prepare().then(() => {
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
