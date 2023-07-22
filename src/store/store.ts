@@ -11,5 +11,5 @@ authStore.set(loginUserAtom, {
   nickname: "",
   uid: "",
   twitter_name: "", // 新しいプロパティを初期化
-  visibility: "private",
+  visibility: "",
 });
