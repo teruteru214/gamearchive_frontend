@@ -24,18 +24,18 @@ export const useFirebaseAuth = () => {
         avatar: authUser.photoURL || "",
         uid: authUser.uid,
         introduction: "",
-        twitter_name: "", // 新しいプロパティを初期化
-        visibility: "private", // 新しいプロパティを初期化
+        twitter_name: "",
+        visibility: "",
         authChecked: true,
       });
     } else {
       setUserState({
-        avatar: "",
         nickname: "",
+        avatar: "",
         uid: "",
         introduction: "",
-        twitter_name: "", // 新しいプロパティを初期化
-        visibility: "private", // 新しいプロパティを初期化
+        twitter_name: "",
+        visibility: "",
         authChecked: false,
       });
     }
@@ -57,7 +57,7 @@ export const useFirebaseAuth = () => {
       .then((result) => {
         setOpened(false);
         if (getAdditionalUserInfo(result)?.isNewUser) {
-          navigate("/onboarding");
+          navigate("/");
           return;
         }
         navigate("/");
@@ -83,7 +83,7 @@ export const useFirebaseAuth = () => {
       uid: "",
       introduction: "",
       twitter_name: "", // 新しいプロパティを初期化
-      visibility: "private", // 新しいプロパティを初期化
+      visibility: "", // 新しいプロパティを初期化
       authChecked: false,
     });
   };

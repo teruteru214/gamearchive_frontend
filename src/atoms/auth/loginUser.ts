@@ -7,7 +7,7 @@ export interface UserState {
   nickname: string;
   uid: string;
   twitter_name: string;
-  visibility: "private" | "public";
+  visibility: string;
 }
 
 export const loginUserAtom = atom<UserState>({
@@ -17,5 +17,5 @@ export const loginUserAtom = atom<UserState>({
   nickname: "",
   uid: "",
   twitter_name: "",
-  visibility: "private",
+  visibility: "",
 });
