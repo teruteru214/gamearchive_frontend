@@ -10,6 +10,7 @@ export const postIdToken = async (config: {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
+      console.error(error);
       throw new Error("login error");
     }
   );
