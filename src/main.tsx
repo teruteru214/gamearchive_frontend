@@ -1,7 +1,7 @@
 import "./lib/tailwind.css";
 
+import firebaseConfig from "config/firebase-config";
 import { initializeApp } from "firebase/app";
-import firebaseConfig from "firebase-config";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
