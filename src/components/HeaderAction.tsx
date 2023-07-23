@@ -178,6 +178,7 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                   onClick={() => {
                     const auth = getAuth();
                     auth.signOut();
+                    navigate("/");
                   }}
                 >
                   ログアウト
