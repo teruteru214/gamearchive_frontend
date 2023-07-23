@@ -13,9 +13,9 @@ export const RouteAuthGuard = ({
   redirect,
 }: RouteAuthGuardProps) => {
   const location = useLocation();
-  const { currentUser, authChecked } = useFirebaseAuth();
+  const { currentUser } = useFirebaseAuth();
 
-  if (authChecked) {
+  if (currentUser.authChecked) {
     if (currentUser.uid) {
       return <>{component}</>;
     } else {
@@ -24,6 +24,9 @@ export const RouteAuthGuard = ({
       );
     }
   } else {
+    if (location.pathname !== "/") {
+      return <Navigate to="/" replace={true} />;
+    }
     return (
       <Center>
         <Loader />
