@@ -1,5 +1,4 @@
 import axios from "axios";
-import { endpoint } from "config";
 import {
   getAdditionalUserInfo,
   getAuth,
@@ -7,6 +6,8 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { NavigateFunction } from "react-router-dom";
+
+import { postIdToken } from "./../../features/auth/api/postIdToken";
 
 export const signInWithGoogle = (
   setOpened: (flag: boolean) => void,
@@ -25,7 +26,7 @@ export const signInWithGoogle = (
       };
 
       try {
-        axios.post(`${endpoint}/authentication`, null, config);
+        await postIdToken(config);
         if (getAdditionalUserInfo(result)?.isNewUser) {
           navigate("/");
           return;
