@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   Container,
@@ -12,8 +11,10 @@ import {
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { loginUserAtom } from "atoms/auth/loginUser";
+import ImagePreview from "features/auth/components/ImagePreview";
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { useMediaQuery } from "lib/mantine/useMediaQuery";
+import { useCallback, useEffect, useState } from "react";
 import { z } from "zod";
 
 const schema = z.object({
@@ -27,13 +28,28 @@ const schema = z.object({
 type Form = z.infer<typeof schema>;
 
 const ProfileForm = () => {
-  const [currentUser] = useAtom(loginUserAtom);
+  const [user] = useAtom(loginUserAtom);
+  const largerThanSm = useMediaQuery("sm");
   const form = useForm<Form>({
     validate: zodResolver(schema),
   });
 
   const [file, setFile] = useState<File | null>(null);
   const [imageURL, setImageURL] = useState("");
+
+  const changeFileHandler = useCallback((payload: File | null) => {
+    if (payload) {
+      setFile(payload);
+    }
+  }, []);
+
+  useEffect(() => {
+    setImageURL(user.avatar);
+    return () => {
+      setImageURL("");
+    };
+  }, [user]);
+
   return (
     <>
       <Container className="mt-4">
@@ -41,38 +57,47 @@ const ProfileForm = () => {
           <form onSubmit={form.onSubmit((values) => console.log(values, file))}>
             <Stack spacing="lg">
               <Group position="left">
-                <Avatar
-                  src={imageURL || currentUser.avatar}
-                  size="xl"
-                  radius="xl"
-                />
+                {largerThanSm ? (
+                  <ImagePreview
+                    file={file}
+                    imageURL={imageURL}
+                    setImageURL={setImageURL}
+                    size={120}
+                  />
+                ) : (
+                  <ImagePreview
+                    file={file}
+                    imageURL={imageURL}
+                    setImageURL={setImageURL}
+                    size={84}
+                  />
+                )}
                 <FileButton
-                  onChange={(file: File | null) => {
-                    if (file) {
-                      setFile(file);
-                      setImageURL(URL.createObjectURL(file));
-                    }
-                  }}
+                  onChange={changeFileHandler}
                   accept="image/png,image/jpeg"
                 >
-                  {(props) => <Button {...props}>画像をアップロード</Button>}
+                  {(props) => (
+                    <Button variant="outline" {...props}>
+                      画像をアップロード
+                    </Button>
+                  )}
                 </FileButton>
               </Group>
               <TextInput
                 withAsterisk
                 label="ニックネーム"
                 placeholder="表示名を入力"
-                defaultValue={currentUser.nickname}
+                defaultValue={user.nickname}
               />
               <Textarea
                 label="自己紹介"
                 placeholder="自己紹介を入力"
-                defaultValue={currentUser?.introduction}
+                defaultValue={user.introduction}
               />
               <TextInput
                 label="Twitterユーザー名"
                 placeholder="@なしで入力"
-                defaultValue={currentUser?.twitter_name}
+                defaultValue={user.twitter_name}
               />
               <Select
                 label="ユーザー公開/非公開"
@@ -81,7 +106,7 @@ const ProfileForm = () => {
                   { value: "private", label: "非公開" },
                   { value: "public", label: "公開" },
                 ]}
-                defaultValue={currentUser.visibility}
+                defaultValue={user.visibility}
               />
             </Stack>
             <Group position="center" className="mt-10">
