@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
+import jotaiDebugLabel from "jotai/babel/plugin-debug-label";
+import jotaiReactRefresh from "jotai/babel/plugin-react-refresh";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,10 +14,7 @@ export default defineConfig({
   plugins: [
     react({
       babel: {
-        plugins: [
-          "jotai/babel/plugin-debug-label",
-          "jotai/babel/plugin-react-refresh",
-        ],
+        plugins: [jotaiDebugLabel, jotaiReactRefresh],
       },
     }),
     tsconfigPaths(),
