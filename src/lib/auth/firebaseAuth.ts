@@ -1,4 +1,6 @@
 import { loginUserAtom } from "atoms/auth/loginUser";
+import { getAvatar } from "features/user/api/getAvatar";
+import { showProfile } from "features/user/api/showProfile";
 import {
   getAdditionalUserInfo,
   getAuth,
@@ -13,23 +15,36 @@ import { useNavigate } from "react-router-dom";
 
 export const useFirebaseAuth = () => {
   const navigate = useNavigate();
-  const currentUser = useAtomValue(loginUserAtom);
   const setUserState = useSetAtom(loginUserAtom);
-  const { authChecked } = useAtomValue(loginUserAtom);
+  const currentUser = useAtomValue(loginUserAtom);
 
   const nextOrObserver = async (authUser: User | null) => {
     if (authUser) {
-      setUserState({
-        nickname: authUser.displayName || "",
-        avatar: authUser.photoURL || "",
-        avatarKey: "",
-        uid: authUser.uid,
-        introduction: "",
-        twitter_name: "",
-        visibility: "",
-        authChecked: true,
-        apiChecked: true,
-      });
+      const idToken = await authUser.getIdToken();
+      const config = {
+        headers: {
+          authorization: `Bearer ${idToken}`,
+        },
+      };
+
+      try {
+        const user = await showProfile(config);
+        const avatarImageUrl = await getAvatar(config);
+        setUserState({
+          nickname: user.data.attributes.nickname || "",
+          avatar: avatarImageUrl || "",
+          avatarKey: user.data.attributes.avatar_key || "",
+          uid: authUser.uid,
+          introduction: user.data.attributes.introduction || "",
+          twitter_name: user.data.attributes.twitter_name || "",
+          visibility: user.data.attributes.visibility || "",
+          authChecked: true,
+          apiChecked: true,
+        });
+      } catch (error) {
+        const err = error as Error;
+        console.error(`Failed to fetch user profile\n${err.message}`);
+      }
     } else {
       setUserState({
         nickname: "",
@@ -98,6 +113,6 @@ export const useFirebaseAuth = () => {
     currentUser,
     signInWithGoogle,
     signOut,
-    authChecked,
+    authChecked: currentUser.authChecked,
   };
 };
