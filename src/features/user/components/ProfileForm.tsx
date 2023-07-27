@@ -25,8 +25,14 @@ import { getAvatar } from "../api/getAvatar";
 import { patchProfile } from "../api/patchProfile";
 
 const schema = z.object({
-  nickname: z.string().trim().min(1, { message: "ニックネームは必須です" }),
-  introduction: z.string(),
+  nickname: z
+    .string()
+    .trim()
+    .min(1, { message: "ニックネームは必須です" })
+    .max(40, { message: "ニックネームは40字以内にしてください" }),
+  introduction: z
+    .string()
+    .max(160, { message: "自己紹介は160字以内にしてください" }),
   twitter_name: z.string(),
   visibility: z.string(),
 });
