@@ -6,7 +6,7 @@ export const patchProfile = async (
   avatar_key: string | null,
   introduction: string,
   twitter_name: string,
-  visibility: "private" | "public",
+  visibility: string,
   config: {
     headers: {
       authorization: string;
