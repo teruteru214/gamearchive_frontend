@@ -7,15 +7,18 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { IconBrandTwitter } from "@tabler/icons-react";
+import { IconBrandTwitter, IconUserEdit } from "@tabler/icons-react";
 import { loginUserAtom } from "atoms/auth/loginUser";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [currentUser] = useAtom(loginUserAtom);
   const largerThanSm = useMediaQuery("sm");
   const { avatar, nickname, introduction, twitter_name } = currentUser || {};
+
+  const navigate = useNavigate();
   return (
     <Paper
       radius="md"
@@ -37,7 +40,7 @@ const Profile = () => {
               <Text size="sm" className="break-all">
                 {introduction}
               </Text>
-              <div className="flex w-1/12 items-center justify-start">
+              <div className="flex items-center justify-start">
                 {twitter_name && (
                   <>
                     <ActionIcon
@@ -53,7 +56,10 @@ const Profile = () => {
               </div>
             </Stack>
           </div>
-          <Button>プロフィールを編集する</Button>
+          <Button onClick={() => navigate("/profile")}>
+            <IconUserEdit size="0.9rem" stroke={1.5} className="mr-1" />
+            プロフィールを編集する
+          </Button>
         </div>
       ) : (
         <Stack>

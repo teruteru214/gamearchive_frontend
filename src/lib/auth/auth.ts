@@ -1,4 +1,5 @@
 import axios from "axios";
+import { endpoint } from "config";
 import {
   getAdditionalUserInfo,
   getAuth,
@@ -7,17 +8,21 @@ import {
 } from "firebase/auth";
 import { NavigateFunction } from "react-router-dom";
 
-import { postIdToken } from "./../../features/auth/api/postIdToken";
-
 export const signInWithGoogle = (
   setOpened: (flag: boolean) => void,
-  navigate: NavigateFunction
+  navigate: NavigateFunction,
+  setIsLoading: (loading: boolean) => void
 ) => {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
+
+  setIsLoading(true); // start loading
+
   signInWithPopup(auth, provider)
     .then(async (result) => {
       setOpened(false);
+      setIsLoading(false); // end loading
+
       const user = result.user;
       const token = await user.getIdToken();
 
@@ -26,7 +31,15 @@ export const signInWithGoogle = (
       };
 
       try {
-        await postIdToken(config);
+        const res = await axios.post(
+          `${endpoint}/authentication`,
+          null,
+          config
+        );
+
+        if (res.status !== 200) {
+          throw new Error("login error");
+        }
         if (getAdditionalUserInfo(result)?.isNewUser) {
           navigate("/");
           return;
@@ -46,6 +59,8 @@ export const signInWithGoogle = (
     })
     .catch((error) => {
       setOpened(false);
+      setIsLoading(false); // end loading in case of an error
+
       if (error.code === "auth/account-exists-with-different-credential") {
         alert(
           `${error.customData.email}は他のSNSと連携した既存ユーザーが登録済みです。既存ユーザーでログイン後、こちらのSNSとの連携が可能です`

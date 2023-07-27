@@ -4,10 +4,11 @@ import { ReactComponent as GoogleIcon } from "../../assets/google.svg";
 
 interface GoogleButtonProps {
   title: string;
+  loading: boolean;
   onClick: () => void;
 }
 
-const GoogleButton = ({ onClick, title }: GoogleButtonProps) => {
+const GoogleButton = ({ onClick, title, loading }: GoogleButtonProps) => {
   return (
     <Button
       leftIcon={
@@ -18,6 +19,7 @@ const GoogleButton = ({ onClick, title }: GoogleButtonProps) => {
       variant="default"
       color="gray"
       onClick={onClick}
+      loading={loading}
     >
       {title}
     </Button>

@@ -1,7 +1,7 @@
 import { Group, Image, Modal, Stack, Text } from "@mantine/core";
 import GoogleButton from "components/Button/GoogleButton";
 import { signInWithGoogle } from "lib/auth/auth";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../../../assets/logo.png";
@@ -13,6 +13,7 @@ type LoginModalProps = {
 
 const LoginModal: FC<LoginModalProps> = ({ opened, setOpened }) => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Modal opened={opened} onClose={() => setOpened(false)} centered size="sm">
@@ -24,7 +25,8 @@ const LoginModal: FC<LoginModalProps> = ({ opened, setOpened }) => {
         <Group grow mb="md" mt="md">
           <GoogleButton
             title="Login With Google"
-            onClick={() => signInWithGoogle(setOpened, navigate)}
+            onClick={() => signInWithGoogle(setOpened, navigate, setIsLoading)}
+            loading={isLoading}
           />
         </Group>
         <Text size="sm" color="dimmed" className="px-5 text-center">

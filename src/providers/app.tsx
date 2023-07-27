@@ -1,4 +1,5 @@
 import { MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { Provider } from "jotai";
 import { ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
@@ -19,6 +20,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
           primaryColor: "yellow",
         }}
       >
+        <Notifications />
         <Router>
           <Provider store={authStore}>{children}</Provider>
         </Router>
