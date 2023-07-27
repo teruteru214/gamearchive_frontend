@@ -22,21 +22,25 @@ export const useFirebaseAuth = () => {
       setUserState({
         nickname: authUser.displayName || "",
         avatar: authUser.photoURL || "",
+        avatarKey: "",
         uid: authUser.uid,
         introduction: "",
         twitter_name: "",
         visibility: "",
         authChecked: true,
+        apiChecked: true,
       });
     } else {
       setUserState({
         nickname: "",
         avatar: "",
+        avatarKey: "",
         uid: "",
         introduction: "",
         twitter_name: "",
         visibility: "",
         authChecked: false,
+        apiChecked: false,
       });
     }
   };
@@ -78,13 +82,15 @@ export const useFirebaseAuth = () => {
     const auth = getAuth();
     auth.signOut();
     setUserState({
-      avatar: "",
       nickname: "",
       uid: "",
+      avatar: "",
+      avatarKey: "",
       introduction: "",
-      twitter_name: "", // 新しいプロパティを初期化
-      visibility: "", // 新しいプロパティを初期化
+      twitter_name: "",
+      visibility: "",
       authChecked: false,
+      apiChecked: false,
     });
   };
 

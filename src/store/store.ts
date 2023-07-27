@@ -7,9 +7,11 @@ export const authStore = createStore();
 authStore.set(loginUserAtom, {
   authChecked: false,
   avatar: "",
+  avatarKey: "",
   introduction: "",
   nickname: "",
   uid: "",
   twitter_name: "", // 新しいプロパティを初期化
   visibility: "",
+  apiChecked: false,
 });
