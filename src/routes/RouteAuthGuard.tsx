@@ -1,4 +1,4 @@
-import { Center, Loader } from "@mantine/core";
+import { Container, Loader } from "@mantine/core";
 import { useFirebaseAuth } from "lib/auth/firebaseAuth";
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
@@ -16,21 +16,43 @@ export const RouteAuthGuard = ({
   const { currentUser } = useFirebaseAuth();
 
   if (currentUser.authChecked) {
-    if (currentUser.uid) {
-      return <>{component}</>;
+    if (currentUser.apiChecked) {
+      if (currentUser.uid) {
+        return <>{component}</>;
+      } else {
+        if (
+          location.pathname.startsWith("/acquisition") ||
+          location.pathname.startsWith("/management") ||
+          location.pathname.startsWith("/profile") ||
+          location.pathname.startsWith("/users")
+        ) {
+          <Container className="flex items-center justify-center py-60">
+            <Loader />
+          </Container>;
+        }
+      }
     } else {
       return (
         <Navigate to={redirect} state={{ from: location }} replace={false} />
       );
     }
   } else {
-    if (location.pathname !== "/") {
+    if (
+      location.pathname === "/acquisition" ||
+      location.pathname === "/management" ||
+      location.pathname === "/profile" ||
+      location.pathname === "/users"
+    ) {
       return <Navigate to="/" replace={true} />;
+    } else {
+      return (
+        <Container className="flex items-center justify-center py-60">
+          <Loader />
+        </Container>
+      );
     }
-    return (
-      <Center>
-        <Loader />
-      </Center>
-    );
   }
 };
+{
+  /* <Navigate to={redirect} state={{ from: location }} replace={false} />; */
+}

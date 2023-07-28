@@ -29,10 +29,14 @@ export const useFirebaseAuth = () => {
 
       try {
         const user = await showProfile(config);
-        const avatarImageUrl = await getAvatar(config);
+
+        const avatarImageUrl = user.data.attributes.avatar_key
+          ? await getAvatar(config)
+          : authUser.photoURL || "";
+
         setUserState({
           nickname: user.data.attributes.nickname || "",
-          avatar: avatarImageUrl || "",
+          avatar: avatarImageUrl,
           avatarKey: user.data.attributes.avatar_key || "",
           uid: authUser.uid,
           introduction: user.data.attributes.introduction || "",

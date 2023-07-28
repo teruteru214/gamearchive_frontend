@@ -72,12 +72,12 @@ const Profile = () => {
               align="center"
               color="dimmed"
               size="sm"
-              className="w-1/2 break-words"
+              className="w-80 break-all"
             >
               {introduction}
             </Text>
           </div>
-          <div className="mx-auto flex w-1/2 items-center justify-center">
+          <div className="mx-auto flex w-80 items-center justify-center">
             {twitter_name && (
               <>
                 <ActionIcon
@@ -92,7 +92,8 @@ const Profile = () => {
             )}
           </div>
 
-          <Button variant="default" fullWidth mt="md">
+          <Button onClick={() => navigate("/profile")}>
+            <IconUserEdit size="0.9rem" stroke={1.5} className="mr-1" />
             プロフィールを編集する
           </Button>
         </Stack>
