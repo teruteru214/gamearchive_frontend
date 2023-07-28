@@ -15,36 +15,24 @@ export const RouteAuthGuard = ({
   const location = useLocation();
   const { currentUser } = useFirebaseAuth();
 
-  if (currentUser.authChecked) {
-    if (currentUser.apiChecked) {
-      if (currentUser.uid) {
-        return <>{component}</>;
-      } else {
-        return (
-          <Container className="flex items-center justify-center py-60">
-            <Loader />
-          </Container>
-        );
-      }
-    } else {
-      return (
-        <Navigate to={redirect} state={{ from: location }} replace={false} />
-      );
-    }
-  } else {
-    if (
-      location.pathname === "/acquisition" ||
-      location.pathname === "/management" ||
-      location.pathname === "/profile" ||
-      location.pathname === "/users"
-    ) {
-      return <Navigate to="/" replace={true} />;
-    } else {
-      return (
-        <Container className="flex items-center justify-center py-60">
-          <Loader />
-        </Container>
-      );
-    }
+  if (!currentUser.authChecked || !currentUser.apiChecked) {
+    return (
+      <Container className="flex items-center justify-center py-60">
+        <Loader />
+      </Container>
+    );
   }
+
+  if (
+    (!currentUser.uid && location.pathname === "/acquisition") ||
+    (!currentUser.uid && location.pathname === "/management/:status") ||
+    (!currentUser.uid && location.pathname === "/profile") ||
+    (!currentUser.uid && location.pathname === "/users")
+  ) {
+    return (
+      <Navigate to={redirect} state={{ from: location }} replace={false} />
+    );
+  }
+
+  return <>{component}</>;
 };
