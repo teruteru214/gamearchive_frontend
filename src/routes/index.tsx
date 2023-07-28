@@ -1,7 +1,6 @@
 import MainLayout from "components/Layout/MainLayout";
 import GameAcquisition from "features/acquisition/components/GameAcquisition";
 import GameManagement from "features/management/components/GameManagement";
-// Import your StatusGameCards compone
 import Top from "features/top/components/Top";
 import UserDetail from "features/user/components/UserDetail";
 import ProfileEdit from "features/user/container/ProfileEdit";

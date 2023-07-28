@@ -20,16 +20,11 @@ export const RouteAuthGuard = ({
       if (currentUser.uid) {
         return <>{component}</>;
       } else {
-        if (
-          location.pathname.startsWith("/acquisition") ||
-          location.pathname.startsWith("/management") ||
-          location.pathname.startsWith("/profile") ||
-          location.pathname.startsWith("/users")
-        ) {
+        return (
           <Container className="flex items-center justify-center py-60">
             <Loader />
-          </Container>;
-        }
+          </Container>
+        );
       }
     } else {
       return (
@@ -53,6 +48,3 @@ export const RouteAuthGuard = ({
     }
   }
 };
-{
-  /* <Navigate to={redirect} state={{ from: location }} replace={false} />; */
-}
