@@ -1,6 +1,10 @@
 import { ActionIcon, TextInput } from "@mantine/core";
 import { IconPointerSearch, IconSearch } from "@tabler/icons-react";
-import { gameResultsAtom, searchQueryAtom } from "atoms/games/gameAcquisition";
+import {
+  gameResultsAtom,
+  searchInProgressAtom,
+  searchQueryAtom,
+} from "atoms/games/gameAcquisition";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { z } from "zod";
@@ -11,6 +15,7 @@ const SearchInputButton = () => {
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
   const [, setGameResults] = useAtom(gameResultsAtom);
   const [error, setError] = useState<string | null>(null);
+  const [, setSearchInProgress] = useAtom(searchInProgressAtom);
 
   const searchQuerySchema = z
     .string()
@@ -18,13 +23,17 @@ const SearchInputButton = () => {
 
   const handleSearch = async () => {
     try {
+      setSearchInProgress(true);
       searchQuerySchema.parse(searchQuery);
       setError(null);
       await searchGames(searchQuery, setGameResults);
+      setSearchInProgress(false);
     } catch (error) {
       if (error instanceof z.ZodError) {
+        setSearchInProgress(false);
         setError(error.errors[0].message);
       } else {
+        setSearchInProgress(false);
         console.error(error);
       }
     }

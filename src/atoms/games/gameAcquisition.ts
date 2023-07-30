@@ -12,3 +12,5 @@ export const statusAtom = atom<string | null>(null);
 export const convertedGameAtom = atom<ConvertedGame>(null);
 // errorメッセージ用のatomを定義
 export const errorAtom = atom<string | null>(null);
+// loading用のatom
+export const searchInProgressAtom = atom<boolean>(false);
