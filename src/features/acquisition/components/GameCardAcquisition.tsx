@@ -13,12 +13,14 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({
 }: GameCardAcquisitionProps) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
+  const defaultImage =
+    "https://images.igdb.com/igdb/image/upload/t_cover_big/nocover.png";
 
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
         <Image
-          src={game.cover?.url}
+          src={game.cover ? game.cover : defaultImage}
           width={145}
           height={largerThanSm ? 210 : 180}
           fit="contain"
@@ -38,10 +40,10 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({
             mt="xs"
             mb="md"
           >
-            {game.name}
+            {game.title}
           </Text>
           <Text className="font-sans font-bold leading-5" mt="xs" mb="md">
-            {`Rating: ${game.rating}`}
+            {`Rating: ${game.rating || "No data"}`}
           </Text>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
             <Text
@@ -49,7 +51,9 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({
               size="xs"
               className="overflow-hidden text-ellipsis whitespace-nowrap font-bold"
             >
-              {game.genres?.map((genre) => `#${genre.name}`).join("  ")}
+              {game.genres && game.genres.length > 0
+                ? game.genres.map((genre) => `#${genre}`).join("  ")
+                : "#No Data"}
             </Text>
           </div>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
@@ -58,7 +62,9 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({
               size="xs"
               className="overflow-hidden text-ellipsis whitespace-nowrap font-bold"
             >
-              {game.platforms?.map((platform) => `#${platform.name}`).join(" ")}
+              {game.platforms && game.platforms.length > 0
+                ? game.platforms.map((platform) => `#${platform}`).join(" ")
+                : "#No Data"}
             </Text>
           </div>
           <a

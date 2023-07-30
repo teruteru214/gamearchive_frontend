@@ -27,26 +27,26 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
     .nonempty({ message: "ゲームステータスを選択してください" });
 
   // ゲーム情報と選択したステータスを元に変換したゲームデータを作成
-  useEffect(() => {
-    if (status) {
-      setConvertedGame({
-        game: {
-          id: game.id,
-          title: game.name,
-          cover: game.cover?.url ?? null,
-          rating: game.rating ?? 0,
-          url: game.url,
-        },
-        genres: game.genres?.map((genre) => genre.name) ?? [],
-        platforms: game.platforms?.map((platform) => platform.name) ?? [],
-        gameStatus: {
-          id: 1, // ここは適切な値に置き換えてください
-          user_id: 1, // ここは適切な値に置き換えてください
-          status: status,
-        },
-      });
-    }
-  }, [status, game]);
+  // useEffect(() => {
+  //   if (status) {
+  //     setConvertedGame({
+  //       game: {
+  //         id: game.id,
+  //         title: game.name,
+  //         cover: game.cover?.url ?? null,
+  //         rating: game.rating ?? 0,
+  //         url: game.url,
+  //       },
+  //       genres: game.genres?.map((genre) => genre.name) ?? [],
+  //       platforms: game.platforms?.map((platform) => platform.name) ?? [],
+  //       gameStatus: {
+  //         id: 1, // ここは適切な値に置き換えてください
+  //         user_id: 1, // ここは適切な値に置き換えてください
+  //         status: status,
+  //       },
+  //     });
+  //   }
+  // }, [status, game]);
 
   // ゲームを取得するボタンのクリックハンドラー
   const handleClick = () => {

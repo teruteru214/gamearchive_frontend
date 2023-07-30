@@ -1,18 +1,8 @@
 export type GameAcquisition = {
-  id: number;
-  name: string;
-  cover?: {
-    id: number;
-    url: string;
-  };
-  genres?: {
-    id: number;
-    name: string;
-  }[];
-  platforms?: {
-    id: number;
-    name: string;
-  }[];
+  title: string;
+  cover?: string;
+  genres?: string[];
+  platforms?: string[];
   url: string;
   rating?: number;
 };
