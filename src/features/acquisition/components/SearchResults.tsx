@@ -12,7 +12,7 @@ const SearchResults = () => {
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {games.slice(0, itemsToShow).map((game) => (
-        <GameCardAcquisition key={game.id} game={game} />
+        <GameCardAcquisition key={game.title} game={game} />
       ))}
       <Button
         onClick={() => setItemsToShow(itemsToShow + 30)}
