@@ -1,16 +1,20 @@
 import { ActionIcon, TextInput } from "@mantine/core";
 import { IconPointerSearch, IconSearch } from "@tabler/icons-react";
-import { gameResultsAtom } from "atoms/games/gameAcquisition";
+import { gameResultsAtom, searchQueryAtom } from "atoms/games/gameAcquisition";
 import { useAtom } from "jotai";
-import { acquisitionGameAPI } from "test/handlers/acquisitionGames";
+
+import { searchGames } from "../api/searchGames";
 
 const SearchInputButton = () => {
-  // const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+  const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
   const [, setGameResults] = useAtom(gameResultsAtom);
 
   const handleSearch = async () => {
-    const results = await acquisitionGameAPI.getALLAcquisitionGames();
-    setGameResults(results);
+    try {
+      await searchGames(searchQuery, setGameResults);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -19,13 +23,15 @@ const SearchInputButton = () => {
         icon={<IconSearch size="1.1rem" stroke={1.5} />}
         radius="xl"
         size="md"
+        value={searchQuery || ""} // added this
+        onChange={(e) => setSearchQuery(e.target.value)} // added this
         rightSection={
           <ActionIcon
             size={32}
             radius="xl"
             variant="filled"
             color="yellow"
-            onClick={handleSearch} // クリックイベントに検索を結びつけます
+            onClick={handleSearch}
           >
             <IconPointerSearch size="1.1rem" stroke={1.5} />
           </ActionIcon>
