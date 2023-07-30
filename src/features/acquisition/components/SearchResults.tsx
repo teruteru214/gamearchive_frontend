@@ -1,13 +1,29 @@
-import { Button } from "@mantine/core";
+import { Button, Center, Image } from "@mantine/core";
 import { itemsToShowAtom } from "atoms/games";
 import { gameResultsAtom } from "atoms/games/gameAcquisition";
 import { useAtom } from "jotai";
+import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
+import before_search from "../../../assets/before_search.png";
 import GameCardAcquisition from "./GameCardAcquisition";
 
 const SearchResults = () => {
   const [games] = useAtom(gameResultsAtom);
   const [itemsToShow, setItemsToShow] = useAtom(itemsToShowAtom);
+
+  const largerThanSm = useMediaQuery("sm");
+
+  if (!games || games.length === 0) {
+    return (
+      <Center>
+        <Image
+          src={before_search}
+          width={largerThanSm ? 550 : 300}
+          className="py-20"
+        />
+      </Center>
+    );
+  }
 
   return (
     <div className="flex flex-wrap justify-between gap-4">
