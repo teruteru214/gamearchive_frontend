@@ -1,19 +1,41 @@
 import { ActionIcon, TextInput } from "@mantine/core";
 import { IconPointerSearch, IconSearch } from "@tabler/icons-react";
-import { gameResultsAtom, searchQueryAtom } from "atoms/games/gameAcquisition";
+import {
+  gameResultsAtom,
+  searchInProgressAtom,
+  searchQueryAtom,
+} from "atoms/games/gameAcquisition";
 import { useAtom } from "jotai";
+import { useState } from "react";
+import { z } from "zod";
 
 import { searchGames } from "../api/searchGames";
 
 const SearchInputButton = () => {
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
   const [, setGameResults] = useAtom(gameResultsAtom);
+  const [error, setError] = useState<string | null>(null);
+  const [, setSearchInProgress] = useAtom(searchInProgressAtom);
+
+  const searchQuerySchema = z
+    .string()
+    .nonempty({ message: "*ゲーム名を入力してください" });
 
   const handleSearch = async () => {
     try {
+      setSearchInProgress(true);
+      searchQuerySchema.parse(searchQuery);
+      setError(null);
       await searchGames(searchQuery, setGameResults);
+      setSearchInProgress(false);
     } catch (error) {
-      console.error(error);
+      if (error instanceof z.ZodError) {
+        setSearchInProgress(false);
+        setError(error.errors[0].message);
+      } else {
+        setSearchInProgress(false);
+        console.error(error);
+      }
     }
   };
 
@@ -36,8 +58,8 @@ const SearchInputButton = () => {
             <IconPointerSearch size="1.1rem" stroke={1.5} />
           </ActionIcon>
         }
-        placeholder="ゲームの名前を入力してください"
         rightSectionWidth={42}
+        error={error}
       />
       <p className="text-xs text-gray-400">
         *目的のゲームが出てこない時、英語でも検索してみてください
