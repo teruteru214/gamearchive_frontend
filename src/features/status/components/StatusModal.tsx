@@ -7,6 +7,7 @@ import { FC, useState } from "react";
 import { z, ZodError } from "zod";
 
 import { createGame } from "../api/createGame";
+import { GameCard, GameStatus } from "../types";
 
 type StatusModalProps = {
   opened: boolean;
@@ -29,13 +30,12 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
   };
 
   const handleSubmit = async () => {
-    setLoading(true); // Set loading to true
+    setLoading(true);
     try {
       statusSchema.parse({ gameStatus });
       setValidationError(null);
 
-      // Create the payload
-      const payload = {
+      const payload: GameCard = {
         game: {
           title: game.title,
           cover: game.cover,
@@ -45,7 +45,7 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
         genres: game.genres,
         platforms: game.platforms,
         game_status: {
-          status: gameStatus,
+          status: gameStatus as GameStatus,
         },
       };
 

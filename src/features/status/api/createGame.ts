@@ -1,16 +1,10 @@
 import axios from "axios";
 import { endpoint } from "config";
-import { GameAcquisition } from "features/acquisition/types";
 
-interface GamePayload {
-  game: GameAcquisition;
-  genres?: string[];
-  platforms?: string[];
-  game_status: { status: string };
-}
+import { GameCard } from "../types";
 
 export const createGame = async (
-  payload: GamePayload,
+  payload: GameCard,
   config: {
     headers: {
       authorization: string;
