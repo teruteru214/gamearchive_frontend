@@ -1,16 +1,15 @@
-export type ConvertedGame = {
+export type GameStatus = "unplaying" | "playing" | "clear";
+
+export type GameCard = {
   game: {
-    id: number;
     title: string;
-    cover: string | null;
-    rating: number;
+    cover?: string;
+    rating?: number;
     url: string;
   };
-  genres: string[];
-  platforms: string[];
-  gameStatus: {
-    id: number;
-    user_id: number;
-    status: string;
+  genres?: string[];
+  platforms?: string[];
+  game_status: {
+    status: GameStatus;
   };
-} | null;
+};
