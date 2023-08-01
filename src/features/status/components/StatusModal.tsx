@@ -1,8 +1,12 @@
-import { Modal } from "@mantine/core";
-import { errorAtom, statusAtom } from "atoms/games/gameAcquisition";
+import { Button, Modal, Select, Stack, Text } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { AxiosError } from "axios";
 import { GameAcquisition } from "features/acquisition/types";
-import { useAtom } from "jotai";
-import { FC } from "react";
+import { getAuth } from "firebase/auth";
+import { FC, useState } from "react";
+import { z, ZodError } from "zod";
+
+import { createGame } from "../api/createGame";
 
 type StatusModalProps = {
   opened: boolean;
@@ -10,88 +14,105 @@ type StatusModalProps = {
   game: GameAcquisition;
 };
 
-const StatusModal: FC<StatusModalProps> = ({ opened, onClose }) => {
-  const [, setStatus] = useAtom(statusAtom);
-  // const [convertedGame, setConvertedGame] = useAtom(convertedGameAtom);
-  const [, setError] = useAtom(errorAtom);
+const statusSchema = z.object({
+  gameStatus: z.enum(["unplaying", "playing", "clear"]),
+});
 
-  // // zodを用いてステータスのバリデーションを定義
-  // const StatusSchema = z
-  //   .string()
-  //   .nonempty({ message: "ゲームステータスを選択してください" });
+const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
+  const [gameStatus, setGameStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [validationError, setValidationError] = useState<ZodError | null>(null);
 
-  // ゲーム情報と選択したステータスを元に変換したゲームデータを作成
-  // useEffect(() => {
-  //   if (status) {
-  //     setConvertedGame({
-  //       game: {
-  //         id: game.id,
-  //         title: game.name,
-  //         cover: game.cover?.url ?? null,
-  //         rating: game.rating ?? 0,
-  //         url: game.url,
-  //       },
-  //       genres: game.genres?.map((genre) => genre.name) ?? [],
-  //       platforms: game.platforms?.map((platform) => platform.name) ?? [],
-  //       gameStatus: {
-  //         id: 1, // ここは適切な値に置き換えてください
-  //         user_id: 1, // ここは適切な値に置き換えてください
-  //         status: status,
-  //       },
-  //     });
-  //   }
-  // }, [status, game]);
-  // const handleClick = () => {
-  //   if (status) {
-  //     // バリデーション
-  //     const result = StatusSchema.safeParse(status);
-  //     if (result.success) {
-  //       console.log(convertedGame);
-  //       setError(null);
-  //     } else {
-  //       setError(result.error.message);
-  //     }
-  //   } else {
-  //     setError("※ゲームステータスを選択してください");
-  //   }
-  // };
   const handleClose = () => {
-    setError(null);
-    setStatus(null);
+    setValidationError(null);
     onClose();
   };
 
-  // モーダルが開かれる度にエラーとステータスをリセット;
-  // useEffect(() => {
-  //   if (opened) {
-  //     setError(null);
-  //     setStatus(null);
-  //   }
-  // }, [opened]);
+  const handleSubmit = async () => {
+    setLoading(true); // Set loading to true
+    try {
+      statusSchema.parse({ gameStatus });
+      setValidationError(null);
 
-  // ステータスが選択された際にエラーメッセージをリセット
-  // const handleStatusChange = (value: string) => {
-  //   setStatus(value);
-  //   setError(null);
-  // };
+      // Create the payload
+      const payload = {
+        game: {
+          title: game.title,
+          cover: game.cover,
+          rating: game.rating,
+          url: game.url,
+        },
+        genres: game.genres,
+        platforms: game.platforms,
+        game_status: {
+          status: gameStatus,
+        },
+      };
 
-  // モーダルのレンダリング
+      const auth = getAuth();
+      const idToken = await auth.currentUser?.getIdToken(true);
+      const config = {
+        headers: {
+          authorization: `Bearer ${idToken}`,
+        },
+      };
+
+      await createGame(payload, config);
+
+      notifications.show({
+        title: "Success",
+        message: `${game.title}を保存しました！`,
+      });
+    } catch (error: unknown) {
+      if (error instanceof ZodError) {
+        setValidationError(error);
+      } else if (error instanceof AxiosError && error.response) {
+        if (error.response.status === 422) {
+          notifications.show({
+            title: game.title,
+            message: "はすでに保存されています",
+            color: "red",
+          });
+        } else {
+          notifications.show({
+            title: game.title,
+            message: "は保存されませんでした",
+            color: "red",
+          });
+        }
+      }
+    } finally {
+      setLoading(false);
+      if (gameStatus) {
+        onClose();
+      }
+    }
+  };
+
+  const handleSelect = (value: string) => {
+    setValidationError(null); // Clear error message
+    setGameStatus(value); // Save the selected value to state
+  };
+
   return (
     <Modal opened={opened} onClose={handleClose} centered size="sm">
-      {/* <Stack className="flex items-center justify-center space-y-4 pb-16">
+      <Stack className="flex flex-col items-center justify-center space-y-4 pb-14">
         <Text size="lg">ゲームステータスを入力</Text>
         <Select
-          placeholder="ゲームステータスを選択"
           data={[
             { value: "unplaying", label: "積みゲー" },
             { value: "playing", label: "プレイ中" },
             { value: "clear", label: "クリア" },
           ]}
-          onChange={handleStatusChange} // ステータスが選択された際のハンドラー
-          error={error ? "※ゲームステータスを選択してください" : null} // エラーメッセージ
+          value={gameStatus}
+          onChange={handleSelect}
+          error={validationError ? "ゲームステータスを選択してください" : null}
+          className="w-64"
         />
-        <Button onClick={handleClick}>ゲームを取得する</Button>
-      </Stack> */}
+        <Button onClick={handleSubmit} loading={loading}>
+          ゲームを取得する
+        </Button>
+      </Stack>
     </Modal>
   );
 };
