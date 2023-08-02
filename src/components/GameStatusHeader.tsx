@@ -1,9 +1,18 @@
 import { Tabs } from "@mantine/core";
+import StatusGameCards from "features/management/components/StatusGameCards";
+import { useState } from "react";
 
 const GameStatusHeader = () => {
+  const [activeTab, setActiveTab] = useState<string | null>("unplaying");
   return (
-    <Tabs defaultValue="unplaying" className="my-4">
-      <Tabs.List>
+    <Tabs value={activeTab} onTabChange={setActiveTab} className="my-4">
+      <Tabs.List grow position="center">
+        <Tabs.Tab
+          value="favorites"
+          className="text-xs font-semibold sm:text-base"
+        >
+          お気に入り
+        </Tabs.Tab>
         <Tabs.Tab value="clear" className="text-xs font-semibold sm:text-base">
           クリア
         </Tabs.Tab>
@@ -19,13 +28,23 @@ const GameStatusHeader = () => {
         >
           積みゲー
         </Tabs.Tab>
-        <Tabs.Tab
-          value="favorites"
-          className="text-xs font-semibold sm:text-base"
-        >
-          お気に入り
-        </Tabs.Tab>
       </Tabs.List>
+      <Tabs.Panel value="favorites">
+        <p>お気に入り</p>
+        <StatusGameCards />
+      </Tabs.Panel>
+      <Tabs.Panel value="clear">
+        <p>クリア</p>
+        <StatusGameCards />
+      </Tabs.Panel>
+      <Tabs.Panel value="playing">
+        <p>プレイ中</p>
+        <StatusGameCards />
+      </Tabs.Panel>
+      <Tabs.Panel value="unplaying">
+        <p>積みゲー</p>
+        <StatusGameCards />
+      </Tabs.Panel>
     </Tabs>
   );
 };
