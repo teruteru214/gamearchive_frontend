@@ -1,5 +1,5 @@
-import AppDescription from "./AppDescription";
-import HeroContents from "./HeroContents";
+import AppDescription from "../components/AppDescription";
+import HeroContents from "../components/HeroContents";
 
 const Top = () => {
   return (
