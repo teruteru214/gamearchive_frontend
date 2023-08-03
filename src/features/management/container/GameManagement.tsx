@@ -1,9 +1,9 @@
 import { Container } from "@mantine/core";
 import { IconReplace } from "@tabler/icons-react";
-import GameStatusHeader from "components/GameStatusHeader";
 import HeroContents from "components/HeroContents";
 
 import Profile from "../../../components/Profile";
+import GameStatusHeader from "../components/GameStatusHeader";
 import GameManagementControls from "./GameManagementControls";
 
 const GameManagement = () => {
