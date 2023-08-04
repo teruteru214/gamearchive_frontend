@@ -1,11 +1,22 @@
 import { Tabs } from "@mantine/core";
+import { selectedGameStatusAtom } from "atoms/games/gameManagement";
 import StatusGameCards from "features/management/components/StatusGameCards";
-import { useState } from "react";
+import { useSetAtom } from "jotai";
+import { startTransition } from "react";
+
+import { GameTab } from "../types";
 
 const GameStatusHeader = () => {
-  const [activeTab, setActiveTab] = useState<string | null>("unplaying");
+  const updateSelectedGameStatus = useSetAtom(selectedGameStatusAtom);
+
+  const handleTabChange = (newTab: string) => {
+    startTransition(() => {
+      updateSelectedGameStatus(newTab as GameTab);
+    });
+  };
+
   return (
-    <Tabs value={activeTab} onTabChange={setActiveTab} className="my-4">
+    <Tabs onTabChange={handleTabChange} className="my-4">
       <Tabs.List grow position="center">
         <Tabs.Tab
           value="favorites"
@@ -31,19 +42,19 @@ const GameStatusHeader = () => {
       </Tabs.List>
       <Tabs.Panel value="favorites">
         <p>お気に入り</p>
-        <StatusGameCards />
+        <StatusGameCards status="favorites" />
       </Tabs.Panel>
       <Tabs.Panel value="clear">
         <p>クリア</p>
-        <StatusGameCards />
+        <StatusGameCards status="clear" />
       </Tabs.Panel>
       <Tabs.Panel value="playing">
         <p>プレイ中</p>
-        <StatusGameCards />
+        <StatusGameCards status="playing" />
       </Tabs.Panel>
       <Tabs.Panel value="unplaying">
         <p>積みゲー</p>
-        <StatusGameCards />
+        <StatusGameCards status="unplaying" />
       </Tabs.Panel>
     </Tabs>
   );

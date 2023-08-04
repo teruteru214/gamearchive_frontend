@@ -1,19 +1,25 @@
 import { Button } from "@mantine/core";
 import { itemsToShowAtom } from "atoms/games";
-import { sabGamesAtom } from "atoms/games/gamesListAtom";
 import { useAtom } from "jotai";
+import { GameCardStatus } from "types/game";
 
+import { gamesAtom } from "../api/atoms/gamesAtom";
+import { GameTab } from "../types";
 import StatusGameCard from "./StatusGameCard";
 
-const StatusGameCards = () => {
+interface StatusGameCardsProps {
+  status: GameTab; // Update type here
+}
+
+const StatusGameCards: React.FC<StatusGameCardsProps> = () => {
   const [itemsToShow, setItemsToShow] = useAtom(itemsToShowAtom);
 
-  const [games] = useAtom(sabGamesAtom);
+  const [games] = useAtom(gamesAtom);
 
   return (
     <div className="flex flex-wrap justify-between gap-4">
-      {games.slice(0, itemsToShow).map((game) => (
-        <StatusGameCard key={game.game.id} gameData={game} />
+      {games.slice(0, itemsToShow).map((gameData: GameCardStatus) => (
+        <StatusGameCard key={gameData.game.id} gameData={gameData} />
       ))}
       <Button
         onClick={() => setItemsToShow(itemsToShow + 30)}

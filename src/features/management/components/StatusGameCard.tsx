@@ -2,9 +2,9 @@ import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import StatusUpdateModal from "features/status/components/StatusUpdateModal";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
-import { GameCard } from "types/game";
+import { GameCardStatus } from "types/game";
 
-const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
+const StatusGameCard = ({ gameData }: { gameData: GameCardStatus }) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
 
