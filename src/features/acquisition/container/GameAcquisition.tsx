@@ -1,7 +1,7 @@
 import { IconDisc } from "@tabler/icons-react";
 import HeroContents from "components/HeroContents";
 
-import GameSearch from "./GameSearch";
+import GameSearch from "../components/GameSearch";
 
 const GameAcquisition = () => {
   return (

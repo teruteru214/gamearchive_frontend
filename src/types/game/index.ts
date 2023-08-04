@@ -1,6 +1,6 @@
 export type GameStatus = "unplaying" | "playing" | "clear";
 
-export type GameCard = {
+export type GameCardStatus = {
   game: {
     id: number;
     title: string;
@@ -18,7 +18,6 @@ export type GameCard = {
   }[];
   gameStatus: {
     id: number;
-    user_id: number;
     status: GameStatus;
   };
 };
