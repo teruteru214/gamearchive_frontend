@@ -1,12 +1,10 @@
 import { Button, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useNavigate } from "react-router-dom";
 
 import RefineModal from "../components/RefineModal";
 
 const GameManagementControls = () => {
-  const largerThanSm = useMediaQuery("sm");
   const navigate = useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
 

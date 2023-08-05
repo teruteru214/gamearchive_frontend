@@ -2,21 +2,28 @@ import { Tabs } from "@mantine/core";
 import { selectedGameStatusAtom } from "atoms/games/gameManagement";
 import StatusGameCards from "features/management/components/StatusGameCards";
 import { useSetAtom } from "jotai";
-import { startTransition } from "react";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { GameTab } from "../types";
 
 const GameStatusHeader = () => {
   const updateSelectedGameStatus = useSetAtom(selectedGameStatusAtom);
+  const navigate = useNavigate();
+  const { status } = useParams();
+
+  useEffect(() => {
+    if (status) {
+      updateSelectedGameStatus(status as GameTab);
+    }
+  }, [status, updateSelectedGameStatus]);
 
   const handleTabChange = (newTab: string) => {
-    startTransition(() => {
-      updateSelectedGameStatus(newTab as GameTab);
-    });
+    navigate(`/management/${newTab}`);
   };
 
   return (
-    <Tabs onTabChange={handleTabChange} className="my-4">
+    <Tabs onTabChange={handleTabChange} className="my-4" value={status}>
       <Tabs.List grow position="center">
         <Tabs.Tab
           value="favorites"

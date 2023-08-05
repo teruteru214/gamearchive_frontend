@@ -1,11 +1,11 @@
 import { Button, Modal, Select, Stack, Text } from "@mantine/core";
 import { FC, useState } from "react";
-import { GameCard, GameStatus } from "types/game";
+import { GameCardStatus, GameStatus } from "types/game";
 
 type StatusUpdateModalProps = {
   opened: boolean;
   onClose: () => void;
-  gameData: GameCard;
+  gameData: GameCardStatus;
 };
 
 const StatusUpdateModal: FC<StatusUpdateModalProps> = ({

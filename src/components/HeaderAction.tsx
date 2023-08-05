@@ -120,6 +120,13 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                 </Menu.Item>
 
                 <Menu.Item
+                  icon={<IconStar size="0.9rem" stroke={1.5} />}
+                  onClick={() => navigate("/management/favorites")}
+                >
+                  お気に入りのゲーム
+                </Menu.Item>
+
+                <Menu.Item
                   icon={<IconTrophy size="0.9rem" stroke={1.5} />}
                   onClick={() => navigate("/management/clear")}
                 >
@@ -138,13 +145,6 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                   onClick={() => navigate("/management/unplaying")}
                 >
                   積みゲー
-                </Menu.Item>
-
-                <Menu.Item
-                  icon={<IconStar size="0.9rem" stroke={1.5} />}
-                  onClick={() => navigate("/management/favorites")}
-                >
-                  お気に入りのゲーム
                 </Menu.Item>
 
                 <Menu.Item
