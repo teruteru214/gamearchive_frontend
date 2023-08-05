@@ -1,8 +1,8 @@
 import { Card, Group, Image, Text } from "@mantine/core";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
-import { GameCard } from "types/game";
+import { GameCardStatus } from "types/game";
 
-const UserGameCard = ({ gameData }: { gameData: GameCard }) => {
+const UserGameCard = ({ gameData }: { gameData: GameCardStatus }) => {
   const largerThanSm = useMediaQuery("sm");
 
   return (
@@ -33,7 +33,7 @@ const UserGameCard = ({ gameData }: { gameData: GameCard }) => {
               size="xs"
               className="line-clamp-1 text-ellipsis font-bold"
             >
-              {gameData.genres?.map((genre) => `#${genre.name}`).join("  ")}
+              {gameData.genres?.map((genre) => `#${genre.name}`).join(" ")}
             </Text>
           </div>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
