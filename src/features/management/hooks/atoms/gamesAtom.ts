@@ -48,7 +48,7 @@ const mapDataToGameCardStatus = (data: GameData[]): GameCardStatus[] => {
       },
       genres: game.attributes.game_genres,
       platforms: game.attributes.game_platforms,
-      gameStatus: game.attributes.game_status,
+      game_status: game.attributes.game_status,
     };
   });
 };

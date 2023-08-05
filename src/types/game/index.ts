@@ -16,7 +16,7 @@ export type GameCardStatus = {
     id: number;
     name: string;
   }[];
-  gameStatus: {
+  game_status: {
     id: number;
     status: GameStatus;
   };

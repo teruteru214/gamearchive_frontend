@@ -14,11 +14,11 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
   onClose,
 }) => {
   const [selectedStatus, setSelectedStatus] = useState(
-    gameData.gameStatus.status
+    gameData.game_status.status
   ); // 初期値を現在のステータスで設定
 
   const handleUpdate = () => {
-    gameData.gameStatus.status = selectedStatus;
+    gameData.game_status.status = selectedStatus;
     console.log(gameData); // gameDataの値をコンソールに出力
   };
 
