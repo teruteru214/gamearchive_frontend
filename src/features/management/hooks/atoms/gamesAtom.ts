@@ -21,7 +21,7 @@ interface GameData {
 
 export const queryClient = new QueryClient();
 
-export const [gamesAtom] = atomsWithQuery((get) => ({
+export const [StatusGameAtom] = atomsWithQuery((get) => ({
   queryKey: ["games", get(selectedGameStatusAtom)],
   queryFn: async ({ queryKey: [, status] }) => {
     const auth = getAuth();

@@ -3,7 +3,7 @@ import { itemsToShowAtom } from "atoms/games";
 import { useAtom } from "jotai";
 import { GameCardStatus } from "types/game";
 
-import { gamesAtom } from "../api/atoms/gamesAtom";
+import { StatusGameAtom } from "../hooks/atoms/gamesAtom";
 import { GameTab } from "../types";
 import StatusGameCard from "./StatusGameCard";
 
@@ -14,7 +14,7 @@ interface StatusGameCardsProps {
 const StatusGameCards: React.FC<StatusGameCardsProps> = () => {
   const [itemsToShow, setItemsToShow] = useAtom(itemsToShowAtom);
 
-  const [games] = useAtom(gamesAtom);
+  const [games] = useAtom(StatusGameAtom);
 
   return (
     <div className="flex flex-wrap justify-between gap-4">
