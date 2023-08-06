@@ -1,6 +1,9 @@
 import { Button, Modal, Select, Stack, Text } from "@mantine/core";
+import { getAuth } from "firebase/auth";
 import { FC, useState } from "react";
 import { GameCardStatus, GameStatus } from "types/game";
+
+import { updateGameStatus } from "../api/updateGameStatus";
 
 type StatusUpdateModalProps = {
   opened: boolean;
@@ -14,12 +17,30 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
   onClose,
 }) => {
   const [selectedStatus, setSelectedStatus] = useState(
-    gameData.gameStatus.status
+    gameData.game_status.status
   ); // 初期値を現在のステータスで設定
 
-  const handleUpdate = () => {
-    gameData.gameStatus.status = selectedStatus;
-    console.log(gameData); // gameDataの値をコンソールに出力
+  const handleUpdate = async () => {
+    const auth = getAuth();
+    const idToken = await auth.currentUser?.getIdToken(true);
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${idToken}`,
+      },
+    };
+
+    try {
+      const updatedGameStatus = await updateGameStatus(
+        gameData.game_status.id,
+        selectedStatus,
+        config
+      );
+      console.log(updatedGameStatus); // updatedGameStatusの値をコンソールに出力
+      gameData.game_status.status = selectedStatus;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
