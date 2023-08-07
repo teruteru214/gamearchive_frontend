@@ -1,27 +1,20 @@
 import axios from "axios";
 import { endpoint } from "config";
-import {
-  getAdditionalUserInfo,
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { NavigateFunction } from "react-router-dom";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export const signInWithGoogle = (
-  setOpened: (flag: boolean) => void,
-  navigate: NavigateFunction,
+  close: () => void,
   setIsLoading: (loading: boolean) => void
 ) => {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
-  setIsLoading(true); // start loading
+  setIsLoading(true);
+  close();
 
   signInWithPopup(auth, provider)
     .then(async (result) => {
-      setOpened(false);
-      setIsLoading(false); // end loading
+      setIsLoading(false);
 
       const user = result.user;
       const token = await user.getIdToken();
@@ -40,11 +33,6 @@ export const signInWithGoogle = (
         if (res.status !== 200) {
           throw new Error("login error");
         }
-        if (getAdditionalUserInfo(result)?.isNewUser) {
-          navigate("/");
-          return;
-        }
-        navigate("/");
       } catch (err) {
         let message;
 
@@ -55,11 +43,9 @@ export const signInWithGoogle = (
           console.error(message);
         }
       }
-      navigate("/management/unplaying");
     })
     .catch((error) => {
-      setOpened(false);
-      setIsLoading(false); // end loading in case of an error
+      setIsLoading(false);
 
       if (error.code === "auth/account-exists-with-different-credential") {
         alert(

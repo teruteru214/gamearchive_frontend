@@ -22,15 +22,6 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="acquisition" element={<MainLayout />}>
-        <Route
-          index
-          element={
-            <RouteAuthGuard component={<GameAcquisition />} redirect="/" />
-          }
-        />
-        <Route path="*" element={<NotFoundTitle />} />
-      </Route>
       <Route path="management" element={<MainLayout />}>
         <Route index element={<Navigate to="/" replace />} />
         <Route
@@ -57,6 +48,10 @@ const AppRoutes = () => {
           path=":userid"
           element={<RouteAuthGuard component={<UserDetail />} redirect="/" />}
         />
+        <Route path="*" element={<NotFoundTitle />} />
+      </Route>
+      <Route path="acquisition" element={<MainLayout />}>
+        <Route index element={<GameAcquisition />} />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
       <Route path="/" element={<MainLayout />}>

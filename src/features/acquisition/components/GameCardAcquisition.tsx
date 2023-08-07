@@ -1,8 +1,11 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { GameAcquisition } from "features/acquisition/types";
+import LoginModal from "features/auth/components/LoginModal";
 import StatusModal from "features/status/components/StatusModal";
+import { useFirebaseAuth } from "lib/auth/firebaseAuth";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
+import { useState } from "react";
 
 type GameCardAcquisitionProps = {
   game: GameAcquisition;
@@ -15,6 +18,21 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({
   const [opened, { open, close }] = useDisclosure(false);
   const defaultImage =
     "https://images.igdb.com/igdb/image/upload/t_cover_big/nocover.png";
+
+  const { currentUser } = useFirebaseAuth();
+  const isLogin = currentUser.uid ? true : false;
+
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const openLoginModal = () => setLoginModalOpen(true);
+  const closeLoginModal = () => setLoginModalOpen(false);
+
+  const openModal = () => {
+    if (isLogin) {
+      open();
+    } else {
+      openLoginModal();
+    }
+  };
 
   return (
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
@@ -29,7 +47,7 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({
           <Button
             size={largerThanSm ? "md" : "xs"}
             className={`${largerThanSm ? "w-64" : "w-40"}`}
-            onClick={open}
+            onClick={openModal}
           >
             ゲームを取得する
           </Button>
@@ -77,6 +95,7 @@ const GameCardAcquisition: React.FC<GameCardAcquisitionProps> = ({
           </a>
         </div>
         <StatusModal opened={opened} onClose={close} game={game} />
+        <LoginModal opened={loginModalOpen} close={closeLoginModal} />
       </Group>
     </Card>
   );
