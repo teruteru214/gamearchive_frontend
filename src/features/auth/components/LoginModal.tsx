@@ -14,11 +14,11 @@ const LoginModal: FC<LoginModalProps> = ({ opened, close }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <Modal opened={opened} onClose={close} centered size="sm">
+    <Modal opened={opened} onClose={close} centered size="md">
       <Stack className="flex items-center justify-center space-y-4">
         <Image src={logo} width={300} fit="contain" />
         <Text size="sm" color="dimmed">
-          GameArchiveは、あなたのゲーム進行状況をシンプルに管理するアプリです。各ゲームの状態を一元管理し、公開設定を選んだユーザーは他のプレイヤーとゲームプレイ状況を共有できます。
+          GameArchiveは、あなたの全てのゲーム進行状況を一元化し、効率的なプレイを実現するためのアプリケーションです。ここでは、複数のプラットフォームのゲームを一覧表示し、プレイ状況を一目で確認することができます
         </Text>
         <Group grow mb="md" mt="md">
           <GoogleButton
