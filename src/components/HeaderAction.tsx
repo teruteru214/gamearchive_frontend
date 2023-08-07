@@ -24,7 +24,6 @@ import { loginUserAtom } from "atoms/auth/loginUser";
 import LoginModal from "features/auth/components/LoginModal";
 import { getAuth } from "firebase/auth";
 import { useAtom } from "jotai";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../assets/logo.png";
@@ -57,8 +56,8 @@ interface HeaderActionProps {
 const HeaderAction = ({ isLogin }: HeaderActionProps) => {
   const { classes } = useStyles();
 
-  const [loginModalOpened, setLoginModalOpened] = useState(false);
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { open, close }] = useDisclosure(false);
+  const [openedMenu, { toggle }] = useDisclosure(false);
   const navigate = useNavigate();
   const [currentUser] = useAtom(loginUserAtom);
 
@@ -76,11 +75,7 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
           </Link>
 
           {!isLogin ? (
-            <Button
-              radius="xl"
-              className="h-8"
-              onClick={() => setLoginModalOpened(true)}
-            >
+            <Button radius="xl" className="h-8" onClick={open}>
               ログイン
             </Button>
           ) : (
@@ -97,7 +92,9 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                 <Group
                   spacing={7}
                   onClick={toggle}
-                  aria-label={opened ? "Close navigation" : "Open navigation"}
+                  aria-label={
+                    openedMenu ? "Close navigation" : "Open navigation"
+                  }
                 >
                   <Avatar
                     src={currentUser.avatar}
@@ -106,7 +103,7 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                     size="sm"
                   />
 
-                  <Burger opened={opened} />
+                  <Burger opened={openedMenu} />
                 </Group>
               </Menu.Target>
 
@@ -188,7 +185,7 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
           )}
         </Group>
       </Container>
-      <LoginModal opened={loginModalOpened} setOpened={setLoginModalOpened} />
+      <LoginModal opened={opened} close={close} />
     </div>
   );
 };
