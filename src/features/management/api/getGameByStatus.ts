@@ -1,7 +1,8 @@
 import axios from "axios";
 import { endpoint } from "config";
 import { getAuth } from "firebase/auth";
-import { GameCardStatus } from "types/game";
+
+import { GameCard } from "../types";
 
 interface GameData {
   attributes: {
@@ -17,9 +18,7 @@ interface GameData {
   };
 }
 
-export const getGamesByStatus = async (
-  status: string
-): Promise<GameCardStatus[]> => {
+export const getGamesByStatus = async (status: string): Promise<GameCard[]> => {
   const auth = getAuth();
   const idToken = await auth.currentUser?.getIdToken(true);
 
@@ -36,7 +35,7 @@ export const getGamesByStatus = async (
   return mapDataToGameCardStatus(res.data.data);
 };
 
-const mapDataToGameCardStatus = (data: GameData[]): GameCardStatus[] => {
+const mapDataToGameCardStatus = (data: GameData[]): GameCard[] => {
   return data.map((game: GameData) => {
     return {
       game: {

@@ -1,10 +1,9 @@
 import { Button } from "@mantine/core";
 import { itemsToShowAtom } from "atoms/games";
 import { useAtom } from "jotai";
-import { GameCardStatus } from "types/game";
 
 import { StatusGameAtom } from "../hooks/useQueryGames";
-import { GameTab } from "../types";
+import { GameCard, GameTab } from "../types";
 import StatusGameCard from "./StatusGameCard";
 
 interface StatusGameCardsProps {
@@ -18,7 +17,7 @@ const StatusGameCards: React.FC<StatusGameCardsProps> = () => {
 
   return (
     <div className="flex flex-wrap justify-between gap-4">
-      {games.slice(0, itemsToShow).map((gameData: GameCardStatus) => (
+      {games.slice(0, itemsToShow).map((gameData: GameCard) => (
         <StatusGameCard key={gameData.game.id} gameData={gameData} />
       ))}
       <Button
