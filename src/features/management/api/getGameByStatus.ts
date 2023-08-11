@@ -1,9 +1,6 @@
-import { QueryClient } from "@tanstack/query-core";
-import { selectedGameStatusAtom } from "atoms/games/gameManagement";
 import axios from "axios";
 import { endpoint } from "config";
 import { getAuth } from "firebase/auth";
-import { atomsWithQuery } from "jotai-tanstack-query";
 import { GameCardStatus } from "types/game";
 
 interface GameData {
@@ -13,28 +10,31 @@ interface GameData {
     cover: string;
     rating: number;
     url: string;
+    favorite: boolean;
     game_genres: any[];
     game_platforms: any[];
     game_status: any;
   };
 }
 
-export const queryClient = new QueryClient();
+export const getGamesByStatus = async (
+  status: string
+): Promise<GameCardStatus[]> => {
+  const auth = getAuth();
+  const idToken = await auth.currentUser?.getIdToken(true);
 
-export const [StatusGameAtom] = atomsWithQuery((get) => ({
-  queryKey: ["games", get(selectedGameStatusAtom)],
-  queryFn: async ({ queryKey: [, status] }) => {
-    const auth = getAuth();
-    const idToken = await auth.currentUser?.getIdToken(true);
-    const config = {
-      headers: {
-        authorization: `Bearer ${idToken}`,
-      },
-    };
-    const res = await axios.get(`${endpoint}/games?status=${status}`, config);
-    return mapDataToGameCardStatus(res.data.data);
-  },
-}));
+  if (!idToken) {
+    throw new Error("Authentication token is missing.");
+  }
+
+  const config = {
+    headers: {
+      authorization: `Bearer ${idToken}`,
+    },
+  };
+  const res = await axios.get(`${endpoint}/games?status=${status}`, config);
+  return mapDataToGameCardStatus(res.data.data);
+};
 
 const mapDataToGameCardStatus = (data: GameData[]): GameCardStatus[] => {
   return data.map((game: GameData) => {

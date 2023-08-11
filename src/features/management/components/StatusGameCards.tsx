@@ -3,7 +3,7 @@ import { itemsToShowAtom } from "atoms/games";
 import { useAtom } from "jotai";
 import { GameCardStatus } from "types/game";
 
-import { StatusGameAtom } from "../hooks/atoms/gamesAtom";
+import { StatusGameAtom } from "../hooks/useQueryGames";
 import { GameTab } from "../types";
 import StatusGameCard from "./StatusGameCard";
 
