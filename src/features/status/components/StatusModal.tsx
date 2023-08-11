@@ -7,7 +7,7 @@ import { FC, useState } from "react";
 import { z, ZodError } from "zod";
 
 import { createGame } from "../api/createGame";
-import { GameCard, GameStatus } from "../types";
+import { Game, GameStatus } from "../types";
 
 type StatusModalProps = {
   opened: boolean;
@@ -35,7 +35,7 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
       statusSchema.parse({ gameStatus });
       setValidationError(null);
 
-      const payload: GameCard = {
+      const payload: Game = {
         game: {
           title: game.title,
           cover: game.cover,

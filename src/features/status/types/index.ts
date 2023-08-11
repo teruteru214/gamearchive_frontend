@@ -1,6 +1,6 @@
 export type GameStatus = "unplaying" | "playing" | "clear";
 
-export type GameCard = {
+export type Game = {
   game: {
     title: string;
     cover?: string;
