@@ -1,14 +1,14 @@
 import { Button, Modal, Select, Stack, Text } from "@mantine/core";
+import { GameCard, GameStatus } from "features/management/types";
 import { getAuth } from "firebase/auth";
 import { FC, useState } from "react";
-import { GameCardStatus, GameStatus } from "types/game";
 
 import { updateGameStatus } from "../api/updateGameStatus";
 
 type StatusUpdateModalProps = {
   opened: boolean;
   onClose: () => void;
-  gameData: GameCardStatus;
+  gameData: GameCard;
 };
 
 const StatusUpdateModal: FC<StatusUpdateModalProps> = ({

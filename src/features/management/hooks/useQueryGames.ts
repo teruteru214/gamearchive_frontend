@@ -3,9 +3,9 @@
 import { QueryClient } from "@tanstack/query-core";
 import { selectedGameStatusAtom } from "atoms/games/gameManagement";
 import { atomsWithQuery } from "jotai-tanstack-query";
-import { GameStatus } from "types/game";
 
 import { getGamesByStatus } from "../api/getGameByStatus";
+import { GameStatus } from "../types";
 
 export const queryClient = new QueryClient();
 
@@ -14,4 +14,5 @@ export const [StatusGameAtom] = atomsWithQuery((get) => ({
   queryFn: async ({ queryKey: [, status] }) => {
     return getGamesByStatus(status as GameStatus);
   },
+  staleTime: Infinity,
 }));

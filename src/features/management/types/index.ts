@@ -1,4 +1,9 @@
-export type GameTab = "favorites" | "unplaying" | "playing" | "clear";
+export type GameTab =
+  | "favorites"
+  | "unplaying"
+  | "playing"
+  | "clear"
+  | undefined;
 
 export type GameStatus = "unplaying" | "playing" | "clear";
 
