@@ -18,7 +18,7 @@ const StatusGameCards: React.FC<StatusGameCardsProps> = () => {
   return (
     <div className="flex flex-wrap justify-between gap-4">
       {games.slice(0, itemsToShow).map((gameData: GameCard) => (
-        <StatusGameCard key={gameData.game.id} gameData={gameData} />
+        <StatusGameCard key={gameData.id} gameData={gameData} />
       ))}
       <Button
         onClick={() => setItemsToShow(itemsToShow + 30)}

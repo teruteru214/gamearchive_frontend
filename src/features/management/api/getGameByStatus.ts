@@ -38,13 +38,11 @@ export const getGamesByStatus = async (status: string): Promise<GameCard[]> => {
 const mapDataToGameCardStatus = (data: GameData[]): GameCard[] => {
   return data.map((game: GameData) => {
     return {
-      game: {
-        id: game.attributes.id,
-        title: game.attributes.title,
-        cover: game.attributes.cover,
-        rating: game.attributes.rating,
-        url: game.attributes.url,
-      },
+      id: game.attributes.id,
+      title: game.attributes.title,
+      cover: game.attributes.cover,
+      rating: game.attributes.rating,
+      url: game.attributes.url,
       genres: game.attributes.game_genres,
       platforms: game.attributes.game_platforms,
       game_status: game.attributes.game_status,

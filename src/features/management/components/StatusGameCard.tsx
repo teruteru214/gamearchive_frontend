@@ -13,7 +13,7 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
         <Image
-          src={gameData.game.cover}
+          src={gameData.cover}
           width={145}
           height={largerThanSm ? 210 : 180}
           fit="contain"
@@ -33,10 +33,10 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
             mt="xs"
             mb="md"
           >
-            {gameData.game.title}
+            {gameData.title}
           </Text>
           <Text className="font-sans font-bold" mt="xs" mb="md">
-            {`Rating: ${gameData.game?.rating}`}
+            {`Rating: ${gameData.rating}`}
           </Text>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
             <Text
@@ -59,7 +59,7 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
             </Text>
           </div>
           <a
-            href={gameData.game.url}
+            href={gameData.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-bold text-blue-400 no-underline hover:underline"
