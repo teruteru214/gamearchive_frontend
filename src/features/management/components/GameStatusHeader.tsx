@@ -1,69 +1,76 @@
-import { Tabs } from "@mantine/core";
-import { selectedGameStatusAtom } from "atoms/games/gameManagement";
-import StatusGameCards from "features/management/components/StatusGameCards";
-import { useSetAtom } from "jotai";
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Card, Tabs } from "@mantine/core";
+import { useEffect, useState } from "react";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 
-import { GameTab } from "../types";
+import { GameListsType } from "../types";
+import StatusGameCard from "./StatusGameCard";
 
-const GameStatusHeader = () => {
-  const updateSelectedGameStatus = useSetAtom(selectedGameStatusAtom);
+const ITEMS_PAGE_SIZE = 20;
+
+const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
   const navigate = useNavigate();
-  const { status } = useParams();
+  const [searchParams] = useSearchParams();
+  const gamePage = parseInt(searchParams.get("page") || "1");
+  const params = useParams();
+  console.log(gameItems);
+  const { hash, pathname } = useLocation();
+
+  const [currentGameItems, setCurrentGameItems] = useState(
+    gameItems.slice(0, ITEMS_PAGE_SIZE)
+  );
+
+  const pageCount = Math.ceil(gameItems.length / ITEMS_PAGE_SIZE);
 
   useEffect(() => {
-    if (status) {
-      updateSelectedGameStatus(status as GameTab);
+    if (!hash) {
+      window.scrollTo(0, 0);
     }
-  }, [status, updateSelectedGameStatus]);
-
-  const handleTabChange = (newTab: string) => {
-    navigate(`/management/${newTab}`);
-  };
+    const from = (gamePage - 1) * ITEMS_PAGE_SIZE;
+    const to = from + ITEMS_PAGE_SIZE;
+    setCurrentGameItems(gameItems.slice(from, to));
+  }, [gamePage, gameItems, hash, pathname]);
 
   return (
-    <Tabs onTabChange={handleTabChange} className="my-4" value={status}>
-      <Tabs.List grow position="center">
-        <Tabs.Tab
-          value="favorites"
-          className="text-xs font-semibold sm:text-base"
-        >
-          お気に入り
-        </Tabs.Tab>
-        <Tabs.Tab value="clear" className="text-xs font-semibold sm:text-base">
-          クリア
-        </Tabs.Tab>
-        <Tabs.Tab
-          value="playing"
-          className="text-xs font-semibold sm:text-base"
-        >
-          プレイ中
-        </Tabs.Tab>
-        <Tabs.Tab
-          value="unplaying"
-          className="text-xs font-semibold sm:text-base"
-        >
-          積みゲー
-        </Tabs.Tab>
-      </Tabs.List>
-      <Tabs.Panel value="favorites">
-        <p>お気に入り</p>
-        <StatusGameCards status="favorites" />
-      </Tabs.Panel>
-      <Tabs.Panel value="clear">
-        <p>クリア</p>
-        <StatusGameCards status="clear" />
-      </Tabs.Panel>
-      <Tabs.Panel value="playing">
-        <p>プレイ中</p>
-        <StatusGameCards status="playing" />
-      </Tabs.Panel>
-      <Tabs.Panel value="unplaying">
-        <p>積みゲー</p>
-        <StatusGameCards status="unplaying" />
-      </Tabs.Panel>
-    </Tabs>
+    <>
+      <Tabs
+        value={params.tab}
+        onTabChange={(value) => {
+          navigate(`/management/${value}`);
+        }}
+        className="py-4"
+      >
+        <Tabs.List grow position="center">
+          {game_status.map((status) => (
+            <Tabs.Tab
+              key={status.path}
+              value={status.path}
+              className="text-xs font-semibold sm:text-base"
+            >
+              {status.name}
+            </Tabs.Tab>
+          ))}
+        </Tabs.List>
+      </Tabs>
+      <div className="flex flex-wrap justify-between gap-2">
+        {currentGameItems.map((gameItem) => (
+          <StatusGameCard key={gameItem.id} gameItem={gameItem} />
+        ))}
+      </div>
+      <Card className="mt-10 flex items-center justify-center">
+        {/* <Pagination
+          total={pageCount}
+          onChange={(nextPage) => {
+            navigate(`${pathname}?page=${nextPage}`);
+          }}
+          page={gamePage}
+        /> */}
+      </Card>
+    </>
   );
 };
 
