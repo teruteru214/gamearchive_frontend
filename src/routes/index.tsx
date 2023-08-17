@@ -25,7 +25,7 @@ const AppRoutes = () => {
       <Route path="management" element={<MainLayout />}>
         <Route index element={<Navigate to="/" replace />} />
         <Route
-          path=":status"
+          path=":tab"
           element={
             <RouteAuthGuard component={<GameManagement />} redirect="/" />
           }

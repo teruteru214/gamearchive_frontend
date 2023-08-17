@@ -5,7 +5,11 @@ import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 import { GameCard } from "../types";
 
-const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
+type StatusGameCardProps = {
+  gameItem: GameCard;
+};
+
+const StatusGameCard = ({ gameItem }: StatusGameCardProps) => {
   const largerThanSm = useMediaQuery("sm");
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -13,7 +17,7 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
     <Card radius="md" className="bg-blue-50 py-0" style={{ width: "450px" }}>
       <Group noWrap spacing={0} className="py-4">
         <Image
-          src={gameData.game.cover}
+          src={gameItem.cover}
           width={145}
           height={largerThanSm ? 210 : 180}
           fit="contain"
@@ -33,10 +37,10 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
             mt="xs"
             mb="md"
           >
-            {gameData.game.title}
+            {gameItem.title}
           </Text>
           <Text className="font-sans font-bold" mt="xs" mb="md">
-            {`Rating: ${gameData.game?.rating}`}
+            {`Rating: ${gameItem.rating}`}
           </Text>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
             <Text
@@ -44,7 +48,7 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
               size="xs"
               className="overflow-hidden text-ellipsis whitespace-nowrap font-bold"
             >
-              {gameData.genres?.map((genre) => `#${genre.name}`).join("  ")}
+              {gameItem.genres?.map((genre) => `#${genre.name}`).join("  ")}
             </Text>
           </div>
           <div className={`flex space-x-2 ${largerThanSm ? "w-64" : "w-40"}`}>
@@ -53,13 +57,13 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
               size="xs"
               className="overflow-hidden text-ellipsis whitespace-nowrap font-bold"
             >
-              {gameData.platforms
+              {gameItem.platforms
                 ?.map((platform) => `#${platform.name}`)
                 .join(" ")}
             </Text>
           </div>
           <a
-            href={gameData.game.url}
+            href={gameItem.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-bold text-blue-400 no-underline hover:underline"
@@ -70,7 +74,7 @@ const StatusGameCard = ({ gameData }: { gameData: GameCard }) => {
         <StatusUpdateModal
           opened={opened}
           onClose={close}
-          gameData={gameData}
+          gameItem={gameItem}
         />
       </Group>
     </Card>

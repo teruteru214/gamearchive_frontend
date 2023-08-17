@@ -1,4 +1,4 @@
 import { GameTab } from "features/management/types";
 import { atom } from "jotai";
 
-export const selectedGameStatusAtom = atom<GameTab>("unplaying");
+export const selectedGameStatusAtom = atom<GameTab>(undefined);
