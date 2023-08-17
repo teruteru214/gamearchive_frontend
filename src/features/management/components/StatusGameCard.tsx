@@ -74,7 +74,7 @@ const StatusGameCard = ({ gameItem }: StatusGameCardProps) => {
         <StatusUpdateModal
           opened={opened}
           onClose={close}
-          gameData={gameItem}
+          gameItem={gameItem}
         />
       </Group>
     </Card>
