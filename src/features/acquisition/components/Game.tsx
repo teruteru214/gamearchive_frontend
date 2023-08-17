@@ -92,7 +92,12 @@ const Game: React.FC<GameProps> = ({ game }: GameProps) => {
                 ゲームの詳細を見る
               </a>
             </div>
-            <StatusModal opened={opened} onClose={close} game={game} />
+            <StatusModal
+              opened={opened}
+              onClose={close}
+              game={game}
+              defaultImage={defaultImage}
+            />
             <LoginModal opened={loginModalOpen} close={closeLoginModal} />
           </Group>
         </Card>
@@ -154,7 +159,12 @@ const Game: React.FC<GameProps> = ({ game }: GameProps) => {
                 ゲームの詳細を見る
               </a>
             </div>
-            <StatusModal opened={opened} onClose={close} game={game} />
+            <StatusModal
+              opened={opened}
+              onClose={close}
+              game={game}
+              defaultImage={defaultImage}
+            />
             <LoginModal opened={loginModalOpen} close={closeLoginModal} />
           </Group>
         </Card>

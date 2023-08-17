@@ -1,4 +1,12 @@
-import { Button, Modal, Select, Stack, Text } from "@mantine/core";
+import {
+  Button,
+  Image,
+  Modal,
+  Select,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { AxiosError } from "axios";
 import { GameAcquisition } from "features/acquisition/types";
@@ -13,13 +21,19 @@ type StatusModalProps = {
   opened: boolean;
   onClose: () => void;
   game: GameAcquisition;
+  defaultImage: string;
 };
 
 const statusSchema = z.object({
   gameStatus: z.enum(["unplaying", "playing", "clear"]),
 });
 
-const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
+const StatusModal: FC<StatusModalProps> = ({
+  opened,
+  onClose,
+  game,
+  defaultImage,
+}) => {
   const [gameStatus, setGameStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState<ZodError | null>(null);
@@ -67,7 +81,7 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
       if (error instanceof ZodError) {
         setValidationError(error);
       } else if (error instanceof AxiosError && error.response) {
-        if (error.response.status === 422) {
+        if (error.response.status === 500) {
           notifications.show({
             title: game.title,
             message: "はすでに保存されています",
@@ -97,7 +111,13 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
   return (
     <Modal opened={opened} onClose={handleClose} centered size="sm">
       <Stack className="flex flex-col items-center justify-center space-y-4 pb-14">
-        <Text size="lg">ゲームステータスを入力</Text>
+        <Title order={4}>ゲームステータスを選択してください</Title>
+        <Text className="text-center">{game.title}</Text>
+        <Image
+          src={game.cover ? game.cover : defaultImage}
+          width={140}
+          radius="sm"
+        />
         <Select
           data={[
             { value: "unplaying", label: "積みゲー" },
@@ -108,8 +128,9 @@ const StatusModal: FC<StatusModalProps> = ({ opened, onClose, game }) => {
           onChange={handleSelect}
           error={validationError ? "ゲームステータスを選択してください" : null}
           className="w-64"
+          placeholder="積みゲーorプレイ中orクリア"
         />
-        <Button onClick={handleSubmit} loading={loading}>
+        <Button onClick={handleSubmit} loading={loading} className="w-64">
           ゲームを取得する
         </Button>
       </Stack>
