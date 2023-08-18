@@ -1,5 +1,5 @@
 import { Button, SimpleGrid, Tabs } from "@mantine/core";
-import { itemsToShowAtom } from "atoms/games";
+import { myGamesToShowAtom } from "atoms/ui";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
   const gamePage = parseInt(searchParams.get("page") || "1");
   const params = useParams();
   const { hash, pathname } = useLocation();
-  const [itemsToShow, setItemsToShow] = useAtom(itemsToShowAtom);
+  const [myGamesToShow, setMyGamesToShow] = useAtom(myGamesToShowAtom);
   const largerThanSm = useMediaQuery("sm");
 
   const [currentGameItems, setCurrentGameItems] = useState(
@@ -59,15 +59,15 @@ const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
         </Tabs.List>
       </Tabs>
       <SimpleGrid cols={largerThanSm ? 2 : 1}>
-        {currentGameItems.map((gameItem) => (
+        {currentGameItems.slice(0, myGamesToShow).map((gameItem) => (
           <MyGame key={gameItem.id} gameItem={gameItem} />
         ))}
       </SimpleGrid>
       <Button
-        onClick={() => setItemsToShow(itemsToShow)}
+        onClick={() => setMyGamesToShow(myGamesToShow + 14)}
         className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
         size="md"
-        style={{ display: itemsToShow >= gameItems.length ? "none" : "flex" }}
+        style={{ display: myGamesToShow >= gameItems.length ? "none" : "flex" }}
       >
         さらに表示する
       </Button>
