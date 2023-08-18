@@ -7,6 +7,7 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { IconTrash } from "@tabler/icons-react";
 import { GameCard, GameStatus } from "features/management/types";
 import { getAuth } from "firebase/auth";
@@ -47,8 +48,18 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
       await updateGameStatus(gameItem.game_status.id, selectedStatus, config);
       gameItem.game_status.status = selectedStatus;
       onClose();
+      notifications.show({
+        title: "Success",
+        message: `${gameItem.title}のプレイ状況を変更しました！`,
+        color: "green",
+      });
     } catch (error) {
       console.error(error);
+      notifications.show({
+        title: "Error",
+        message: `${gameItem.title}のプレイ状況の変更に失敗しました`,
+        color: "red",
+      });
     } finally {
       setLoading(false);
     }
