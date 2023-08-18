@@ -1,9 +1,10 @@
-import { Button, SimpleGrid, Tabs } from "@mantine/core";
+import { Button, Image, SimpleGrid, Tabs } from "@mantine/core";
 import { myGamesToShowAtom } from "atoms/ui";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useNavigate, useParams } from "react-router-dom";
 
+import None from "../../../assets/None.png";
 import { GameListsType } from "../types";
 import MyGame from "./MyGame";
 
@@ -34,19 +35,29 @@ const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
           ))}
         </Tabs.List>
       </Tabs>
-      <SimpleGrid cols={largerThanSm ? 2 : 1}>
-        {gameItems.slice(0, myGamesToShow).map((gameItem) => (
-          <MyGame key={gameItem.id} gameItem={gameItem} />
-        ))}
-      </SimpleGrid>
-      <Button
-        onClick={() => setMyGamesToShow(myGamesToShow + 14)}
-        className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
-        size="md"
-        style={{ display: myGamesToShow >= gameItems.length ? "none" : "flex" }}
-      >
-        さらに表示する
-      </Button>
+      {gameItems.length > 0 ? (
+        <>
+          <SimpleGrid cols={largerThanSm ? 2 : 1}>
+            {gameItems.slice(0, myGamesToShow).map((gameItem) => (
+              <MyGame key={gameItem.id} gameItem={gameItem} />
+            ))}
+          </SimpleGrid>
+          <Button
+            onClick={() => setMyGamesToShow(myGamesToShow + 14)}
+            className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
+            size="md"
+          >
+            さらに表示する
+          </Button>
+        </>
+      ) : (
+        <div className="my-10 flex justify-center">
+          <Image
+            src={None}
+            style={{ width: largerThanSm ? "600px" : "300px", height: "auto" }}
+          />
+        </div>
+      )}
     </>
   );
 };
