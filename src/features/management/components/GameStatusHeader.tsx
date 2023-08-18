@@ -1,4 +1,7 @@
-import { Card, Tabs } from "@mantine/core";
+import { Button, SimpleGrid, Tabs } from "@mantine/core";
+import { itemsToShowAtom } from "atoms/games";
+import { useAtom } from "jotai";
+import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useEffect, useState } from "react";
 import {
   useLocation,
@@ -8,7 +11,7 @@ import {
 } from "react-router-dom";
 
 import { GameListsType } from "../types";
-import StatusGameCard from "./StatusGameCard";
+import MyGame from "./MyGame";
 
 const ITEMS_PAGE_SIZE = 20;
 
@@ -17,14 +20,13 @@ const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
   const [searchParams] = useSearchParams();
   const gamePage = parseInt(searchParams.get("page") || "1");
   const params = useParams();
-  console.log(gameItems);
   const { hash, pathname } = useLocation();
+  const [itemsToShow, setItemsToShow] = useAtom(itemsToShowAtom);
+  const largerThanSm = useMediaQuery("sm");
 
   const [currentGameItems, setCurrentGameItems] = useState(
     gameItems.slice(0, ITEMS_PAGE_SIZE)
   );
-
-  const pageCount = Math.ceil(gameItems.length / ITEMS_PAGE_SIZE);
 
   useEffect(() => {
     if (!hash) {
@@ -56,20 +58,19 @@ const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
           ))}
         </Tabs.List>
       </Tabs>
-      <div className="flex flex-wrap justify-between gap-2">
+      <SimpleGrid cols={largerThanSm ? 2 : 1}>
         {currentGameItems.map((gameItem) => (
-          <StatusGameCard key={gameItem.id} gameItem={gameItem} />
+          <MyGame key={gameItem.id} gameItem={gameItem} />
         ))}
-      </div>
-      <Card className="mt-10 flex items-center justify-center">
-        {/* <Pagination
-          total={pageCount}
-          onChange={(nextPage) => {
-            navigate(`${pathname}?page=${nextPage}`);
-          }}
-          page={gamePage}
-        /> */}
-      </Card>
+      </SimpleGrid>
+      <Button
+        onClick={() => setItemsToShow(itemsToShow)}
+        className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
+        size="md"
+        style={{ display: itemsToShow >= gameItems.length ? "none" : "flex" }}
+      >
+        さらに表示する
+      </Button>
     </>
   );
 };
