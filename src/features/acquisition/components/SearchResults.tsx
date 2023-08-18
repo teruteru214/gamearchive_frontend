@@ -1,18 +1,18 @@
-import { Button, Center, Image, Skeleton } from "@mantine/core";
-import { itemsToShowAtom } from "atoms/games";
+import { Button, Center, Image, SimpleGrid, Skeleton } from "@mantine/core";
 import {
   gameResultsAtom,
   searchInProgressAtom,
 } from "atoms/games/gameAcquisition";
+import { gamesToShowAtom } from "atoms/ui";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 import before_search from "../../../assets/before_search.png";
-import GameCardAcquisition from "./GameCardAcquisition";
+import Game from "./Game";
 
 const SearchResults = () => {
   const [games] = useAtom(gameResultsAtom);
-  const [itemsToShow, setItemsToShow] = useAtom(itemsToShowAtom);
+  const [gamesToShow, setGamesToShow] = useAtom(gamesToShowAtom);
   const [searchInProgress] = useAtom(searchInProgressAtom);
 
   const largerThanSm = useMediaQuery("sm");
@@ -42,19 +42,21 @@ const SearchResults = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-between gap-4">
-      {games.slice(0, itemsToShow).map((game) => (
-        <GameCardAcquisition key={game.title} game={game} />
-      ))}
+    <>
+      <SimpleGrid cols={largerThanSm ? 2 : 1}>
+        {games.slice(0, gamesToShow).map((game) => (
+          <Game key={game.url} game={game} />
+        ))}
+      </SimpleGrid>
       <Button
-        onClick={() => setItemsToShow(itemsToShow + 30)}
-        className="flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
+        onClick={() => setGamesToShow(gamesToShow + 30)}
+        className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
         size="md"
-        style={{ display: itemsToShow >= games.length ? "none" : "flex" }}
+        style={{ display: gamesToShow >= games.length ? "none" : "flex" }}
       >
         さらに表示する
       </Button>
-    </div>
+    </>
   );
 };
 

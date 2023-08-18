@@ -1,39 +1,18 @@
-import { Card, Tabs } from "@mantine/core";
-import { useEffect, useState } from "react";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { Button, Image, SimpleGrid, Tabs } from "@mantine/core";
+import { myGamesToShowAtom } from "atoms/ui";
+import { useAtom } from "jotai";
+import { useMediaQuery } from "lib/mantine/useMediaQuery";
+import { useNavigate, useParams } from "react-router-dom";
 
+import None from "../../../assets/None.png";
 import { GameListsType } from "../types";
-import StatusGameCard from "./StatusGameCard";
-
-const ITEMS_PAGE_SIZE = 20;
+import MyGame from "./MyGame";
 
 const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const gamePage = parseInt(searchParams.get("page") || "1");
   const params = useParams();
-  console.log(gameItems);
-  const { hash, pathname } = useLocation();
-
-  const [currentGameItems, setCurrentGameItems] = useState(
-    gameItems.slice(0, ITEMS_PAGE_SIZE)
-  );
-
-  const pageCount = Math.ceil(gameItems.length / ITEMS_PAGE_SIZE);
-
-  useEffect(() => {
-    if (!hash) {
-      window.scrollTo(0, 0);
-    }
-    const from = (gamePage - 1) * ITEMS_PAGE_SIZE;
-    const to = from + ITEMS_PAGE_SIZE;
-    setCurrentGameItems(gameItems.slice(from, to));
-  }, [gamePage, gameItems, hash, pathname]);
+  const [myGamesToShow, setMyGamesToShow] = useAtom(myGamesToShowAtom);
+  const largerThanSm = useMediaQuery("sm");
 
   return (
     <>
@@ -56,20 +35,29 @@ const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
           ))}
         </Tabs.List>
       </Tabs>
-      <div className="flex flex-wrap justify-between gap-2">
-        {currentGameItems.map((gameItem) => (
-          <StatusGameCard key={gameItem.id} gameItem={gameItem} />
-        ))}
-      </div>
-      <Card className="mt-10 flex items-center justify-center">
-        {/* <Pagination
-          total={pageCount}
-          onChange={(nextPage) => {
-            navigate(`${pathname}?page=${nextPage}`);
-          }}
-          page={gamePage}
-        /> */}
-      </Card>
+      {gameItems.length > 0 ? (
+        <>
+          <SimpleGrid cols={largerThanSm ? 2 : 1}>
+            {gameItems.slice(0, myGamesToShow).map((gameItem) => (
+              <MyGame key={gameItem.id} gameItem={gameItem} />
+            ))}
+          </SimpleGrid>
+          <Button
+            onClick={() => setMyGamesToShow(myGamesToShow + 14)}
+            className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
+            size="md"
+          >
+            さらに表示する
+          </Button>
+        </>
+      ) : (
+        <div className="my-10 flex justify-center">
+          <Image
+            src={None}
+            style={{ width: largerThanSm ? "600px" : "300px", height: "auto" }}
+          />
+        </div>
+      )}
     </>
   );
 };
