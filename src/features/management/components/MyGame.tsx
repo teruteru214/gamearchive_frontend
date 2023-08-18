@@ -80,6 +80,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               opened={opened}
               onClose={close}
               gameItem={gameItem}
+              defaultImage={defaultImage}
             />
           </Group>
         </Card>
@@ -147,6 +148,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               opened={opened}
               onClose={close}
               gameItem={gameItem}
+              defaultImage={defaultImage}
             />
           </Group>
         </Card>
