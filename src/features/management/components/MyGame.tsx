@@ -29,7 +29,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
             </a>
             <div className="pl-4">
               <Button size="md" className="mt-2 w-64" onClick={open}>
-                ゲームステータスを変更
+                プレイ状況を変更する
               </Button>
               <div className="h-14">
                 <Text
