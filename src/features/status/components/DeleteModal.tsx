@@ -1,6 +1,7 @@
 import { Button, Image, Modal, Stack, Text, Title } from "@mantine/core";
 import { GameCard } from "features/management/types";
 import { getAuth } from "firebase/auth";
+import { useState } from "react";
 
 import { deleteGame } from "../api/deleteGame";
 
@@ -17,7 +18,9 @@ const DeleteModal = ({
   onClose,
   defaultImage,
 }: DeleteModalProps) => {
+  const [loading, setLoading] = useState(false);
   const handleDelete = async () => {
+    setLoading(true);
     try {
       const auth = getAuth();
       const idToken = await auth.currentUser?.getIdToken(true);
@@ -31,6 +34,8 @@ const DeleteModal = ({
       onClose();
     } catch (error) {
       alert("Failed to delete the game.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,7 +50,12 @@ const DeleteModal = ({
             width={140}
             radius="sm"
           />
-          <Button className="w-36" color="red" onClick={handleDelete}>
+          <Button
+            className="w-36"
+            color="red"
+            onClick={handleDelete}
+            loading={loading}
+          >
             ゲームを削除
           </Button>
         </Stack>
