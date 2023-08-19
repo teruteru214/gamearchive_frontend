@@ -4,7 +4,7 @@ import { GameCard } from "features/management/types";
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
 
-import { deleteGame } from "../api/deleteGame";
+import { useMutateGameDelete } from "../hooks/useMutateGameDelete";
 
 type DeleteModalProps = {
   opened: boolean;
@@ -20,6 +20,8 @@ const DeleteModal = ({
   defaultImage,
 }: DeleteModalProps) => {
   const [loading, setLoading] = useState(false);
+  const { deleteGameMutation } = useMutateGameDelete();
+
   const handleDelete = async () => {
     setLoading(true);
     try {
@@ -30,7 +32,10 @@ const DeleteModal = ({
           authorization: `Bearer ${idToken}`,
         },
       };
-      await deleteGame(gameItem.id, config);
+      await deleteGameMutation.mutateAsync({
+        gameId: gameItem.id,
+        config,
+      });
       notifications.show({
         title: "Success",
         message: "ゲームの削除に成功しました!",
