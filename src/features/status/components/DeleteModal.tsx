@@ -1,4 +1,5 @@
 import { Button, Image, Modal, Stack, Text, Title } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { GameCard } from "features/management/types";
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
@@ -30,10 +31,18 @@ const DeleteModal = ({
         },
       };
       await deleteGame(gameItem.id, config);
-      alert("Game deleted successfully.");
+      notifications.show({
+        title: "Success",
+        message: "ゲームの削除に成功しました!",
+        color: "green",
+      });
       onClose();
     } catch (error) {
-      alert("Failed to delete the game.");
+      notifications.show({
+        title: "Error",
+        message: "ゲームの削除に失敗しました",
+        color: "red",
+      });
     } finally {
       setLoading(false);
     }
