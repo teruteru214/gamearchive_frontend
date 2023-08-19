@@ -1,4 +1,4 @@
-import { GameTab } from "features/management/types";
+import { GameCard } from "features/management/types";
 import { atom } from "jotai";
 
-export const selectedGameStatusAtom = atom<GameTab>(undefined);
+export const gamesAtom = atom<GameCard[]>([]);

@@ -10,8 +10,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { showNotification } from "@mantine/notifications";
-import { IconCheck } from "@tabler/icons-react";
+import { notifications } from "@mantine/notifications";
 import { loginUserAtom } from "atoms/auth/loginUser";
 import ImagePreview from "features/auth/components/ImagePreview";
 import { getAuth } from "firebase/auth";
@@ -98,15 +97,10 @@ const ProfileForm = () => {
                   );
                   const avatarImageUrl = await getAvatar(config);
 
-                  showNotification({
-                    message: "更新しました！",
-                    icon: <IconCheck />,
-                    styles: (theme) => ({
-                      root: {
-                        backgroundColor: theme.colors.dark,
-                      },
-                      description: { color: theme.white },
-                    }),
+                  notifications.show({
+                    title: "Success",
+                    message: "ユーザー更新しました！",
+                    color: "green",
                   });
 
                   updateUser((state) => ({
@@ -132,15 +126,10 @@ const ProfileForm = () => {
                   );
                   if (user.avatarKey) {
                     const avatarImageUrl = await getAvatar(config);
-                    showNotification({
-                      message: "更新しました！",
-                      icon: <IconCheck />,
-                      styles: (theme) => ({
-                        root: {
-                          backgroundColor: theme.colors.dark,
-                        },
-                        description: { color: theme.white },
-                      }),
+                    notifications.show({
+                      title: "Success",
+                      message: "ユーザー更新しました！",
+                      color: "green",
                     });
                     updateUser((state) => ({
                       ...state,
@@ -153,15 +142,10 @@ const ProfileForm = () => {
                     }));
                   } else {
                     const avatarImageUrl = user.avatar;
-                    showNotification({
-                      message: "更新しました！",
-                      icon: <IconCheck />,
-                      styles: (theme) => ({
-                        root: {
-                          backgroundColor: theme.colors.dark,
-                        },
-                        description: { color: theme.white },
-                      }),
+                    notifications.show({
+                      title: "Success",
+                      message: "ユーザー更新しました！",
+                      color: "green",
                     });
                     updateUser((state) => ({
                       ...state,
@@ -177,7 +161,11 @@ const ProfileForm = () => {
                 }
               } catch (error: any) {
                 setIsLoading(false);
-                alert(`プロフィール編集に失敗しました。\n${error.message}`);
+                notifications.show({
+                  title: "Error",
+                  message: "ユーザー更新できませんでした",
+                  color: "red",
+                });
               }
             })}
           >

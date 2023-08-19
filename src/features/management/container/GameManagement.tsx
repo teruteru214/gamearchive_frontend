@@ -1,6 +1,9 @@
 import { Container } from "@mantine/core";
 import { IconReplace } from "@tabler/icons-react";
+import { gamesAtom } from "atoms/games/gameManagement";
 import HeroContents from "components/HeroContents";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Profile from "../../../components/Profile";
@@ -10,6 +13,7 @@ import GameManagementControls from "./GameManagementControls";
 
 const GameManagement = () => {
   const userGamesQuery = useQueryGames();
+  const [games, setGames] = useAtom(gamesAtom);
   const ClearGames = (userGamesQuery.data || []).filter(
     (game) => game.game_status.status === "clear"
   );
@@ -21,6 +25,12 @@ const GameManagement = () => {
   );
 
   const params = useParams();
+
+  useEffect(() => {
+    if (userGamesQuery.data) {
+      setGames(userGamesQuery.data);
+    }
+  }, [userGamesQuery.data, setGames]);
 
   return (
     <>

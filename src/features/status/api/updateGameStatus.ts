@@ -1,11 +1,13 @@
 import axios from "axios";
 import { endpoint } from "config";
 
-export const updateGameStatus = async (
-  gameStatusId: number,
-  newStatus: string,
-  config: { headers: { authorization: string } }
-) => {
+import { UpdateGameStatusParams } from "../types";
+
+export const updateGameStatus = async ({
+  gameStatusId,
+  newStatus,
+  config,
+}: UpdateGameStatusParams) => {
   const response = await axios.put(
     `${endpoint}/game_statuses/${gameStatusId}`,
     {

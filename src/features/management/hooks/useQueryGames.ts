@@ -35,6 +35,7 @@ export const useQueryGames = () => {
     queryKey: ["games"],
     queryFn: getGames,
     staleTime: 0,
+    refetchOnWindowFocus: true,
     onError: (error) =>
       alert(`ゲーム情報取得に失敗しました。\n${error.message}`),
   });

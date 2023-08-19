@@ -76,6 +76,7 @@ const StatusModal: FC<StatusModalProps> = ({
       notifications.show({
         title: "Success",
         message: `${game.title}を保存しました！`,
+        color: "green",
       });
     } catch (error: unknown) {
       if (error instanceof ZodError) {
@@ -83,13 +84,13 @@ const StatusModal: FC<StatusModalProps> = ({
       } else if (error instanceof AxiosError && error.response) {
         if (error.response.status === 500) {
           notifications.show({
-            title: game.title,
-            message: "はすでに保存されています",
+            title: "Saved in",
+            message: "すでに保存されています",
             color: "red",
           });
         } else {
           notifications.show({
-            title: game.title,
+            title: "Error",
             message: "は保存されませんでした",
             color: "red",
           });

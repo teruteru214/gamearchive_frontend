@@ -7,12 +7,15 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { IconTrash } from "@tabler/icons-react";
+import { gamesAtom } from "atoms/games/gameManagement";
 import { GameCard, GameStatus } from "features/management/types";
 import { getAuth } from "firebase/auth";
+import { useAtom } from "jotai";
 import { FC, useState } from "react";
 
-import { updateGameStatus } from "../api/updateGameStatus";
+import { useMutateGameStatus } from "../hooks/useMutateGameStatus";
 
 type StatusUpdateModalProps = {
   opened: boolean;
@@ -29,9 +32,13 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
 }) => {
   const [selectedStatus, setSelectedStatus] = useState(
     gameItem.game_status.status
-  ); // 初期値を現在のステータスで設定
+  );
+  const [loading, setLoading] = useState(false);
+  const { updateStatusMutation } = useMutateGameStatus();
+  const [games, setGames] = useAtom(gamesAtom);
 
   const handleUpdate = async () => {
+    setLoading(true);
     const auth = getAuth();
     const idToken = await auth.currentUser?.getIdToken(true);
 
@@ -42,14 +49,35 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
     };
 
     try {
-      const updatedGameStatus = await updateGameStatus(
-        gameItem.game_status.id,
-        selectedStatus,
-        config
-      );
+      await updateStatusMutation.mutateAsync({
+        gameStatusId: gameItem.game_status.id,
+        newStatus: selectedStatus,
+        config,
+      });
       gameItem.game_status.status = selectedStatus;
+      onClose();
+      notifications.show({
+        title: "Success",
+        message: `${gameItem.title}のプレイ状況を変更しました！`,
+        color: "green",
+      });
+      const updatedGames = games.map((game) =>
+        game.id === gameItem.id
+          ? {
+              ...game,
+              game_status: { ...game.game_status, status: selectedStatus },
+            }
+          : game
+      );
+      setGames(updatedGames);
     } catch (error) {
-      console.error(error);
+      notifications.show({
+        title: "Error",
+        message: `${gameItem.title}のプレイ状況の変更に失敗しました`,
+        color: "red",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,7 +93,7 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
         />
         <Select
           value={selectedStatus}
-          onChange={(value) => value && setSelectedStatus(value as GameStatus)} // valueがnullでない場合だけ状態を更新
+          onChange={(value) => value && setSelectedStatus(value as GameStatus)}
           data={[
             { value: "unplaying", label: "積みゲー" },
             { value: "playing", label: "プレイ中" },
@@ -73,7 +101,11 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
           ]}
         />
         <div className="flex">
-          <Button className="mr-4 w-24" onClick={handleUpdate}>
+          <Button
+            className="mr-4 w-24"
+            onClick={handleUpdate}
+            loading={loading}
+          >
             更新
           </Button>
           <Button color="red" className="w-24">

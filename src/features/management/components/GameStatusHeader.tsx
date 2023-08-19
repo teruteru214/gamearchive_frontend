@@ -42,13 +42,15 @@ const GameStatusHeader = ({ game_status, gameItems }: GameListsType) => {
               <MyGame key={gameItem.id} gameItem={gameItem} />
             ))}
           </SimpleGrid>
-          <Button
-            onClick={() => setMyGamesToShow(myGamesToShow + 14)}
-            className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
-            size="md"
-          >
-            さらに表示する
-          </Button>
+          {gameItems.length > myGamesToShow ? (
+            <Button
+              onClick={() => setMyGamesToShow(myGamesToShow + 14)}
+              className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
+              size="md"
+            >
+              さらに表示する
+            </Button>
+          ) : null}
         </>
       ) : (
         <div className="my-10 flex justify-center">

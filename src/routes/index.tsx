@@ -2,9 +2,7 @@ import MainLayout from "components/Layout/MainLayout";
 import GameAcquisition from "features/acquisition/container/GameAcquisition";
 import GameManagement from "features/management/container/GameManagement";
 import Top from "features/top/container/Top";
-import UserDetail from "features/user/components/UserDetail";
 import ProfileEdit from "features/user/container/ProfileEdit";
-import UserListPage from "features/users/components/UserListPage";
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
@@ -39,7 +37,7 @@ const AppRoutes = () => {
         />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
-      <Route path="users" element={<MainLayout />}>
+      {/* <Route path="users" element={<MainLayout />}>
         <Route
           index
           element={<RouteAuthGuard component={<UserListPage />} redirect="/" />}
@@ -49,7 +47,7 @@ const AppRoutes = () => {
           element={<RouteAuthGuard component={<UserDetail />} redirect="/" />}
         />
         <Route path="*" element={<NotFoundTitle />} />
-      </Route>
+      </Route> */}
       <Route path="acquisition" element={<MainLayout />}>
         <Route index element={<GameAcquisition />} />
         <Route path="*" element={<NotFoundTitle />} />
