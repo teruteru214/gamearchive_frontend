@@ -19,3 +19,8 @@ export type UpdateGameStatusParams = {
   newStatus: string;
   config: { headers: { authorization: string } };
 };
+
+export type DeleteGameStatusParams = {
+  gameId: number;
+  config: { headers: { authorization: string } };
+};
