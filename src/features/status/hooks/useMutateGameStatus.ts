@@ -13,7 +13,7 @@ export const useMutateGameStatus = () => {
 
       return { previousGames };
     },
-    onError: (error, variables, context) => {
+    onError: (error, _, context) => {
       console.log("Error during mutation:", error);
       queryClient.setQueryData(["games"], context?.previousGames);
     },
