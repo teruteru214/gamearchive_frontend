@@ -13,3 +13,9 @@ export type Game = {
     status: GameStatus;
   };
 };
+
+export type UpdateGameStatusParams = {
+  gameStatusId: number;
+  newStatus: string;
+  config: { headers: { authorization: string } };
+};
