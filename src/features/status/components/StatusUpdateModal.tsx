@@ -9,11 +9,13 @@ import {
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { IconTrash } from "@tabler/icons-react";
+import { gamesAtom } from "atoms/games/gameManagement";
 import { GameCard, GameStatus } from "features/management/types";
 import { getAuth } from "firebase/auth";
+import { useAtom } from "jotai";
 import { FC, useState } from "react";
 
-import { updateGameStatus } from "../api/updateGameStatus";
+import { useMutateGameStatus } from "../hooks/useMutateGameStatus";
 
 type StatusUpdateModalProps = {
   opened: boolean;
@@ -32,6 +34,8 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
     gameItem.game_status.status
   );
   const [loading, setLoading] = useState(false);
+  const { updateStatusMutation } = useMutateGameStatus();
+  const [games, setGames] = useAtom(gamesAtom);
 
   const handleUpdate = async () => {
     setLoading(true);
@@ -45,7 +49,11 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
     };
 
     try {
-      await updateGameStatus(gameItem.game_status.id, selectedStatus, config);
+      await updateStatusMutation.mutateAsync({
+        gameStatusId: gameItem.game_status.id,
+        newStatus: selectedStatus,
+        config,
+      });
       gameItem.game_status.status = selectedStatus;
       onClose();
       notifications.show({
@@ -53,8 +61,16 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
         message: `${gameItem.title}のプレイ状況を変更しました！`,
         color: "green",
       });
+      const updatedGames = games.map((game) =>
+        game.id === gameItem.id
+          ? {
+              ...game,
+              game_status: { ...game.game_status, status: selectedStatus },
+            }
+          : game
+      );
+      setGames(updatedGames);
     } catch (error) {
-      console.error(error);
       notifications.show({
         title: "Error",
         message: `${gameItem.title}のプレイ状況の変更に失敗しました`,
