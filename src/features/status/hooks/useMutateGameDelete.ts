@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { updateGameStatus } from "./../api/updateGameStatus";
+import { deleteGame } from "../api/deleteGame";
 
-export const useMutateGameStatus = () => {
+export const useMutateGameDelete = () => {
   const queryClient = useQueryClient();
 
-  const updateStatusMutation = useMutation(updateGameStatus, {
+  const deleteGameMutation = useMutation(deleteGame, {
     onMutate: async () => {
       const previousGames = queryClient.getQueryData(["games"]);
 
@@ -23,6 +23,6 @@ export const useMutateGameStatus = () => {
   });
 
   return {
-    updateStatusMutation,
+    deleteGameMutation,
   };
 };

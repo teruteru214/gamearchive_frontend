@@ -8,7 +8,6 @@ import {
   Title,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { IconTrash } from "@tabler/icons-react";
 import { gamesAtom } from "atoms/games/gameManagement";
 import { GameCard, GameStatus } from "features/management/types";
 import { getAuth } from "firebase/auth";
@@ -101,16 +100,8 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
           ]}
         />
         <div className="flex">
-          <Button
-            className="mr-4 w-24"
-            onClick={handleUpdate}
-            loading={loading}
-          >
-            更新
-          </Button>
-          <Button color="red" className="w-24">
-            <IconTrash size="1.1rem" stroke={1.5} className="mr-1" />
-            削除
+          <Button className="w-52" onClick={handleUpdate} loading={loading}>
+            プレイ状況を更新
           </Button>
         </div>
       </Stack>

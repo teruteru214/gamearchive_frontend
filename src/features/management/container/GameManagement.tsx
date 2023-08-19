@@ -13,7 +13,7 @@ import GameManagementControls from "./GameManagementControls";
 
 const GameManagement = () => {
   const userGamesQuery = useQueryGames();
-  const [games, setGames] = useAtom(gamesAtom);
+  const [, setGames] = useAtom(gamesAtom);
   const ClearGames = (userGamesQuery.data || []).filter(
     (game) => game.game_status.status === "clear"
   );

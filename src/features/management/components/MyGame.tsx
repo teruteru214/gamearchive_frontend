@@ -1,5 +1,7 @@
 import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { IconTrash } from "@tabler/icons-react";
+import DeleteModal from "features/status/components/DeleteModal";
 import StatusUpdateModal from "features/status/components/StatusUpdateModal";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
@@ -11,14 +13,18 @@ type MyGameProps = {
 
 const MyGame = ({ gameItem }: MyGameProps) => {
   const largerThanXs = useMediaQuery("xs");
-  const [opened, { open, close }] = useDisclosure(false);
+  const [statusOpened, { open: openStatus, close: closeStatus }] =
+    useDisclosure(false);
+  const [deleteOpened, { open: openDelete, close: closeDelete }] =
+    useDisclosure(false);
+
   const defaultImage =
     "https://images.igdb.com/igdb/image/upload/t_cover_big/nocover.png";
   return (
     <>
       {largerThanXs ? (
         <Card radius="md" className="bg-gray-100">
-          <Group noWrap spacing={0}>
+          <Group noWrap spacing={0} className="relative">
             <a href={gameItem.url} target="_blank" rel="noreferrer">
               <Image
                 src={gameItem.cover ? gameItem.cover : defaultImage}
@@ -28,8 +34,8 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               />
             </a>
             <div className="pl-4">
-              <Button size="md" className="mt-2 w-64" onClick={open}>
-                ゲームステータスを変更
+              <Button size="md" className="mt-2 w-64" onClick={openStatus}>
+                プレイ状況を変更する
               </Button>
               <div className="h-14">
                 <Text
@@ -75,11 +81,22 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               >
                 ゲームの詳細を見る
               </a>
+              <IconTrash
+                size={20}
+                className="absolute bottom-0 right-0 cursor-pointer hover:bg-gray-300"
+                onClick={openDelete}
+              />
             </div>
             <StatusUpdateModal
-              opened={opened}
-              onClose={close}
+              opened={statusOpened}
+              onClose={closeStatus}
               gameItem={gameItem}
+              defaultImage={defaultImage}
+            />
+            <DeleteModal
+              gameItem={gameItem}
+              opened={deleteOpened}
+              onClose={closeDelete}
               defaultImage={defaultImage}
             />
           </Group>
@@ -96,7 +113,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               />
             </a>
             <div className="pl-2">
-              <Button size="sm" className="mt-2 w-40" onClick={open}>
+              <Button size="sm" className="mt-2 w-40" onClick={openStatus}>
                 プレイ状況を変更
               </Button>
               <div className="h-14">
@@ -143,11 +160,22 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               >
                 ゲームの詳細を見る
               </a>
+              <IconTrash
+                size={20}
+                className="absolute bottom-4 right-3 cursor-pointer hover:bg-gray-300"
+                onClick={openDelete}
+              />
             </div>
             <StatusUpdateModal
-              opened={opened}
-              onClose={close}
+              opened={statusOpened}
+              onClose={closeStatus}
               gameItem={gameItem}
+              defaultImage={defaultImage}
+            />
+            <DeleteModal
+              gameItem={gameItem}
+              opened={deleteOpened}
+              onClose={closeDelete}
               defaultImage={defaultImage}
             />
           </Group>
