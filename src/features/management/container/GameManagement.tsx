@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Profile from "../../../components/Profile";
-import GameStatusHeader from "../components/GameStatusHeader";
+import GameStatusSelecter from "../components/GameStatusSelecter";
 import { useQueryFavorites } from "../hooks/useQueryFavorites";
 import { useQueryGames } from "../hooks/useQueryGames";
 import GameManagementControls from "./GameManagementControls";
@@ -43,7 +43,7 @@ const GameManagement = () => {
       <Container>
         <Profile />
         <GameManagementControls />
-        <GameStatusHeader
+        <GameStatusSelecter
           game_status={[
             {
               name: "お気に入り",
@@ -72,6 +72,10 @@ const GameManagement = () => {
               : params.tab === "unplaying"
               ? NotPlayGames || []
               : []
+          }
+          isLoading={
+            userGamesQuery.status === "loading" ||
+            userFavoritesQuery.status === "loading"
           }
         />
       </Container>
