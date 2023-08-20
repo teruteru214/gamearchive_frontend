@@ -1,10 +1,12 @@
-import { Button, Card, Group, Image, Text } from "@mantine/core";
+import { ActionIcon, Button, Card, Group, Image, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconTrash } from "@tabler/icons-react";
+import { IconStar, IconStarFilled, IconTrash } from "@tabler/icons-react";
 import DeleteModal from "features/status/components/DeleteModal";
 import StatusUpdateModal from "features/status/components/StatusUpdateModal";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
+import { useMutateFavorite } from "../hooks/useMutateFavorite";
+import { useQueryFavorites } from "../hooks/useQueryFavorites";
 import { GameCard } from "../types";
 
 type MyGameProps = {
@@ -20,6 +22,28 @@ const MyGame = ({ gameItem }: MyGameProps) => {
 
   const defaultImage =
     "https://images.igdb.com/igdb/image/upload/t_cover_big/nocover.png";
+
+  const userFavoritesQuery = useQueryFavorites();
+
+  const { createFavoriteMutation, deleteFavoriteMutation } =
+    useMutateFavorite();
+
+  const isFavorite =
+    userFavoritesQuery.data &&
+    userFavoritesQuery.data.find((game) => game.id === gameItem.id);
+
+  const favorite = async () => {
+    if (isFavorite) {
+      deleteFavoriteMutation.mutate({
+        ...gameItem,
+      });
+    } else {
+      createFavoriteMutation.mutate({
+        ...gameItem,
+      });
+    }
+  };
+
   return (
     <>
       {largerThanXs ? (
@@ -28,8 +52,8 @@ const MyGame = ({ gameItem }: MyGameProps) => {
             <a href={gameItem.url} target="_blank" rel="noreferrer">
               <Image
                 src={gameItem.cover ? gameItem.cover : defaultImage}
-                width={148}
-                height={200}
+                width={145}
+                height={195}
                 fit="contain"
               />
             </a>
@@ -46,7 +70,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
                   {gameItem.title}
                 </Text>
               </div>
-              <Text className="font-sans font-bold leading-5" mb="md">
+              <Text className="font-sans font-bold leading-5" mb="xs">
                 {`Rating: ${gameItem.rating || "None"}`}
               </Text>
               <div className="flex w-64 space-x-2">
@@ -60,7 +84,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
                     : "#None"}
                 </Text>
               </div>
-              <div className="flex w-64 space-x-2">
+              <div className=" flex w-64 space-x-2">
                 <Text
                   color="dimmed"
                   size="xs"
@@ -81,11 +105,24 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               >
                 ゲームの詳細を見る
               </a>
-              <IconTrash
-                size={20}
-                className="absolute bottom-0 right-0 cursor-pointer hover:bg-gray-300"
-                onClick={openDelete}
-              />
+              {isFavorite ? (
+                <ActionIcon
+                  className="absolute bottom-0 right-7 hover:bg-gray-200"
+                  onClick={favorite}
+                >
+                  <IconStarFilled size={18} style={{ color: "#FFD200" }} />
+                </ActionIcon>
+              ) : (
+                <ActionIcon
+                  className="absolute bottom-0 right-7 hover:bg-gray-200"
+                  onClick={favorite}
+                >
+                  <IconStar size={18} />
+                </ActionIcon>
+              )}
+              <ActionIcon className="absolute bottom-0 right-0 hover:bg-gray-200">
+                <IconTrash size={18} onClick={openDelete} />
+              </ActionIcon>
             </div>
             <StatusUpdateModal
               opened={statusOpened}
@@ -160,11 +197,24 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               >
                 ゲームの詳細を見る
               </a>
-              <IconTrash
-                size={20}
-                className="absolute bottom-4 right-3 cursor-pointer hover:bg-gray-300"
-                onClick={openDelete}
-              />
+              {isFavorite ? (
+                <ActionIcon
+                  className="absolute bottom-3 right-7 hover:bg-gray-200"
+                  onClick={favorite}
+                >
+                  <IconStarFilled size={18} style={{ color: "#FFD200" }} />
+                </ActionIcon>
+              ) : (
+                <ActionIcon
+                  className="absolute bottom-3 right-7 hover:bg-gray-200"
+                  onClick={favorite}
+                >
+                  <IconStar size={18} />
+                </ActionIcon>
+              )}
+              <ActionIcon className="absolute bottom-3 right-1 hover:bg-gray-200">
+                <IconTrash size={18} onClick={openDelete} />
+              </ActionIcon>
             </div>
             <StatusUpdateModal
               opened={statusOpened}
