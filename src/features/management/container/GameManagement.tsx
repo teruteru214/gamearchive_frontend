@@ -8,12 +8,13 @@ import { useParams } from "react-router-dom";
 
 import Profile from "../../../components/Profile";
 import GameStatusHeader from "../components/GameStatusHeader";
+import { useQueryFavorites } from "../hooks/useQueryFavorites";
 import { useQueryGames } from "../hooks/useQueryGames";
 import GameManagementControls from "./GameManagementControls";
 
 const GameManagement = () => {
   const userGamesQuery = useQueryGames();
-  const [, setGames] = useAtom(gamesAtom);
+  const userFavoritesQuery = useQueryFavorites();
   const ClearGames = (userGamesQuery.data || []).filter(
     (game) => game.game_status.status === "clear"
   );
@@ -23,6 +24,7 @@ const GameManagement = () => {
   const NotPlayGames = (userGamesQuery.data || []).filter(
     (game) => game.game_status.status === "unplaying"
   );
+  const [, setGames] = useAtom(gamesAtom);
 
   const params = useParams();
 
@@ -62,7 +64,7 @@ const GameManagement = () => {
           ]}
           gameItems={
             params.tab === "favorites"
-              ? []
+              ? userFavoritesQuery.data || []
               : params.tab === "clear"
               ? ClearGames || []
               : params.tab === "playing"
