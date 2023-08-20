@@ -59,4 +59,5 @@ export type GameListsType = {
     path: string;
   }[];
   gameItems: GameCard[];
+  isLoading: boolean;
 };
