@@ -3,6 +3,7 @@ import GameAcquisition from "features/acquisition/container/GameAcquisition";
 import GameManagement from "features/management/container/GameManagement";
 import Top from "features/top/container/Top";
 import ProfileEdit from "features/user/container/ProfileEdit";
+import { usePageViewsTracking } from "hooks/usePageViewsTracking";
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
@@ -17,6 +18,8 @@ const AppRoutes = () => {
       window.scrollTo(0, 0);
     }
   }, [hash, pathname]);
+
+  usePageViewsTracking();
 
   return (
     <Routes>
