@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 import { sortOrderAtom } from "../atoms/index";
 import RefineModal from "../components/RefineModal";
+import { AllGame } from "../types";
 
-const GameManagementControls = () => {
+const GameManagementControls = ({ gameItems }: AllGame) => {
   const navigate = useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
   const [, setSortOrder] = useAtom(sortOrderAtom);
@@ -54,7 +55,7 @@ const GameManagementControls = () => {
           >
             評価が低い順に並べる
           </Button>
-          <RefineModal opened={opened} onClose={close} />
+          <RefineModal opened={opened} onClose={close} gameItems={gameItems} />
         </Group>
       </div>
     </>

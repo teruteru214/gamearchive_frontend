@@ -5,7 +5,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import None from "../../../assets/None.png";
-import { myGamesToShowAtom, sortOrderAtom } from "../atoms";
+import {
+  myGamesToShowAtom,
+  selectedGenresAtom,
+  selectedPlatformsAtom,
+  sortOrderAtom,
+} from "../atoms";
 import { GameCard, GameListsType } from "../types";
 import { sortGamesByRating } from "../utils";
 import MyGame from "./MyGame";
@@ -21,18 +26,34 @@ const GameStatusSelecter = ({
   const largerThanSm = useMediaQuery("sm");
   const sortOrder = useAtomValue(sortOrderAtom);
   const [sortedGameItems, setSortedGameItems] = useState<GameCard[]>([]);
+  const selectedGenres = useAtomValue(selectedGenresAtom);
+  const selectedPlatforms = useAtomValue(selectedPlatformsAtom);
 
   useEffect(() => {
-    if (sortOrder === "descending") {
-      const sortedGames = sortGamesByRating(gameItems, false);
-      setSortedGameItems(sortedGames);
-    } else if (sortOrder === "ascending") {
-      const sortedGames = sortGamesByRating(gameItems, true);
-      setSortedGameItems(sortedGames);
-    } else {
-      setSortedGameItems(gameItems);
+    let filteredGames = gameItems;
+
+    if (selectedGenres.length) {
+      filteredGames = filteredGames.filter((game) =>
+        game.genres?.some((genre) => selectedGenres.includes(genre.name))
+      );
     }
-  }, [sortOrder, gameItems]);
+
+    if (selectedPlatforms.length) {
+      filteredGames = filteredGames.filter((game) =>
+        game.platforms?.some((platform) =>
+          selectedPlatforms.includes(platform.name)
+        )
+      );
+    }
+
+    if (sortOrder === "descending") {
+      filteredGames = sortGamesByRating(filteredGames, false);
+    } else if (sortOrder === "ascending") {
+      filteredGames = sortGamesByRating(filteredGames, true);
+    }
+
+    setSortedGameItems(filteredGames);
+  }, [sortOrder, gameItems, selectedGenres, selectedPlatforms]);
 
   return (
     <>
@@ -67,7 +88,7 @@ const GameStatusSelecter = ({
             </div>
           ))}
         </div>
-      ) : gameItems.length > 0 ? (
+      ) : sortedGameItems.length > 0 ? (
         <>
           <SimpleGrid cols={largerThanSm ? 2 : 1}>
             {sortedGameItems.slice(0, myGamesToShow).map((gameItem) => (
@@ -86,7 +107,7 @@ const GameStatusSelecter = ({
         </>
       ) : (
         <div className="my-10 flex justify-center">
-          <Image src={None} alt="No games available" />
+          <Image src={None} alt="No games available" width={300} />
         </div>
       )}
     </>
