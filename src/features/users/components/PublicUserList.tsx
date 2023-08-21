@@ -1,12 +1,12 @@
 // src/features/components/PublicUserList.tsx
 import { Pagination } from "@mantine/core";
+import { useAtom } from "jotai";
+
 import {
   activePageAtom,
   filteredUsersAtom,
   ITEMS_PER_PAGE,
-} from "atoms/user/userInfoAtom";
-import { useAtom } from "jotai";
-
+} from "../atoms/userInfoAtom";
 import PublicUser from "./PublicUser";
 
 const PublicUserList: React.FC = () => {
