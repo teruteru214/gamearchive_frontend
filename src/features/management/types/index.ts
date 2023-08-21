@@ -61,3 +61,7 @@ export type GameListsType = {
   gameItems: GameCard[];
   isLoading: boolean;
 };
+
+export type AllGame = {
+  gameItems: GameCard[];
+};
