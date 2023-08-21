@@ -1,5 +1,6 @@
 import { FooterAtom } from "atoms/ui";
 import FooterLinks from "components/FooterLinks";
+import { Head } from "components/Head/Head";
 import HeaderAction from "components/HeaderAction";
 import { useAtom } from "jotai";
 import { useFirebaseAuth } from "lib/auth/firebaseAuth";
@@ -12,6 +13,7 @@ const MainLayout = () => {
 
   return (
     <>
+      <Head />
       <HeaderAction {...{ isLogin }} />
       <Outlet />
       <FooterLinks {...{ data }} />
