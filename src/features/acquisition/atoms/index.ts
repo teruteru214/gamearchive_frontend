@@ -1,5 +1,6 @@
-import { GameAcquisition } from "features/acquisition/types";
 import { atom } from "jotai";
+
+import { GameAcquisition } from "../types";
 
 //ゲームの検索文字
 export const searchQueryAtom = atom<string>("");
