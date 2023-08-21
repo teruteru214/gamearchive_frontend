@@ -42,7 +42,7 @@ const GameManagement = () => {
       />
       <Container>
         <Profile />
-        <GameManagementControls />
+        <GameManagementControls gameItems={userGamesQuery.data || []} />
         <GameStatusSelecter
           game_status={[
             {

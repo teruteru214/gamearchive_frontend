@@ -1,19 +1,23 @@
 import { Button, Divider, Modal, Text } from "@mantine/core";
 import { FC } from "react";
 
+import { GameCard } from "../types";
+import { extractUniqueGenresAndPlatforms } from "../utils";
+
 type RefineModalProps = {
   opened: boolean;
   onClose: () => void;
+  gameItems: GameCard[];
 };
 
-const RefineModal: FC<RefineModalProps> = ({ opened, onClose }) => {
-  const buttonsArray = new Array(30).fill(null);
+const RefineModal: FC<RefineModalProps> = ({ opened, onClose, gameItems }) => {
+  const { genres, platforms } = extractUniqueGenresAndPlatforms(gameItems);
 
   return (
     <Modal opened={opened} onClose={onClose} size="sm">
       <Text>ジャンルで絞る</Text>
       <Divider my="sm" />
-      {buttonsArray.map((_, index) => (
+      {genres.map((genre, index) => (
         <Button
           key={`genres-${index}`}
           radius="lg"
@@ -22,13 +26,13 @@ const RefineModal: FC<RefineModalProps> = ({ opened, onClose }) => {
           className="mr-1"
           variant="outline"
         >
-          genres
+          {genre}
         </Button>
       ))}
       <Divider my="sm" />
       <Text>プラットフォームで絞る</Text>
       <Divider my="sm" />
-      {buttonsArray.map((_, index) => (
+      {platforms.map((platform, index) => (
         <Button
           key={`platform-${index}`}
           radius="lg"
@@ -37,7 +41,7 @@ const RefineModal: FC<RefineModalProps> = ({ opened, onClose }) => {
           className="mr-1"
           variant="outline"
         >
-          platform
+          {platform}
         </Button>
       ))}
     </Modal>
