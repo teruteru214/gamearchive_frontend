@@ -1,6 +1,7 @@
 import "./lib/tailwind.css";
 
 import firebaseConfig from "config/firebase-config";
+import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -16,9 +17,8 @@ const prepare = async () => {
     worker.start();
   }
 };
-console.log(firebaseConfig);
 const app = initializeApp(firebaseConfig);
-console.log(app);
+getAnalytics(app);
 
 prepare().then(() => {
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
