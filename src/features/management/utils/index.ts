@@ -10,3 +10,18 @@ export const sortGamesByRating = (
     return ascending ? ratingA - ratingB : ratingB - ratingA;
   });
 };
+
+export const extractUniqueGenresAndPlatforms = (games: GameCard[]) => {
+  const genres: Set<string> = new Set();
+  const platforms: Set<string> = new Set();
+
+  games.forEach((game) => {
+    game.genres?.forEach((genre) => genres.add(genre.name));
+    game.platforms?.forEach((platform) => platforms.add(platform.name));
+  });
+
+  return {
+    genres: Array.from(genres),
+    platforms: Array.from(platforms),
+  };
+};
