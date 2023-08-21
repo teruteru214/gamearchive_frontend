@@ -1,10 +1,10 @@
 import { Button, Image, SimpleGrid, Skeleton, Tabs } from "@mantine/core";
-import { myGamesToShowAtom } from "atoms/ui";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useNavigate, useParams } from "react-router-dom";
 
 import None from "../../../assets/None.png";
+import { myGamesToShowAtom } from "../atoms";
 import { GameListsType } from "../types";
 import MyGame from "./MyGame";
 

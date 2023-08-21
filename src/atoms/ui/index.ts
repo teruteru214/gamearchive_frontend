@@ -14,7 +14,3 @@ export const FooterAtom = atom([
     label: "お問い合わせ",
   },
 ]);
-
-export const gamesToShowAtom = atom<number>(30);
-
-export const myGamesToShowAtom = atom<number>(14);

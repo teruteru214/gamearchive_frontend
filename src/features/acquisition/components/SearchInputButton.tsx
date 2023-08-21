@@ -1,15 +1,15 @@
 import { ActionIcon, TextInput } from "@mantine/core";
 import { IconPointerSearch, IconSearch } from "@tabler/icons-react";
-import {
-  gameResultsAtom,
-  searchInProgressAtom,
-  searchQueryAtom,
-} from "atoms/games/gameAcquisition";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { z } from "zod";
 
 import { searchGames } from "../api/searchGames";
+import {
+  gameResultsAtom,
+  searchInProgressAtom,
+  searchQueryAtom,
+} from "../atoms";
 
 const SearchInputButton = () => {
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);

@@ -1,5 +1,6 @@
-import { GameAcquisition } from "features/acquisition/types";
 import { atom } from "jotai";
+
+import { GameAcquisition } from "../types";
 
 //ゲームの検索文字
 export const searchQueryAtom = atom<string>("");
@@ -7,3 +8,5 @@ export const searchQueryAtom = atom<string>("");
 export const gameResultsAtom = atom<GameAcquisition[]>([]);
 // loading用のatom
 export const searchInProgressAtom = atom<boolean>(false);
+
+export const gamesToShowAtom = atom<number>(30);
