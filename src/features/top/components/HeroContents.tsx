@@ -37,10 +37,11 @@ const HeroContents = () => {
             style={{
               fontSize: largerThanSm ? "32px" : "16px",
             }}
+            align="center"
           >
-            一つ一つクリアへ
+            あなたのゲームライブラリを
             <br />
-            積みゲー解消のパートナー
+            究極に管理
           </Title>
         </div>
       </Container>
