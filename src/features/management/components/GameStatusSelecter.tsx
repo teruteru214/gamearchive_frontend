@@ -1,11 +1,13 @@
 import { Button, Image, SimpleGrid, Skeleton, Tabs } from "@mantine/core";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import None from "../../../assets/None.png";
-import { myGamesToShowAtom } from "../atoms";
-import { GameListsType } from "../types";
+import { myGamesToShowAtom, sortOrderAtom } from "../atoms";
+import { GameCard, GameListsType } from "../types";
+import { sortGamesByRating } from "../utils";
 import MyGame from "./MyGame";
 
 const GameStatusSelecter = ({
@@ -17,6 +19,20 @@ const GameStatusSelecter = ({
   const params = useParams();
   const [myGamesToShow, setMyGamesToShow] = useAtom(myGamesToShowAtom);
   const largerThanSm = useMediaQuery("sm");
+  const sortOrder = useAtomValue(sortOrderAtom);
+  const [sortedGameItems, setSortedGameItems] = useState<GameCard[]>([]);
+
+  useEffect(() => {
+    if (sortOrder === "descending") {
+      const sortedGames = sortGamesByRating(gameItems, false);
+      setSortedGameItems(sortedGames);
+    } else if (sortOrder === "ascending") {
+      const sortedGames = sortGamesByRating(gameItems, true);
+      setSortedGameItems(sortedGames);
+    } else {
+      setSortedGameItems(gameItems);
+    }
+  }, [sortOrder, gameItems]);
 
   return (
     <>
@@ -54,11 +70,11 @@ const GameStatusSelecter = ({
       ) : gameItems.length > 0 ? (
         <>
           <SimpleGrid cols={largerThanSm ? 2 : 1}>
-            {gameItems.slice(0, myGamesToShow).map((gameItem) => (
+            {sortedGameItems.slice(0, myGamesToShow).map((gameItem) => (
               <MyGame key={gameItem.id} gameItem={gameItem} />
             ))}
           </SimpleGrid>
-          {gameItems.length > myGamesToShow && (
+          {sortedGameItems.length > myGamesToShow && (
             <Button
               onClick={() => setMyGamesToShow(myGamesToShow + 14)}
               className="mt-4 flex w-full items-center justify-center border-0 border-y border-gray-300 bg-white text-black hover:bg-gray-100"
