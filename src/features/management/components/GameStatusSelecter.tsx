@@ -88,7 +88,7 @@ const GameStatusSelecter = ({
             </div>
           ))}
         </div>
-      ) : gameItems.length > 0 ? (
+      ) : sortedGameItems.length > 0 ? (
         <>
           <SimpleGrid cols={largerThanSm ? 2 : 1}>
             {sortedGameItems.slice(0, myGamesToShow).map((gameItem) => (
