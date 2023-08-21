@@ -1,10 +1,13 @@
 import { Button, Center, Image, SimpleGrid, Skeleton } from "@mantine/core";
-import { gamesToShowAtom } from "atoms/ui";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 import before_search from "../../../assets/before_search.png";
-import { gameResultsAtom, searchInProgressAtom } from "../atoms";
+import {
+  gameResultsAtom,
+  gamesToShowAtom,
+  searchInProgressAtom,
+} from "../atoms";
 import Game from "./Game";
 
 const SearchResults = () => {

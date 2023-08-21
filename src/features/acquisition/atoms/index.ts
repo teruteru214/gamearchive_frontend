@@ -8,3 +8,5 @@ export const searchQueryAtom = atom<string>("");
 export const gameResultsAtom = atom<GameAcquisition[]>([]);
 // loading用のatom
 export const searchInProgressAtom = atom<boolean>(false);
+
+export const gamesToShowAtom = atom<number>(30);
