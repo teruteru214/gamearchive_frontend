@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { useState } from "react";
 import { z } from "zod";
 
+import { englishConversitionText } from "../api/englishConversion";
 import { searchGames } from "../api/searchGames";
 import {
   gameResultsAtom,
@@ -24,9 +25,10 @@ const SearchInputButton = () => {
   const handleSearch = async () => {
     try {
       setSearchInProgress(true);
-      searchQuerySchema.parse(searchQuery);
+      const processedSearchQuery = await englishConversitionText(searchQuery);
+      searchQuerySchema.parse(processedSearchQuery); // 英語に変換したクエリを使用
       setError(null);
-      await searchGames(searchQuery, setGameResults);
+      await searchGames(processedSearchQuery, setGameResults); // 英語に変換したクエリを使用
       setSearchInProgress(false);
     } catch (error) {
       if (error instanceof z.ZodError) {
