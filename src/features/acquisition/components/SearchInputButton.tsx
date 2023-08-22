@@ -39,14 +39,21 @@ const SearchInputButton = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="py-4">
       <TextInput
         icon={<IconSearch size="1.1rem" stroke={1.5} />}
         radius="xl"
         size="md"
-        value={searchQuery || ""} // added this
-        onChange={(e) => setSearchQuery(e.target.value)} // added this
+        value={searchQuery || ""}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyPress={handleKeyPress}
         rightSection={
           <ActionIcon
             size={32}
