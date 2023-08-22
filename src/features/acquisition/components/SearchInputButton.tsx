@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { useState } from "react";
 import { z } from "zod";
 
+import { englishConversitionText } from "../api/englishConversion";
 import { searchGames } from "../api/searchGames";
 import {
   gameResultsAtom,
@@ -24,9 +25,10 @@ const SearchInputButton = () => {
   const handleSearch = async () => {
     try {
       setSearchInProgress(true);
-      searchQuerySchema.parse(searchQuery);
+      const processedSearchQuery = await englishConversitionText(searchQuery);
+      searchQuerySchema.parse(processedSearchQuery); // 英語に変換したクエリを使用
       setError(null);
-      await searchGames(searchQuery, setGameResults);
+      await searchGames(processedSearchQuery, setGameResults); // 英語に変換したクエリを使用
       setSearchInProgress(false);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -69,7 +71,9 @@ const SearchInputButton = () => {
         error={error}
         placeholder="ゲーム名を入力して、Enterまたはクリックアイコンで検索できます"
       />
-      <p className="text-xs text-gray-400">*現在、英語のみで検索できます</p>
+      <p className="text-xs text-gray-400">
+        *検索フォームは日本語と英語に対応しています
+      </p>
     </div>
   );
 };

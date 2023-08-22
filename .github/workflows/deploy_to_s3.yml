@@ -28,7 +28,7 @@ jobs:
           echo "VITE_APP_MEASUREMENT_ID=${{ secrets.VITE_APP_MEASUREMENT_ID }}" >> .env
           echo "VITE_APP_API_ENDPOINT=${{ secrets.VITE_APP_API_ENDPOINT }}" >> .env
           echo "VITE_APP_USE_MOCK_SERVER=${{ secrets.VITE_APP_USE_MOCK_SERVER }}" >> .env
-
+          echo "VITE_APP_GOOGLE_CLOUD_API_KEY=${{ secrets.VITE_APP_GOOGLE_CLOUD_API_KEY }}" >> .env
 
       - name: Setup Node
         uses: actions/setup-node@v2
