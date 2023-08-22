@@ -67,7 +67,7 @@ const SearchInputButton = () => {
         }
         rightSectionWidth={42}
         error={error}
-        placeholder="ゲーム名を入力して、右のクリックアイコンを押すと検索できます"
+        placeholder="ゲーム名を入力して、Enterまたはクリックアイコンで検索できます"
       />
       <p className="text-xs text-gray-400">*現在、英語のみで検索できます</p>
     </div>
