@@ -71,7 +71,9 @@ const SearchInputButton = () => {
         error={error}
         placeholder="ゲーム名を入力して、Enterまたはクリックアイコンで検索できます"
       />
-      <p className="text-xs text-gray-400">*日本語にも対応をはじめました</p>
+      <p className="text-xs text-gray-400">
+        *検索フォームは日本語と英語に対応しています
+      </p>
     </div>
   );
 };
