@@ -39,14 +39,21 @@ const SearchInputButton = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="py-4">
       <TextInput
         icon={<IconSearch size="1.1rem" stroke={1.5} />}
         radius="xl"
         size="md"
-        value={searchQuery || ""} // added this
-        onChange={(e) => setSearchQuery(e.target.value)} // added this
+        value={searchQuery || ""}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyPress={handleKeyPress}
         rightSection={
           <ActionIcon
             size={32}
@@ -60,7 +67,7 @@ const SearchInputButton = () => {
         }
         rightSectionWidth={42}
         error={error}
-        placeholder="ゲーム名を入力して、右のクリックアイコンを押すと検索できます"
+        placeholder="ゲーム名を入力して、Enterまたはクリックアイコンで検索できます"
       />
       <p className="text-xs text-gray-400">*現在、英語のみで検索できます</p>
     </div>
