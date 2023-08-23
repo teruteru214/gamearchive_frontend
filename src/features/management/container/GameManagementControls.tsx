@@ -10,7 +10,7 @@ import { AllGame } from "../types";
 const GameManagementControls = ({ gameItems }: AllGame) => {
   const navigate = useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
-  const [, setSortOrder] = useAtom(sortOrderAtom);
+  const [sortOrder, setSortOrder] = useAtom(sortOrderAtom);
 
   return (
     <>
@@ -40,18 +40,20 @@ const GameManagementControls = ({ gameItems }: AllGame) => {
           <Button
             size="xs"
             className="w-52"
-            variant="light"
+            variant={sortOrder === "descending" ? "filled" : "outline"}
             radius="lg"
             onClick={() => setSortOrder("descending")}
+            color="red"
           >
             評価が高い順に並べる
           </Button>
           <Button
             size="xs"
             className="w-52"
-            variant="light"
+            variant={sortOrder === "ascending" ? "filled" : "outline"}
             radius="lg"
             onClick={() => setSortOrder("ascending")}
+            color="blue"
           >
             評価が低い順に並べる
           </Button>
