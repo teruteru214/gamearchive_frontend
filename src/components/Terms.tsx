@@ -1,4 +1,4 @@
-import { Container, Space, Text, Title } from "@mantine/core";
+import { Container, Divider, Group, Space, Text, Title } from "@mantine/core";
 import { useMediaQuery } from "lib/mantine/useMediaQuery";
 
 const Terms = () => {
@@ -6,16 +6,19 @@ const Terms = () => {
   return (
     <Container>
       <div className="px-8 py-5">
-        {largerThanSm ? (
-          <Title order={1}>利用規約</Title>
-        ) : (
-          <Title order={3}>利用規約</Title>
-        )}
+        <Group position="center">
+          {largerThanSm ? (
+            <Title order={1}>利用規約</Title>
+          ) : (
+            <Title order={3}>利用規約</Title>
+          )}
+        </Group>
+        <Divider mt="lg" mb={50} />
         <Text className="max-sm:text-sm max-sm:leading-relaxed">
           この利用規約(以下、「本規約」といいます。)は、GameArchive(以下、「当方」と言います。)の利用条件を定めるものです。本規約は、当方を利用するすべてのユーザーに適用されます。
         </Text>
         <Space h={50} />
-        <article className="prose max-sm:prose-sm">
+        <article>
           <h3>本規約への同意</h3>
           <p>
             ユーザーは、当方を利用することによって、本規約に有効かつ取り消し不能な同意をしたものとみなされます。本規約に同意しないユーザーは、当方をご利用いただけません。
