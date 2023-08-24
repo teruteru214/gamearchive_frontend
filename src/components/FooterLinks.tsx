@@ -14,7 +14,7 @@ const FooterLinks = ({ data }: FooterLinksProps) => {
     <Anchor<"a">
       color="dimmed"
       key={link.label}
-      onClick={(event) => event.preventDefault()}
+      href={link.link}
       underline={false}
       className="text-sm hover:bg-m_gray-2 max-sm:text-xs"
     >

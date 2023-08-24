@@ -1,4 +1,7 @@
+import About from "components/About";
 import MainLayout from "components/Layout/MainLayout";
+import PrivacyPolicy from "components/PrivacyPolicy";
+import Terms from "components/Terms";
 import GameAcquisition from "features/acquisition/container/GameAcquisition";
 import GameManagement from "features/management/container/GameManagement";
 import Top from "features/top/container/Top";
@@ -59,6 +62,19 @@ const AppRoutes = () => {
         <Route index element={<Top />} />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
+      <Route path="/about" element={<MainLayout />}>
+        <Route index element={<About />} />
+        <Route path="*" element={<NotFoundTitle />} />
+      </Route>
+      <Route path="/terms" element={<MainLayout />}>
+        <Route index element={<Terms />} />
+        <Route path="*" element={<NotFoundTitle />} />
+      </Route>
+      <Route path="/privacy-policy" element={<MainLayout />}>
+        <Route index element={<PrivacyPolicy />} />
+        <Route path="*" element={<NotFoundTitle />} />
+      </Route>
+
       <Route path="*" element={<NotFoundTitle />} />
     </Routes>
   );

@@ -2,15 +2,15 @@ import { atom } from "jotai";
 
 export const FooterAtom = atom([
   {
-    link: "#",
-    label: "プライバシーポリシー",
+    link: "/about",
+    label: "GameArchiveについて",
   },
   {
-    link: "#",
+    link: "/terms",
     label: "利用規約",
   },
   {
-    link: "#",
-    label: "お問い合わせ",
+    link: "/privacy-policy",
+    label: "プライバシーポリシー",
   },
 ]);
