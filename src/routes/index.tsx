@@ -31,7 +31,11 @@ const AppRoutes = () => {
         <Route
           path=":tab"
           element={
-            <RouteAuthGuard component={<GameManagement />} redirect="/" />
+            <RouteAuthGuard
+              component={<GameManagement />}
+              redirect="/"
+              validTabs={["favorites", "clear", "playing", "unplaying"]}
+            />
           }
         />
         <Route path="*" element={<NotFoundTitle />} />
@@ -74,7 +78,6 @@ const AppRoutes = () => {
         <Route index element={<PrivacyPolicy />} />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
-
       <Route path="*" element={<NotFoundTitle />} />
     </Routes>
   );

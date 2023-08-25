@@ -1,19 +1,22 @@
 import { Container, Loader } from "@mantine/core";
 import { useFirebaseAuth } from "lib/auth/firebaseAuth";
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
 
 type RouteAuthGuardProps = {
   component: React.ReactNode;
   redirect: string;
+  validTabs?: string[];
 };
 
 export const RouteAuthGuard = ({
   component,
   redirect,
+  validTabs,
 }: RouteAuthGuardProps) => {
   const location = useLocation();
   const { currentUser } = useFirebaseAuth();
+  const { tab } = useParams(); // 追加
 
   if (!currentUser.authChecked || !currentUser.apiChecked) {
     return (
@@ -23,15 +26,15 @@ export const RouteAuthGuard = ({
     );
   }
 
+  if (validTabs && tab && !validTabs.includes(tab)) {
+    return <Navigate to="/management/unplaying" replace />;
+  }
+
   if (
-    (!currentUser.uid && location.pathname === "/acquisition") ||
-    (!currentUser.uid && location.pathname === "/management/:status") ||
-    (!currentUser.uid && location.pathname === "/profile") ||
-    (!currentUser.uid && location.pathname === "/users")
+    (!currentUser.uid && location.pathname === "/management/:tab") ||
+    (!currentUser.uid && location.pathname === "/profile")
   ) {
-    return (
-      <Navigate to={redirect} state={{ from: location }} replace={false} />
-    );
+    return <Navigate to={redirect} replace={false} />;
   }
 
   return <>{component}</>;
