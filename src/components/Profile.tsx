@@ -27,7 +27,7 @@ const Profile = () => {
       sx={(theme) => ({
         backgroundColor: theme.white,
       })}
-      className="my-8"
+      className="mt-4"
     >
       {largerThanSm ? (
         <div className="flex justify-between space-x-5 px-10">
