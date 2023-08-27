@@ -62,7 +62,7 @@ const GameStatusSelecter = ({
         onTabChange={(value) => {
           navigate(`/management/${value}`);
         }}
-        className="py-4"
+        className="pb-4 pt-2"
       >
         <Tabs.List grow position="center">
           {game_status.map((status) => (

@@ -1,5 +1,6 @@
-import { Container } from "@mantine/core";
-import { IconReplace } from "@tabler/icons-react";
+import { Button, Container, Group } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconReplace, IconSettings } from "@tabler/icons-react";
 import { gamesAtom } from "atoms/games/gameManagement";
 import HeroContents from "components/HeroContents";
 import { useAtom } from "jotai";
@@ -7,12 +8,14 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Profile from "../../../components/Profile";
+import GameSettingDrawer from "../components/GameSettingDrawer";
 import GameStatusSelecter from "../components/GameStatusSelecter";
 import { useQueryFavorites } from "../hooks/useQueryFavorites";
 import { useQueryGames } from "../hooks/useQueryGames";
-import GameManagementControls from "./GameManagementControls";
 
 const GameManagement = () => {
+  const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
+    useDisclosure(false);
   const userGamesQuery = useQueryGames();
   const userFavoritesQuery = useQueryFavorites();
   const ClearGames = (userGamesQuery.data || []).filter(
@@ -42,7 +45,6 @@ const GameManagement = () => {
       />
       <Container>
         <Profile />
-        <GameManagementControls gameItems={userGamesQuery.data || []} />
         <GameStatusSelecter
           game_status={[
             {
@@ -79,6 +81,26 @@ const GameManagement = () => {
           }
         />
       </Container>
+      <div className="fixed bottom-1 left-1 z-50">
+        <Group>
+          <Button
+            radius="xl"
+            size="xs"
+            uppercase
+            onClick={openDrawer}
+            variant="gradient"
+            gradient={{ from: "red", to: "yellow", deg: 105 }}
+          >
+            <IconSettings size="1rem" />
+            Game Display Settings
+          </Button>
+        </Group>
+      </div>
+      <GameSettingDrawer
+        opened={drawerOpened}
+        onClose={closeDrawer}
+        gameItems={userGamesQuery.data || []}
+      />
     </>
   );
 };
