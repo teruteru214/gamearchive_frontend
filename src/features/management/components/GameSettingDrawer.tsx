@@ -135,6 +135,15 @@ const GameSettingDrawer = ({
         >
           評価が低い順に並べる
         </Button>
+        <Button
+          size="xs"
+          className="w-52"
+          variant="light"
+          radius="lg"
+          onClick={() => setSortOrder(null)}
+        >
+          ソート機能を削除する
+        </Button>
       </Stack>
       <Space h="md" />
       <Group>
