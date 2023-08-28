@@ -1,4 +1,12 @@
-import { Button, Divider, Drawer, Space, Stack, Title } from "@mantine/core";
+import {
+  Button,
+  Divider,
+  Drawer,
+  Group,
+  Space,
+  Stack,
+  Title,
+} from "@mantine/core";
 import { useAtom } from "jotai";
 import { useNavigate } from "react-router-dom";
 
@@ -42,6 +50,14 @@ const GameSettingDrawer = ({
         ? prev.filter((p) => p !== platform)
         : [...prev, platform]
     );
+  };
+
+  const clearSelectedGenres = () => {
+    setSelectedGenres([]);
+  };
+
+  const clearSelectedPlatforms = () => {
+    setSelectedPlatforms([]);
   };
 
   return (
@@ -121,7 +137,18 @@ const GameSettingDrawer = ({
         </Button>
       </Stack>
       <Space h="md" />
-      <Title order={4}>ジャンルで絞りこむ</Title>
+      <Group>
+        <Title order={4}>ジャンルで絞りこむ</Title>
+        <Button
+          onClick={clearSelectedGenres}
+          size="xs"
+          variant="light"
+          radius="lg"
+          compact
+        >
+          All Genres
+        </Button>
+      </Group>
       <Divider className="my-1" />
       {genres.map((genre, index) => (
         <Button
@@ -137,7 +164,18 @@ const GameSettingDrawer = ({
         </Button>
       ))}
       <Space h="md" />
-      <Title order={4}>プラットフォームで絞りこむ</Title>
+      <Group>
+        <Title order={4}>ゲーム機体で絞りこむ</Title>
+        <Button
+          onClick={clearSelectedPlatforms}
+          size="xs"
+          variant="light"
+          radius="lg"
+          compact
+        >
+          All Platforms
+        </Button>
+      </Group>
       <Divider className="my-1" />
       {platforms.map((platform, index) => (
         <Button
