@@ -47,17 +47,6 @@ const AppRoutes = () => {
         />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
-      {/* <Route path="users" element={<MainLayout />}>
-        <Route
-          index
-          element={<RouteAuthGuard component={<UserListPage />} redirect="/" />}
-        />
-        <Route
-          path=":userid"
-          element={<RouteAuthGuard component={<UserDetail />} redirect="/" />}
-        />
-        <Route path="*" element={<NotFoundTitle />} />
-      </Route> */}
       <Route path="acquisition" element={<MainLayout />}>
         <Route index element={<GameAcquisition />} />
         <Route path="*" element={<NotFoundTitle />} />
