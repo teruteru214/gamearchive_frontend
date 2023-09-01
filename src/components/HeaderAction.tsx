@@ -18,7 +18,6 @@ import {
   IconStar,
   IconTrophy,
   IconUserEdit,
-  IconUsersGroup,
 } from "@tabler/icons-react";
 import { loginUserAtom } from "atoms/auth/loginUser";
 import LoginModal from "features/auth/components/LoginModal";
@@ -142,13 +141,6 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                   onClick={() => navigate("/management/unplaying")}
                 >
                   積みゲー
-                </Menu.Item>
-
-                <Menu.Item
-                  icon={<IconUsersGroup size="0.9rem" stroke={1.5} />}
-                  onClick={() => navigate("/users")}
-                >
-                  ユーザー一覧
                 </Menu.Item>
 
                 <Menu.Divider />
