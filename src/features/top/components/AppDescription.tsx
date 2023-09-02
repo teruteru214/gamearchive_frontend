@@ -1,6 +1,4 @@
-import { Button, Image } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
+import { Image } from "@mantine/core";
 
 import appDescription from "../../../assets/appDescription.png";
 import appDescription2 from "../../../assets/appDescription2.png";
@@ -8,7 +6,6 @@ import { useMediaQuery } from "../../../lib/mantine/useMediaQuery";
 
 const AppDescription = () => {
   const largerThanSm = useMediaQuery("sm");
-  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
@@ -37,10 +34,6 @@ const AppDescription = () => {
         <br />
         あなたのゲーム体験をスムーズに最適化しましょう
       </p>
-      <Button onClick={() => navigate("/acquisition")}>
-        <IconSearch size="0.9rem" stroke={1.5} className="mr-1" />
-        早速ゲームを検索してみる
-      </Button>
     </div>
   );
 };
