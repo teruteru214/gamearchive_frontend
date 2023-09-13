@@ -3,6 +3,7 @@ import MainLayout from "components/Layout/MainLayout";
 import PrivacyPolicy from "components/PrivacyPolicy";
 import Terms from "components/Terms";
 import GameAcquisition from "features/acquisition/container/GameAcquisition";
+import GameNotification from "features/line/container/GameNotification";
 import GameManagement from "features/management/container/GameManagement";
 import Top from "features/top/container/Top";
 import ProfileEdit from "features/user/container/ProfileEdit";
@@ -44,6 +45,15 @@ const AppRoutes = () => {
         <Route
           index
           element={<RouteAuthGuard component={<ProfileEdit />} redirect="/" />}
+        />
+        <Route path="*" element={<NotFoundTitle />} />
+      </Route>
+      <Route path="line" element={<MainLayout />}>
+        <Route
+          index
+          element={
+            <RouteAuthGuard component={<GameNotification />} redirect="/" />
+          }
         />
         <Route path="*" element={<NotFoundTitle />} />
       </Route>
