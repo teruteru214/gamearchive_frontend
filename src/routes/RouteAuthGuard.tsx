@@ -1,8 +1,8 @@
 import { Container, Loader } from "@mantine/core";
 import { loginUserAtom } from "atoms/auth/loginUser";
 import { useAtomValue } from "jotai";
-import React from "react";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
 
 type RouteAuthGuardProps = {
   component: React.ReactNode;
@@ -15,9 +15,26 @@ export const RouteAuthGuard = ({
   redirect,
   validTabs,
 }: RouteAuthGuardProps) => {
-  const location = useLocation();
   const currentUser = useAtomValue(loginUserAtom);
   const { tab } = useParams();
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    if (!currentUser.authChecked) {
+      timer = setTimeout(() => {
+        setShouldRedirect(true); // ステートを更新
+      }, 2500);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [currentUser.authChecked]);
+
+  if (shouldRedirect) {
+    return <Navigate to="/" replace={true} />;
+  }
 
   if (validTabs && tab && !validTabs.includes(tab)) {
     return <Navigate to="/management/unplaying" replace />;
@@ -28,50 +45,20 @@ export const RouteAuthGuard = ({
       if (currentUser.uid) {
         return <>{component}</>;
       } else {
-        if (location.pathname === "/profile") {
-          return (
-            <Container className="flex items-center justify-center py-60">
-              <Loader />
-            </Container>
-          );
-        } else if (location.pathname === "/management/tab") {
-          return (
-            <Container className="flex items-center justify-center py-60">
-              <Loader />
-            </Container>
-          );
-        } else {
-          return (
-            <Container className="flex items-center justify-center py-60">
-              <Loader />
-            </Container>
-          );
-        }
+        return (
+          <Container className="flex items-center justify-center py-96">
+            <Loader />
+          </Container>
+        );
       }
     } else {
-      return (
-        <Navigate to={redirect} state={{ from: location }} replace={false} />
-      );
+      return <Navigate to={redirect} replace={false} />;
     }
   } else {
-    if (location.pathname === "/profile") {
-      return (
-        <Container className="flex items-center justify-center py-60">
-          <Loader />
-        </Container>
-      );
-    } else if (location.pathname === "/management/tab") {
-      return (
-        <Container className="flex items-center justify-center py-60">
-          <Loader />
-        </Container>
-      );
-    } else {
-      return (
-        <Container className="flex items-center justify-center py-60">
-          <Loader />
-        </Container>
-      );
-    }
+    return (
+      <Container className="flex items-center justify-center py-96">
+        <Loader />
+      </Container>
+    );
   }
 };
