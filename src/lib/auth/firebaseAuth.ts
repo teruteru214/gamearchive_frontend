@@ -108,7 +108,7 @@ export const useFirebaseAuth = () => {
       introduction: "",
       twitter_name: "",
       visibility: "",
-      authChecked: false,
+      authChecked: true,
       apiChecked: false,
     });
   };
