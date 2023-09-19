@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
+  IconBell,
   IconDeviceGamepad2,
   IconDisc,
   IconLogout,
@@ -189,6 +190,13 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                     onClick={() => navigate("/management/unplaying")}
                   >
                     ゲームマネジメント
+                  </Menu.Item>
+
+                  <Menu.Item
+                    icon={<IconBell size="0.9rem" stroke={1.5} />}
+                    onClick={() => navigate("/line")}
+                  >
+                    LINE通知設定(作成中)
                   </Menu.Item>
 
                   <Menu.Item
