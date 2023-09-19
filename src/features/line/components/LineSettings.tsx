@@ -29,7 +29,7 @@ const LineSettings = () => {
 
   useEffect(() => {
     const initLiff = async () => {
-      const liffId = process.env.VITE_APP_LIFF_ID;
+      const liffId = import.meta.env.VITE_APP_LIFF_ID;
       if (liffId) {
         try {
           await liff.init({ liffId });
@@ -71,11 +71,7 @@ const LineSettings = () => {
         <Box>
           <Stack spacing="lg">
             <Group>
-              <Avatar
-                radius="xl"
-                size="lg"
-                src={profile.pictureUrl} // プロフィール画像
-              />
+              <Avatar radius="xl" size="lg" src={profile.pictureUrl} />
               <Text fz="md">{profile.displayName}</Text>
             </Group>
             <Switch
