@@ -1,7 +1,7 @@
 import { Container, Loader } from "@mantine/core";
 import { loginUserAtom } from "atoms/auth/loginUser";
 import { useAtomValue } from "jotai";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 
 type RouteAuthGuardProps = {
@@ -19,18 +19,18 @@ export const RouteAuthGuard = ({
   const { tab } = useParams();
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    if (!currentUser.authChecked) {
-      timer = setTimeout(() => {
-        setShouldRedirect(true); // ステートを更新
-      }, 10000);
-    }
+  // useEffect(() => {
+  //   let timer: ReturnType<typeof setTimeout>;
+  //   if (!currentUser.authChecked) {
+  //     timer = setTimeout(() => {
+  //       setShouldRedirect(true); // ステートを更新
+  //     }, 10000);
+  //   }
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [currentUser.authChecked]);
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, [currentUser.authChecked]);
 
   if (shouldRedirect) {
     return <Navigate to="/" replace={true} />;
