@@ -24,7 +24,7 @@ export const RouteAuthGuard = ({
     if (!currentUser.authChecked) {
       timer = setTimeout(() => {
         setShouldRedirect(true); // ステートを更新
-      }, 2500);
+      }, 10000);
     }
 
     return () => {
