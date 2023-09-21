@@ -1,6 +1,8 @@
+import liff from "@line/liff";
 import { useEffect, useState } from "react";
 
 import { handleLineLogin, initLiff } from "../api/liffLogin";
+import { postLiffIdToken } from "../api/PostLiffIdToken";
 import { Profile } from "../types";
 import BeforeLogin from "./BeforeLogin";
 import LineLoggedIn from "./LineLoggedIn";
@@ -11,17 +13,42 @@ const LineSettings = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userProfile = await initLiff();
-      setProfile(userProfile);
-      setLogin(userProfile !== null);
+      try {
+        const userProfile = await initLiff();
+        if (userProfile) {
+          const IdToken = liff.getIDToken();
+          if (IdToken) {
+            await postLiffIdToken(IdToken);
+          }
+        }
+        setProfile(userProfile);
+        setLogin(!!userProfile);
+      } catch (e) {
+        console.error("An error occurred:", e);
+        setLogin(false);
+        setProfile(null);
+      }
     };
+
     fetchData();
   }, []);
 
   const handleLogin = async () => {
-    const userProfile = await handleLineLogin();
-    setProfile(userProfile);
-    setLogin(userProfile !== null);
+    try {
+      const userProfile = await handleLineLogin();
+      if (userProfile) {
+        const IdToken = liff.getIDToken();
+        if (IdToken) {
+          await postLiffIdToken(IdToken);
+        }
+      }
+      setProfile(userProfile);
+      setLogin(!!userProfile);
+    } catch (e) {
+      console.error("An error occurred during login:", e);
+      setLogin(false);
+      setProfile(null);
+    }
   };
 
   return (
