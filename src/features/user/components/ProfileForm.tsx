@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   FileButton,
+  Flex,
   Group,
   Select,
   Stack,
@@ -170,33 +171,24 @@ const ProfileForm = () => {
             })}
           >
             <Stack spacing="lg">
-              <Group position="left">
-                {largerThanSm ? (
-                  <ImagePreview
-                    file={file}
-                    imageURL={imageURL}
-                    setImageURL={setImageURL}
-                    size={120}
-                  />
-                ) : (
-                  <ImagePreview
-                    file={file}
-                    imageURL={imageURL}
-                    setImageURL={setImageURL}
-                    size={84}
-                  />
-                )}
+              <ImagePreview
+                file={file}
+                imageURL={imageURL}
+                setImageURL={setImageURL}
+                size={90}
+              />
+              <Flex>
                 <FileButton
                   onChange={changeFileHandler}
                   accept="image/png,image/jpeg"
                 >
                   {(props) => (
-                    <Button variant="outline" {...props}>
-                      画像をアップロード
+                    <Button variant="subtle" {...props}>
+                      変更する
                     </Button>
                   )}
                 </FileButton>
-              </Group>
+              </Flex>
               <TextInput
                 withAsterisk
                 label="ニックネーム"
