@@ -17,7 +17,6 @@ import ImagePreview from "features/auth/components/ImagePreview";
 import { getAuth } from "firebase/auth";
 import { useAtom, useSetAtom } from "jotai";
 import { postImage } from "lib/api/postImage";
-import { useMediaQuery } from "lib/mantine/useMediaQuery";
 import { useCallback, useEffect, useState } from "react";
 import { z } from "zod";
 
@@ -41,7 +40,6 @@ type Form = z.infer<typeof schema>;
 
 const ProfileForm = () => {
   const [user] = useAtom(loginUserAtom);
-  const largerThanSm = useMediaQuery("sm");
   const form = useForm<Form>({
     validate: zodResolver(schema),
     initialValues: {
