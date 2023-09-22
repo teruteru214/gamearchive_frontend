@@ -150,12 +150,12 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               />
             </a>
             <div className="pl-2">
-              <Button size="sm" className="mt-2 w-40" onClick={openStatus}>
+              <Button size="sm" className="mt-2 w-auto" onClick={openStatus}>
                 プレイ状況を変更
               </Button>
               <div className="h-14">
                 <Text
-                  className="line-clamp-2 w-40 text-ellipsis font-sans font-bold leading-[1.5rem]"
+                  className="line-clamp-2 w-auto text-ellipsis font-sans font-bold leading-[1.5rem]"
                   mt="xs"
                   mb="md"
                 >
@@ -165,7 +165,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
               <Text className="font-sans font-bold leading-5" mb="md">
                 {`Rating: ${gameItem.rating || "None"}`}
               </Text>
-              <div className="flex w-40 space-x-2">
+              <div className="flex w-36 space-x-2">
                 <Text
                   color="dimmed"
                   size="xs"
@@ -176,7 +176,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
                     : "#None"}
                 </Text>
               </div>
-              <div className="flex w-40 space-x-2">
+              <div className="flex w-36 space-x-2">
                 <Text
                   color="dimmed"
                   size="xs"
@@ -195,24 +195,24 @@ const MyGame = ({ gameItem }: MyGameProps) => {
                 rel="noopener noreferrer"
                 className="text-xs font-bold text-blue-400 no-underline hover:underline"
               >
-                ゲームの詳細を見る
+                詳細を見る
               </a>
               {isFavorite ? (
                 <ActionIcon
-                  className="absolute bottom-3 right-7 hover:bg-gray-200"
+                  className="absolute bottom-4 right-8 hover:bg-gray-200"
                   onClick={favorite}
                 >
                   <IconStarFilled size={18} style={{ color: "#FFD200" }} />
                 </ActionIcon>
               ) : (
                 <ActionIcon
-                  className="absolute bottom-3 right-7 hover:bg-gray-200"
+                  className="absolute bottom-4 right-8 hover:bg-gray-200"
                   onClick={favorite}
                 >
                   <IconStar size={18} />
                 </ActionIcon>
               )}
-              <ActionIcon className="absolute bottom-3 right-1 hover:bg-gray-200">
+              <ActionIcon className="absolute bottom-4 right-2 hover:bg-gray-200">
                 <IconTrash size={18} onClick={openDelete} />
               </ActionIcon>
             </div>

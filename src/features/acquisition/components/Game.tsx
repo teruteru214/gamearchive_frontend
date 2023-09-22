@@ -113,12 +113,12 @@ const Game: React.FC<GameProps> = ({ game }: GameProps) => {
               />
             </a>
             <div className="pl-2">
-              <Button size="sm" onClick={openModal} className="mt-2 w-40">
+              <Button size="sm" onClick={openModal} className="mt-2 w-auto">
                 ゲームを取得する
               </Button>
               <div className="h-14">
                 <Text
-                  className="line-clamp-2 w-40 text-ellipsis font-sans font-bold leading-[1.5rem]"
+                  className="line-clamp-2 w-36 text-ellipsis font-sans font-bold leading-[1.5rem]"
                   mt="xs"
                   mb="md"
                 >
@@ -128,7 +128,7 @@ const Game: React.FC<GameProps> = ({ game }: GameProps) => {
               <Text className="font-sans font-bold leading-5" mb="md">
                 {`Rating: ${game.rating || "None"}`}
               </Text>
-              <div className="flex w-40 space-x-2">
+              <div className="flex w-36 space-x-2">
                 <Text
                   color="dimmed"
                   size="xs"
@@ -139,7 +139,7 @@ const Game: React.FC<GameProps> = ({ game }: GameProps) => {
                     : "#None"}
                 </Text>
               </div>
-              <div className="flex w-40 space-x-2">
+              <div className="flex w-36 space-x-2">
                 <Text
                   color="dimmed"
                   size="xs"
