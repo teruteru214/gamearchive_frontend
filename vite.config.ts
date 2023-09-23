@@ -5,6 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
 import jotaiDebugLabel from "jotai/babel/plugin-debug-label";
 import jotaiReactRefresh from "jotai/babel/plugin-react-refresh";
+// import basicSsl from "@vitejs/plugin-basic-ssl";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,5 +20,6 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     svgr(),
+    // basicSsl(),
   ],
 });

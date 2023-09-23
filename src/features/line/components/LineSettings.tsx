@@ -2,7 +2,7 @@ import liff from "@line/liff";
 import { useEffect, useState } from "react";
 
 import { handleLineLogin, initLiff } from "../api/liffLogin";
-import { postLiffIdToken } from "../api/PostLiffIdToken";
+import { postAccessToken } from "../api/postAccessToken";
 import { Profile } from "../types";
 import BeforeLogin from "./BeforeLogin";
 import LineLoggedIn from "./LineLoggedIn";
@@ -15,11 +15,9 @@ const LineSettings = () => {
     const fetchData = async () => {
       try {
         const userProfile = await initLiff();
-        if (userProfile) {
-          const IdToken = liff.getIDToken();
-          if (IdToken) {
-            await postLiffIdToken(IdToken);
-          }
+        const accessToken = liff.getAccessToken();
+        if (accessToken) {
+          await postAccessToken(accessToken);
         }
         setProfile(userProfile);
         setLogin(!!userProfile);
@@ -37,9 +35,9 @@ const LineSettings = () => {
     try {
       const userProfile = await handleLineLogin();
       if (userProfile) {
-        const IdToken = liff.getIDToken();
-        if (IdToken) {
-          await postLiffIdToken(IdToken);
+        const accessToken = liff.getAccessToken();
+        if (accessToken) {
+          await postAccessToken(accessToken);
         }
       }
       setProfile(userProfile);
