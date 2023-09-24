@@ -11,3 +11,16 @@ export interface LoggedInProps {
 export interface BeforeLoginProps {
   handleLineLogin: () => void;
 }
+
+export type LineSettingType = {
+  attributes: {
+    id: number;
+    line_notification: boolean;
+    stacked_notification_interval: number;
+    favorite_notification_interval: number;
+  };
+};
+
+export type ResponseLineSettingType = {
+  data: LineSettingType;
+};
