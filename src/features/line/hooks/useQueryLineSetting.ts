@@ -36,7 +36,7 @@ export const useQueryLineSetting = () => {
   const { status, data } = useQuery({
     queryKey: ["lineSetting"],
     queryFn: getLineSetting,
-    staleTime: Infinity,
+    staleTime: 0,
     onError: () => alert(`Line設定情報取得に失敗しました。`),
   });
 
