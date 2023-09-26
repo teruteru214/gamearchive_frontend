@@ -34,14 +34,12 @@ export interface UpdateLineSettingParams {
 }
 
 export interface UserLineQueryResult {
-  data:
-    | {
-        id: number;
-        line_notification: boolean;
-        favorite_notification_interval: number;
-        stacked_notification_interval: number;
-      }
-    | undefined;
+  data: {
+    id: number;
+    line_notification: boolean;
+    favorite_notification_interval: number;
+    stacked_notification_interval: number;
+  };
   status: "error" | "success" | "loading";
 }
 
