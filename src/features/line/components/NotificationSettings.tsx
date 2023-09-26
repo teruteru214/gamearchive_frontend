@@ -1,10 +1,26 @@
-import { Button, Center, NumberInput, Switch } from "@mantine/core";
+import { Button, Center, NumberInput, Stack, Switch } from "@mantine/core";
+import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
+import { z } from "zod";
 
 import { updateLineSetting } from "../api/updateLineSetting";
 import { NotificationSettingsProps } from "../types";
+
+const schema = z.object({
+  line_notification: z.boolean(),
+  stacked_notification_interval: z
+    .number()
+    .min(1, { message: "1日以上" })
+    .max(60, { message: "60日以下" }),
+  favorite_notification_interval: z
+    .number()
+    .min(1, { message: "1日以上" })
+    .max(60, { message: "60日以下" }),
+});
+
+type Form = z.infer<typeof schema>;
 
 const NotificationSettings: React.FC<NotificationSettingsProps> = ({
   userId,
@@ -12,29 +28,29 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
   initialStackedValue,
   initialFavoriteValue,
 }) => {
-  const [isSwitchOn, setIsSwitchOn] = useState<boolean | undefined>(
-    initialIsSwitchOn
-  );
-  const [stackedValue, setStackedValue] = useState<number | undefined>(
-    initialStackedValue
-  );
-  const [favoriteValue, setFavoriteValue] = useState<number | undefined>(
-    initialFavoriteValue
-  );
+  const form = useForm<Form>({
+    validate: zodResolver(schema),
+    initialValues: {
+      line_notification: initialIsSwitchOn ?? false,
+      stacked_notification_interval: initialStackedValue ?? 1,
+      favorite_notification_interval: initialFavoriteValue ?? 1,
+    },
+    validateInputOnBlur: true,
+  });
+
+  console.log(initialIsSwitchOn);
+
   const [loading, setLoading] = useState(false);
 
   const handleUpdate = async () => {
-    if (
-      !userId ||
-      isSwitchOn === undefined ||
-      stackedValue === undefined ||
-      favoriteValue === undefined
-    ) {
-      console.error("データが正常ではありません");
+    if (!userId) {
+      console.error("line_user_idが送られてきていません");
       return;
     }
 
     setLoading(true);
+
+    const values = form.values;
 
     try {
       const auth = getAuth();
@@ -46,9 +62,7 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
       };
       await updateLineSetting({
         id: userId,
-        line_notification: isSwitchOn,
-        stacked_notification_interval: stackedValue,
-        favorite_notification_interval: favoriteValue,
+        ...values,
         config,
       });
       notifications.show({
@@ -68,41 +82,42 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
   };
 
   return (
-    <>
-      <Switch
-        label="Lineのゲーム通知をオンにする"
-        checked={isSwitchOn}
-        onChange={() => setIsSwitchOn(!isSwitchOn)}
-      />
-      {isSwitchOn && (
-        <>
-          <NumberInput
-            defaultValue={stackedValue}
-            onChange={(value: number) => setStackedValue(value)}
-            label="積みゲー通知設定(日数を入力)"
-            withAsterisk
-          />
-          <NumberInput
-            defaultValue={favoriteValue}
-            onChange={(value: number) => setFavoriteValue(value)}
-            label="お気に入りゲームを通知(日数を入力)"
-            withAsterisk
-          />
-        </>
-      )}
-      <Center>
-        <Button
-          type="submit"
-          radius="xl"
-          size="md"
-          className="w-36"
-          onClick={handleUpdate}
-          loading={loading}
-        >
-          更新する
-        </Button>
-      </Center>
-    </>
+    <form onSubmit={form.onSubmit(handleUpdate)}>
+      <Stack>
+        <Switch
+          label="LINEのゲーム通知をオンにする"
+          checked={form.values.line_notification}
+          {...form.getInputProps("line_notification")}
+          onLabel="ON"
+          offLabel="OFF"
+        />
+        {form.values.line_notification && (
+          <>
+            <NumberInput
+              {...form.getInputProps("stacked_notification_interval")}
+              label="積みゲー通知設定(日数を入力)"
+              withAsterisk
+            />
+            <NumberInput
+              {...form.getInputProps("favorite_notification_interval")}
+              label="お気に入りゲームを通知(日数を入力)"
+              withAsterisk
+            />
+          </>
+        )}
+        <Center>
+          <Button
+            type="submit"
+            radius="xl"
+            size="md"
+            className="w-36"
+            loading={loading}
+          >
+            更新する
+          </Button>
+        </Center>
+      </Stack>
+    </form>
   );
 };
 
