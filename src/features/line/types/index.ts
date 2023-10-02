@@ -17,7 +17,6 @@ export type LineSettingType = {
     id: number;
     line_notification: boolean;
     stacked_notification_interval: number;
-    favorite_notification_interval: number;
   };
 };
 
@@ -29,7 +28,6 @@ export interface UpdateLineSettingParams {
   id: number;
   line_notification: boolean;
   stacked_notification_interval: number;
-  favorite_notification_interval: number;
   config: { headers: { authorization: string } };
 }
 
@@ -37,7 +35,6 @@ export interface UserLineQueryResult {
   data: {
     id: number;
     line_notification: boolean;
-    favorite_notification_interval: number;
     stacked_notification_interval: number;
   };
   status: "error" | "success" | "loading";

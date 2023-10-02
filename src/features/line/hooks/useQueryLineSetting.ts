@@ -25,8 +25,6 @@ export const useQueryLineSetting = () => {
     const LineSetting = {
       id: lineSettingData.id,
       line_notification: lineSettingData.line_notification,
-      favorite_notification_interval:
-        lineSettingData.favorite_notification_interval,
       stacked_notification_interval:
         lineSettingData.stacked_notification_interval,
     };
