@@ -14,10 +14,6 @@ const schema = z.object({
     .number()
     .min(1, { message: "1日以上" })
     .max(60, { message: "60日以下" }),
-  favorite_notification_interval: z
-    .number()
-    .min(1, { message: "1日以上" })
-    .max(60, { message: "60日以下" }),
 });
 
 type Form = z.infer<typeof schema>;
@@ -26,19 +22,15 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
   userId,
   initialIsSwitchOn,
   initialStackedValue,
-  initialFavoriteValue,
 }) => {
   const form = useForm<Form>({
     validate: zodResolver(schema),
     initialValues: {
       line_notification: initialIsSwitchOn ?? false,
       stacked_notification_interval: initialStackedValue ?? 1,
-      favorite_notification_interval: initialFavoriteValue ?? 1,
     },
     validateInputOnBlur: true,
   });
-
-  console.log(initialIsSwitchOn);
 
   const [loading, setLoading] = useState(false);
 
@@ -96,11 +88,6 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
             <NumberInput
               {...form.getInputProps("stacked_notification_interval")}
               label="積みゲー通知設定(日数を入力)"
-              withAsterisk
-            />
-            <NumberInput
-              {...form.getInputProps("favorite_notification_interval")}
-              label="お気に入りゲームを通知(日数を入力)"
               withAsterisk
             />
           </>
