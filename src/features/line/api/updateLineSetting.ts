@@ -5,11 +5,12 @@ import { UpdateLineSettingParams } from "../types";
 
 export const updateLineSetting = async (params: UpdateLineSettingParams) => {
   const response = await axios.put(
-    `${endpoint}/line_settings`,
+    `${endpoint}/line_settings/${params.id}`,
     {
-      id: params.id,
-      line_notification: params.line_notification,
-      stacked_notification_interval: params.stacked_notification_interval,
+      line_setting: {
+        line_notification: params.line_notification,
+        stacked_notification_interval: params.stacked_notification_interval,
+      },
     },
     params.config
   );
