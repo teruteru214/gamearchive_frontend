@@ -6,6 +6,7 @@ import { postAccessToken } from "../api/postAccessToken";
 import { Profile } from "../types";
 import BeforeLogin from "./BeforeLogin";
 import LineLoggedIn from "./LineLoggedIn";
+import SummaryList from "./SummaryList";
 
 const LineSettings = () => {
   const [isLogin, setLogin] = useState(false);
@@ -56,6 +57,7 @@ const LineSettings = () => {
       ) : (
         <BeforeLogin handleLineLogin={handleLogin} />
       )}
+      <SummaryList />
     </>
   );
 };

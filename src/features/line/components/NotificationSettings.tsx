@@ -77,7 +77,7 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
     <form onSubmit={form.onSubmit(handleUpdate)}>
       <Stack>
         <Switch
-          label="LINEのゲーム通知をオンにする"
+          label="積みゲー通知"
           checked={form.values.line_notification}
           {...form.getInputProps("line_notification")}
           onLabel="ON"
@@ -87,7 +87,7 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
           <>
             <NumberInput
               {...form.getInputProps("stacked_notification_interval")}
-              label="積みゲー通知設定(日数を入力)"
+              label="通知間隔を記入(数字を入力してください)"
               withAsterisk
             />
           </>
