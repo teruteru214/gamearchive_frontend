@@ -47,7 +47,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
   return (
     <>
       {largerThanXs ? (
-        <Card radius="md" className="bg-gray-100">
+        <Card radius="md" className="bg-blue-50 hover:bg-blue-100">
           <Group noWrap spacing={0} className="relative">
             <a href={gameItem.url} target="_blank" rel="noreferrer">
               <Image
@@ -139,7 +139,7 @@ const MyGame = ({ gameItem }: MyGameProps) => {
           </Group>
         </Card>
       ) : (
-        <Card radius="md" className="bg-gray-100">
+        <Card radius="md" className="bg-blue-50 hover:bg-blue-100">
           <Group noWrap spacing={0}>
             <a href={gameItem.url} target="_blank" rel="noreferrer">
               <Image

@@ -1,4 +1,13 @@
-import { Avatar, Box, Center, Group, Loader, Stack, Text } from "@mantine/core";
+import {
+  Avatar,
+  Box,
+  Center,
+  Group,
+  Loader,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
 import React from "react";
 
 import { useQueryLineSetting } from "../hooks/useQueryLineSetting";
@@ -29,7 +38,7 @@ const LineLoggedIn: React.FC<LoggedInProps> = ({ profile }) => {
       <Stack spacing="lg">
         <Group>
           <Avatar radius="xl" size="lg" src={profile.pictureUrl} />
-          <Text fz="md">{profile.displayName}</Text>
+          <Title order={4}>{profile.displayName}</Title>
         </Group>
         <NotificationSettings
           initialIsSwitchOn={userLineQuery.data?.line_notification}

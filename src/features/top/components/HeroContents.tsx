@@ -39,7 +39,7 @@ const HeroContents = () => {
             }}
             align="center"
           >
-            あなたのゲームライブラリを
+            あなたのゲームライブラリ
             <br />
             究極に管理
           </Title>
