@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
+  IconBell,
   IconDeviceGamepad2,
   IconDisc,
   IconLogout,
@@ -119,6 +120,26 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                   <IconReplace size="1.625rem" />
                 </Tooltip>
               </ActionIcon>
+              <ActionIcon size="sm" onClick={() => navigate("/line")}>
+                <Tooltip
+                  label="積みゲー通知設定"
+                  position="left"
+                  color="yellow"
+                  withArrow
+                >
+                  <IconBell size="1.625rem" />
+                </Tooltip>
+              </ActionIcon>
+              <ActionIcon size="sm" onClick={() => navigate("/profile")}>
+                <Tooltip
+                  label="プロフィール編集"
+                  position="left"
+                  color="yellow"
+                  withArrow
+                >
+                  <IconUserEdit size="1.625rem" />
+                </Tooltip>
+              </ActionIcon>
               <Menu
                 position="bottom-end"
                 transitionProps={{ transition: "pop-top-right" }}
@@ -178,17 +199,24 @@ const HeaderAction = ({ isLogin }: HeaderActionProps) => {
                   <Menu.Label>Settings</Menu.Label>
 
                   <Menu.Item
-                    icon={<IconUserEdit size="0.9rem" stroke={1.5} />}
-                    onClick={() => navigate("/profile")}
-                  >
-                    プロフィール編集
-                  </Menu.Item>
-
-                  <Menu.Item
                     icon={<IconReplace size="0.9rem" stroke={1.5} />}
                     onClick={() => navigate("/management/unplaying")}
                   >
                     ゲームマネジメント
+                  </Menu.Item>
+
+                  <Menu.Item
+                    icon={<IconBell size="0.9rem" stroke={1.5} />}
+                    onClick={() => navigate("/line")}
+                  >
+                    積みゲー通知設定
+                  </Menu.Item>
+
+                  <Menu.Item
+                    icon={<IconUserEdit size="0.9rem" stroke={1.5} />}
+                    onClick={() => navigate("/profile")}
+                  >
+                    プロフィール編集
                   </Menu.Item>
 
                   <Menu.Item
