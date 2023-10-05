@@ -1,12 +1,4 @@
-import {
-  Button,
-  Image,
-  Modal,
-  Select,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Button, Image, Modal, Select, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { gamesAtom } from "atoms/games/gameManagement";
 import { GameCard, GameStatus } from "features/management/types";
@@ -82,14 +74,16 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
 
   return (
     <Modal opened={opened} onClose={onClose} centered size="sm">
-      <Stack className="flex items-center justify-center space-y-4 pb-16">
-        <Title order={4}>ゲームステータスを選択してください</Title>
-        <Text className="text-center">{gameItem.title}</Text>
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <Title order={5}>ゲームステータスを選択してください</Title>
         <Image
           src={gameItem.cover ? gameItem.cover : defaultImage}
-          width={140}
+          width={200}
           radius="sm"
         />
+        <Title order={5} className="text-center">
+          {gameItem.title}
+        </Title>
         <Select
           value={selectedStatus}
           onChange={(value) => value && setSelectedStatus(value as GameStatus)}
@@ -98,13 +92,12 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
             { value: "playing", label: "プレイ中" },
             { value: "clear", label: "クリア" },
           ]}
+          className="w-52"
         />
-        <div className="flex">
-          <Button className="w-52" onClick={handleUpdate} loading={loading}>
-            プレイ状況を更新
-          </Button>
-        </div>
-      </Stack>
+        <Button className="w-52" onClick={handleUpdate} loading={loading}>
+          プレイ状況を更新
+        </Button>
+      </div>
     </Modal>
   );
 };

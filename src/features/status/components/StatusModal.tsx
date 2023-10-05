@@ -1,12 +1,4 @@
-import {
-  Button,
-  Image,
-  Modal,
-  Select,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Button, Image, Modal, Select, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { AxiosError } from "axios";
 import { GameAcquisition } from "features/acquisition/types";
@@ -111,14 +103,16 @@ const StatusModal: FC<StatusModalProps> = ({
 
   return (
     <Modal opened={opened} onClose={handleClose} centered size="sm">
-      <Stack className="flex flex-col items-center justify-center space-y-4 pb-14">
-        <Title order={4}>ゲームステータスを選択してください</Title>
-        <Text className="text-center">{game.title}</Text>
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <Title order={5}>ゲームステータスを選択してください</Title>
         <Image
           src={game.cover ? game.cover : defaultImage}
-          width={140}
+          width={200}
           radius="sm"
         />
+        <Title order={5} className="text-center">
+          {game.title}
+        </Title>
         <Select
           data={[
             { value: "unplaying", label: "積みゲー" },
@@ -128,13 +122,13 @@ const StatusModal: FC<StatusModalProps> = ({
           value={gameStatus}
           onChange={handleSelect}
           error={validationError ? "ゲームステータスを選択してください" : null}
-          className="w-64"
-          placeholder="積みゲーorプレイ中orクリア"
+          className="w-52"
+          placeholder="ここから選択"
         />
-        <Button onClick={handleSubmit} loading={loading} className="w-64">
+        <Button onClick={handleSubmit} loading={loading} className="w-52">
           ゲームを取得する
         </Button>
-      </Stack>
+      </div>
     </Modal>
   );
 };
