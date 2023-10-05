@@ -1,4 +1,4 @@
-import { Button, Image, Modal, Stack, Text, Title } from "@mantine/core";
+import { Button, Image, Modal, Stack, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { GameCard } from "features/management/types";
 import { getAuth } from "firebase/auth";
@@ -56,16 +56,18 @@ const DeleteModal = ({
   return (
     <>
       <Modal opened={opened} onClose={onClose} centered size="sm">
-        <Stack className="flex flex-col items-center justify-center space-y-4 pb-14">
-          <Title order={4}>本当にゲームを削除しますか？</Title>
-          <Text className="text-center">{gameItem.title}</Text>
+        <Stack className="flex flex-col items-center justify-center space-y-4">
+          <Title order={5}>本当にゲームを削除しますか？</Title>
           <Image
             src={gameItem.cover ? gameItem.cover : defaultImage}
-            width={140}
+            width={200}
             radius="sm"
           />
+          <Title order={5} className="text-center">
+            {gameItem.title}
+          </Title>
           <Button
-            className="w-36"
+            className="w-52"
             color="red"
             onClick={handleDelete}
             loading={loading}
