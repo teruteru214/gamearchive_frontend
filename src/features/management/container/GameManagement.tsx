@@ -7,9 +7,9 @@ import { useAtom } from "jotai";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import Profile from "../../../components/Profile";
 import GameSettingDrawer from "../components/GameSettingDrawer";
 import GameStatusSelecter from "../components/GameStatusSelecter";
+import Profile from "../components/Profile";
 import { useQueryFavorites } from "../hooks/useQueryFavorites";
 import { useQueryGames } from "../hooks/useQueryGames";
 
