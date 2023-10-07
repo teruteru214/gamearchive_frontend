@@ -36,8 +36,8 @@ const SummaryList = () => {
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
-      <Text c="red">
-        *積みゲー通知は試験運用中です。お気に入りのゲーム通知は公式チャンネルから利用できます。
+      <Text size="sm" color="red">
+        *積みゲー通知は開発中です🙇他ユーザーのお気に入りのゲームを受け取る機能はLINE公式チャンネルから利用できます。
       </Text>
     </>
   );

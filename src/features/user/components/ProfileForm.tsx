@@ -204,7 +204,7 @@ const ProfileForm = () => {
                 {...form.getInputProps("twitter_name")}
               />
               <Select
-                label="お気に入りゲームの公開 or 非公開(他ユーザーに自身のゲームが通知されます)"
+                label="お気に入りゲームの公開/非公開"
                 data={[
                   { value: "private", label: "非公開" },
                   { value: "public", label: "公開" },
