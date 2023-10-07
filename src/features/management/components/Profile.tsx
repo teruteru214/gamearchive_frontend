@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const [currentUser] = useAtom(loginUserAtom);
   const largerThanSm = useMediaQuery("sm");
-  const { avatar, nickname, introduction, twitter_name } = currentUser || {};
+  const { avatar, nickname, introduction, twitter_name, visibility } =
+    currentUser || {};
 
   const navigate = useNavigate();
   return (
@@ -32,13 +33,17 @@ const Profile = () => {
       {largerThanSm ? (
         <div className="flex justify-between space-x-5 px-10">
           <div className="flex w-2/3 space-x-5">
-            <Avatar src={avatar} size={120} radius={120} />
+            <Avatar src={avatar} size={150} radius={120} />
             <Stack>
               <Title order={3} weight={500}>
                 {nickname}
               </Title>
               <Text size="sm" className="break-all">
                 {introduction}
+              </Text>
+              <Text size="sm" className="break-all">
+                お気に入りのゲーム:{" "}
+                {visibility === "public" ? "公開中" : "非公開"}
               </Text>
               <div className="flex items-center justify-start">
                 {twitter_name && (
@@ -77,6 +82,9 @@ const Profile = () => {
               {introduction}
             </Text>
           </div>
+          <Text size="sm" align="center">
+            お気に入りのゲーム: {visibility === "public" ? "公開中" : "非公開"}
+          </Text>
           <div className="mx-auto flex w-80 items-center justify-center">
             {twitter_name && (
               <>

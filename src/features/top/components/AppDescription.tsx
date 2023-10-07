@@ -93,7 +93,7 @@ const AppDescription = () => {
             <Text weight={500}>LINE通知設定</Text>
 
             <Text size="sm" color="dimmed">
-              LINEログインすることで積みゲー通知や他ユーザーのお気に入りのゲームの通知をLINEのチャンネルから受け取ることができます。(ログインユーザーのみ)
+              LINEログインすることで他ユーザーのお気に入りゲームをLINEのチャンネルから受け取ることができます。(ログインユーザーのみ)
             </Text>
           </Card>
         </Grid.Col>
@@ -113,7 +113,7 @@ const AppDescription = () => {
             <Text weight={500}>プロフィール編集</Text>
 
             <Text size="sm" color="dimmed">
-              自身のプロフィール編集できます。公開設定をオンにすると自身のお気に入りのゲームを他ユーザーに通知することができます。(ログインユーザーのみ)
+              自身のプロフィール編集できます。公開設定をオンにすると自身のお気に入りゲームを他ユーザーにLINE上で送信ができます。(ログインユーザーのみ)
             </Text>
           </Card>
         </Grid.Col>
