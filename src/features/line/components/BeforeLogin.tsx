@@ -1,4 +1,3 @@
-// LineSettingsLoggedOut.tsx
 import { Button, Center, Image, Stack } from "@mantine/core";
 import { IconBrandLine } from "@tabler/icons-react";
 

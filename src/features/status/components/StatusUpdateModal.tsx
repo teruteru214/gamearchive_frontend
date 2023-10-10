@@ -1,6 +1,7 @@
 import { Button, Image, Modal, Select, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { gamesAtom } from "atoms/games/gameManagement";
+import { confettiDisplayAtom } from "atoms/ui";
 import { GameCard, GameStatus } from "features/management/types";
 import { getAuth } from "firebase/auth";
 import { useAtom } from "jotai";
@@ -27,6 +28,7 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
   const [loading, setLoading] = useState(false);
   const { updateStatusMutation } = useMutateGameStatus();
   const [games, setGames] = useAtom(gamesAtom);
+  const [showConfetti, setShowConfetti] = useAtom(confettiDisplayAtom);
 
   const handleUpdate = async () => {
     setLoading(true);
@@ -61,6 +63,10 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
           : game
       );
       setGames(updatedGames);
+      if (selectedStatus === "clear") {
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 7000);
+      }
     } catch (error) {
       notifications.show({
         title: "Error",
