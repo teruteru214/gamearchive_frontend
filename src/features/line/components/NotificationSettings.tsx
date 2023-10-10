@@ -1,4 +1,13 @@
-import { Button, Center, NumberInput, Stack, Switch } from "@mantine/core";
+import {
+  Button,
+  Center,
+  Indicator,
+  NumberInput,
+  Stack,
+  Switch,
+  Title,
+} from "@mantine/core";
+import { Calendar } from "@mantine/dates";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { getAuth } from "firebase/auth";
@@ -22,6 +31,7 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
   userId,
   initialIsSwitchOn,
   initialStackedValue,
+  initialNotificationDate,
 }) => {
   const form = useForm<Form>({
     validate: zodResolver(schema),
@@ -73,6 +83,10 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
     }
   };
 
+  const notificationDate = initialNotificationDate
+    ? new Date(initialNotificationDate)
+    : new Date();
+
   return (
     <form onSubmit={form.onSubmit(handleUpdate)}>
       <Stack>
@@ -87,9 +101,34 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
           <>
             <NumberInput
               {...form.getInputProps("stacked_notification_interval")}
-              label="通知間隔を記入(数字を入力してください)"
+              label="次のリマインダーを設定する日数を入力"
               withAsterisk
             />
+            <Title order={5} align={"center"}>
+              次回通知日
+            </Title>
+            <Center>
+              <Calendar
+                renderDay={(date) => {
+                  const day = date.getDate();
+                  const isNotificationDate =
+                    date.getFullYear() === notificationDate.getFullYear() &&
+                    date.getMonth() === notificationDate.getMonth() &&
+                    day === notificationDate.getDate();
+
+                  return (
+                    <Indicator
+                      size={6}
+                      color="green"
+                      offset={-2}
+                      disabled={!isNotificationDate}
+                    >
+                      <div>{day}</div>
+                    </Indicator>
+                  );
+                }}
+              />
+            </Center>
           </>
         )}
         <Center>

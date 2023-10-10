@@ -27,6 +27,7 @@ export const useQueryLineSetting = () => {
       line_notification: lineSettingData.line_notification,
       stacked_notification_interval:
         lineSettingData.stacked_notification_interval,
+      notification_date: lineSettingData.notification_date,
     };
     return LineSetting;
   };
