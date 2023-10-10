@@ -17,6 +17,7 @@ export type LineSettingType = {
     id: number;
     line_notification: boolean;
     stacked_notification_interval: number;
+    notification_date: string;
   };
 };
 
@@ -44,5 +45,5 @@ export interface NotificationSettingsProps {
   userId?: number;
   initialIsSwitchOn?: boolean;
   initialStackedValue?: number;
-  initialFavoriteValue?: number;
+  initialNotificationDate?: string;
 }

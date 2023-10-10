@@ -45,6 +45,7 @@ const LineLoggedIn: React.FC<LoggedInProps> = ({ profile }) => {
           initialStackedValue={
             userLineQuery.data?.stacked_notification_interval
           }
+          initialNotificationDate={userLineQuery.data?.notification_date}
           userId={userLineQuery.data?.id}
         />
       </Stack>
