@@ -101,7 +101,7 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
           <>
             <NumberInput
               {...form.getInputProps("stacked_notification_interval")}
-              label="次のリマインダーを設定する日数を入力"
+              label="何日ごとに通知しますか？(数字で入力)"
               withAsterisk
             />
             <Title order={5} align={"center"}>

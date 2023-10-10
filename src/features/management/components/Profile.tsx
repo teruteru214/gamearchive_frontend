@@ -42,7 +42,7 @@ const Profile = () => {
                 {introduction}
               </Text>
               <Text size="sm" className="break-all">
-                お気に入りのゲーム:{" "}
+                <span className="font-bold">お気に入りのゲーム:</span>{" "}
                 {visibility === "public" ? "公開中" : "非公開"}
               </Text>
               <div className="flex items-center justify-start">

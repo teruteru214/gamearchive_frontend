@@ -1,4 +1,4 @@
-import { Accordion, Space, Text } from "@mantine/core";
+import { Accordion, Space } from "@mantine/core";
 import { IconAlertCircle, IconNotebook } from "@tabler/icons-react";
 
 const SummaryList = () => {
@@ -14,11 +14,8 @@ const SummaryList = () => {
             <Space h="lg" />
             1
             友達登録した公式チャンネルからリッチメニューを使用し、公開ユーザーのお気に入りゲーム（ハイライトゲーム）を受け取ることができます。
-            <Space h="lg" />
-            2
-            通知設定をオンにし、希望の日付間隔を数字で入力すると、毎日12:00に未プレイのゲーム（積みゲー）をプレイするように促す通知が届きます(現在開発中)
-            <Space h="lg" />3
-            通知の日程はカレンダーにも表示される機能を開発中です。
+            <Space h="lg" />2
+            通知設定をオンにし、希望の日付間隔を数字で入力すると、毎日18:00に未プレイのゲーム（積みゲー）をプレイするように促す通知が届きます
           </Accordion.Panel>
         </Accordion.Item>
         <Accordion.Item value="focus-ring">
@@ -36,9 +33,6 @@ const SummaryList = () => {
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
-      <Text size="sm" color="red">
-        *積みゲー通知は開発中です🙇他ユーザーのお気に入りのゲームを受け取る機能はLINE公式チャンネルから利用できます。
-      </Text>
     </>
   );
 };
