@@ -50,7 +50,9 @@ const AppDescription = () => {
               <IconDisc className="h-[180px] w-auto" />
             </Card.Section>
 
-            <Text weight={500}>ゲームを取得</Text>
+            <Text className="font-bold" align={"center"}>
+              ゲームを取得
+            </Text>
 
             <Text size="sm" color="dimmed">
               ゲームを検索すると、ゲームの詳細を確認できます。ログインするとプレイ状況に基づいてゲームを保存することができます。
@@ -70,7 +72,9 @@ const AppDescription = () => {
               <IconReplace className="h-[180px] w-auto" />
             </Card.Section>
 
-            <Text weight={500}>ゲームマネジメント</Text>
+            <Text className="font-bold" align={"center"}>
+              ゲームマネジメント
+            </Text>
 
             <Text size="sm" color="dimmed">
               ゲームプレイ状況の変更や評価値による並び替え。ジャンルやプラットやプラットフォームで絞り込み。お気に入りも登録可能(ログインユーザーのみ)
@@ -90,7 +94,9 @@ const AppDescription = () => {
               <IconBell className="h-[180px] w-auto" />
             </Card.Section>
 
-            <Text weight={500}>LINE通知設定</Text>
+            <Text className="font-bold" align={"center"}>
+              LINE通知設定
+            </Text>
 
             <Text size="sm" color="dimmed">
               LINEログインすることで他ユーザーのお気に入りゲームをLINEのチャンネルから受け取ることができます。(ログインユーザーのみ)
@@ -110,7 +116,9 @@ const AppDescription = () => {
               <IconUserEdit className="h-[180px] w-auto" />
             </Card.Section>
 
-            <Text weight={500}>プロフィール編集</Text>
+            <Text className="font-bold" align={"center"}>
+              プロフィール編集
+            </Text>
 
             <Text size="sm" color="dimmed">
               自身のプロフィール編集できます。公開設定をオンにすると自身のお気に入りゲームを他ユーザーにLINE上で送信ができます。(ログインユーザーのみ)

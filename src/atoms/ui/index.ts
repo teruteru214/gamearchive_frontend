@@ -14,3 +14,5 @@ export const FooterAtom = atom([
     label: "プライバシーポリシー",
   },
 ]);
+
+export const confettiDisplayAtom = atom<boolean>(false);

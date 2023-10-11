@@ -1,4 +1,3 @@
-// LineSettingsLoggedOut.tsx
 import { Button, Center, Image, Stack } from "@mantine/core";
 import { IconBrandLine } from "@tabler/icons-react";
 
@@ -11,12 +10,12 @@ const BeforeLogin: React.FC<BeforeLoginProps> = ({ handleLineLogin }) => {
       <Image src={notification} />
       <Center>
         <Button
-          className="mb-5 w-52"
+          className="mb-5 w-56"
           color="teal"
           mx="auto"
           onClick={handleLineLogin}
         >
-          <IconBrandLine />
+          <IconBrandLine className="pr-1" />
           LINEユーザーを登録する
         </Button>
       </Center>

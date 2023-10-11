@@ -1,3 +1,5 @@
+import { QueryObserverResult } from "@tanstack/react-query";
+
 export interface Profile {
   userId: string;
   displayName: string;
@@ -43,7 +45,18 @@ export interface UserLineQueryResult {
 
 export interface NotificationSettingsProps {
   userId?: number;
-  initialIsSwitchOn?: boolean;
-  initialStackedValue?: number;
-  initialNotificationDate?: string;
+  isSwitchOn?: boolean;
+  interval?: number;
+  notificationDate?: string;
+  refetchLineSetting: () => Promise<
+    QueryObserverResult<
+      {
+        id: number;
+        line_notification: boolean;
+        stacked_notification_interval: number;
+        notification_date: string;
+      },
+      unknown
+    >
+  >;
 }

@@ -29,15 +29,16 @@ type Form = z.infer<typeof schema>;
 
 const NotificationSettings: React.FC<NotificationSettingsProps> = ({
   userId,
-  initialIsSwitchOn,
-  initialStackedValue,
-  initialNotificationDate,
+  isSwitchOn,
+  interval,
+  notificationDate,
+  refetchLineSetting,
 }) => {
   const form = useForm<Form>({
     validate: zodResolver(schema),
     initialValues: {
-      line_notification: initialIsSwitchOn ?? false,
-      stacked_notification_interval: initialStackedValue ?? 1,
+      line_notification: isSwitchOn ?? false,
+      stacked_notification_interval: interval ?? 1,
     },
     validateInputOnBlur: true,
   });
@@ -72,6 +73,7 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
         message: "LINE通知設定を更新しました！",
         color: "green",
       });
+      refetchLineSetting();
     } catch (error) {
       notifications.show({
         title: "Error",
@@ -83,8 +85,8 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
     }
   };
 
-  const notificationDate = initialNotificationDate
-    ? new Date(initialNotificationDate)
+  const nextNotification = notificationDate
+    ? new Date(notificationDate)
     : new Date();
 
   return (
@@ -101,7 +103,7 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
           <>
             <NumberInput
               {...form.getInputProps("stacked_notification_interval")}
-              label="次のリマインダーを設定する日数を入力"
+              label="何日ごとに通知しますか？(数字で入力)"
               withAsterisk
             />
             <Title order={5} align={"center"}>
@@ -112,9 +114,9 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({
                 renderDay={(date) => {
                   const day = date.getDate();
                   const isNotificationDate =
-                    date.getFullYear() === notificationDate.getFullYear() &&
-                    date.getMonth() === notificationDate.getMonth() &&
-                    day === notificationDate.getDate();
+                    date.getFullYear() === nextNotification.getFullYear() &&
+                    date.getMonth() === nextNotification.getMonth() &&
+                    day === nextNotification.getDate();
 
                   return (
                     <Indicator

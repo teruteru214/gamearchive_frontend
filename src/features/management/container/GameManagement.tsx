@@ -2,10 +2,13 @@ import { Button, Container, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconReplace, IconSettings } from "@tabler/icons-react";
 import { gamesAtom } from "atoms/games/gameManagement";
+import { confettiDisplayAtom } from "atoms/ui";
 import HeroContents from "components/HeroContents";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
+import Confetti from "react-confetti";
 import { useParams } from "react-router-dom";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 import GameSettingDrawer from "../components/GameSettingDrawer";
 import GameStatusSelecter from "../components/GameStatusSelecter";
@@ -14,6 +17,8 @@ import { useQueryFavorites } from "../hooks/useQueryFavorites";
 import { useQueryGames } from "../hooks/useQueryGames";
 
 const GameManagement = () => {
+  const { width, height } = useWindowSize();
+  const [showConfetti] = useAtom(confettiDisplayAtom);
   const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const userGamesQuery = useQueryGames();
@@ -101,6 +106,9 @@ const GameManagement = () => {
         onClose={closeDrawer}
         gameItems={userGamesQuery.data || []}
       />
+      {showConfetti && (
+        <Confetti width={width} height={height} recycle={false} />
+      )}
     </>
   );
 };
