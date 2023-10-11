@@ -1,5 +1,8 @@
-import { Accordion, Space } from "@mantine/core";
+import { Accordion, Image, Space } from "@mantine/core";
 import { IconAlertCircle, IconNotebook } from "@tabler/icons-react";
+
+import favorite_game from "../../../assets/line_favorite.png";
+import tsumige from "../../../assets/tsumige.png";
 
 const SummaryList = () => {
   return (
@@ -14,8 +17,10 @@ const SummaryList = () => {
             <Space h="lg" />
             1
             友達登録した公式チャンネルからリッチメニューを使用し、公開ユーザーのお気に入りゲーム（ハイライトゲーム）を受け取ることができます。
+            <Image src={favorite_game} />
             <Space h="lg" />2
             通知設定をオンにし、希望の日付間隔を数字で入力すると、毎日18:00に未プレイのゲーム（積みゲー）をプレイするように促す通知が届きます
+            <Image src={tsumige} />
           </Accordion.Panel>
         </Accordion.Item>
         <Accordion.Item value="focus-ring">
