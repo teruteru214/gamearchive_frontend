@@ -41,12 +41,11 @@ const LineLoggedIn: React.FC<LoggedInProps> = ({ profile }) => {
           <Title order={4}>{profile.displayName}</Title>
         </Group>
         <NotificationSettings
-          initialIsSwitchOn={userLineQuery.data?.line_notification}
-          initialStackedValue={
-            userLineQuery.data?.stacked_notification_interval
-          }
-          initialNotificationDate={userLineQuery.data?.notification_date}
+          isSwitchOn={userLineQuery.data?.line_notification}
+          interval={userLineQuery.data?.stacked_notification_interval}
+          notificationDate={userLineQuery.data?.notification_date}
           userId={userLineQuery.data?.id}
+          refetchLineSetting={() => userLineQuery.refetch()}
         />
       </Stack>
     </Box>

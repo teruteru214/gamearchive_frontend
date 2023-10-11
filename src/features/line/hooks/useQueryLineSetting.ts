@@ -32,7 +32,7 @@ export const useQueryLineSetting = () => {
     return LineSetting;
   };
 
-  const { status, data } = useQuery({
+  const { status, data, refetch } = useQuery({
     queryKey: ["lineSetting"],
     queryFn: getLineSetting,
     staleTime: 0,
@@ -42,5 +42,6 @@ export const useQueryLineSetting = () => {
   return {
     data,
     status,
+    refetch,
   };
 };
