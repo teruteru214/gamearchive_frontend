@@ -28,7 +28,7 @@ const StatusUpdateModal: FC<StatusUpdateModalProps> = ({
   const [loading, setLoading] = useState(false);
   const { updateStatusMutation } = useMutateGameStatus();
   const [games, setGames] = useAtom(gamesAtom);
-  const [showConfetti, setShowConfetti] = useAtom(confettiDisplayAtom);
+  const [, setShowConfetti] = useAtom(confettiDisplayAtom);
 
   const handleUpdate = async () => {
     setLoading(true);
