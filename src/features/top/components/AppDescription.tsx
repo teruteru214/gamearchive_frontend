@@ -99,7 +99,7 @@ const AppDescription = () => {
             </Text>
 
             <Text size="sm" color="dimmed">
-              LINEログインすることで他ユーザーのお気に入りゲームをLINEのチャンネルから受け取ることができます。(ログインユーザーのみ)
+              LINEログインすることで取得した積みゲーの通知を定期的に受け取れるようになります(ログインユーザーのみ)
             </Text>
           </Card>
         </Grid.Col>
