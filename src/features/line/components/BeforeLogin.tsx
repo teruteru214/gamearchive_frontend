@@ -16,7 +16,7 @@ const BeforeLogin: React.FC<BeforeLoginProps> = ({ handleLineLogin }) => {
           onClick={handleLineLogin}
         >
           <IconBrandLine className="pr-1" />
-          LINEユーザーを登録する
+          LINEで友達を追加する
         </Button>
       </Center>
     </Stack>
