@@ -11,7 +11,7 @@ const GameNotification = () => {
         IconComponent={<IconBell size="3rem" stroke={1.5} />}
         title="積みゲー通知設定"
       />
-      <Container className="my-52" size="xs">
+      <Container size="xs" className="my-36">
         <LineSettings />
       </Container>
     </>

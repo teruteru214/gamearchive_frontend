@@ -1,13 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Center,
-  Group,
-  Loader,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Avatar, Box, Group, Stack, Text, Title } from "@mantine/core";
 import React from "react";
 
 import { useQueryLineSetting } from "../hooks/useQueryLineSetting";
@@ -23,9 +14,9 @@ const LineLoggedIn: React.FC<LoggedInProps> = ({ profile }) => {
 
   if (userLineQuery.status === "loading") {
     return (
-      <Center>
-        <Loader className="h-96" />
-      </Center>
+      <div className="flex h-52 justify-center" aria-label="読み込み中">
+        <div className="h-4 w-4 animate-ping rounded-full bg-yellow-600"></div>
+      </div>
     );
   }
 

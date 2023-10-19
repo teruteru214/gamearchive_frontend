@@ -1,8 +1,8 @@
 import { Accordion, Image, Space } from "@mantine/core";
 import { IconAlertCircle, IconNotebook } from "@tabler/icons-react";
 
-import favorite_game from "../../../assets/line_favorite.png";
-import tsumige from "../../../assets/tsumige.png";
+import favorite_game from "../../../assets/line-favorite.gif";
+import tsumige from "../../../assets/tsumige.gif";
 
 const SummaryList = () => {
   return (
